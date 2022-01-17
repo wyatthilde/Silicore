@@ -1,0 +1,24 @@
+/* Style the tab */
+div.quicklinks a 
+{
+  color: #88B7DA;
+  font-weight: bold;
+}
+
+.analyticsDashboardContent a:link
+{
+	color: blue;
+	text-decoration: none;
+}
+
+.analyticsDashboardContent a:hover
+{
+    color: blue;
+    text-decoration: underline; 
+}
+
+.analyticsDashboardContent a:visited
+{
+    color: purple;
+    text-decoration: none;
+}

@@ -1,0 +1,7 @@
+The 'Configuration' directory at this level can be used in correlation with 'Controls' and 'Content' pages. 
+
+This would be a good place to contain 'administrative' level pages that allow for the customization of the related UI pages; edit pages, if you will.
+
+Interaction with the ui_ level DB tables could contain everything from styles to data.
+
+Food for thought.

@@ -1,0 +1,36 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jul 10, 2018, 8:55:07 AM
+    Author     : zthale
+*/
+
+.container {
+  float: left;
+}
+
+.form-group {
+  max-width: 700px;
+}
+
+#plantTextbox
+{
+  text-align: center;
+}
+
+#descriptionTextbox
+{
+  text-align: center;
+}
+
+th {
+  color: #FFFFFF;
+  background-color: #4C7AD0;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #BADBAA;
+}

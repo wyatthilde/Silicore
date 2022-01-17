@@ -1,0 +1,310 @@
+Silicore Quality Control MySQL Database Tables
+Date: 12-1-2017
+Author: Matt Nutsch
+
+Intro:
+This document explains which database tables in Silicore are related to Quality Control and what each table and field is used for.
+Silicore was created as a replacement for a legacy application called Back Office. References to the legacy application mean Back Office. References to the new application mean Silicore.
+
+NOTE - Prefix Explanation:
+All of these tables have a 2 character prefix which indicates which Quality Control Laboratory they belong to.
+In this document, only the "gb_" prefix is listed. However, the tables for other mines (such as "tl_") follow the same format.
+
+Table: gb_qc_composites
+Description: This table contains the options for the sample composite select box. This is a descriptor explaining the frequency of which this sample gets taken.
+Fields:
+id		int(11) AI PK	This is the primary key for the table.
+main_site_id 	int(11)		This references an ID in the table main_sites.
+description	varchar(256)	This is the text displayed to the user in the select box.
+sort_order	int(11)		This controls in which order the options appear. 
+is_active	tinyint(1)	This is used to make and hide inactive options.
+
+Table: gb_qc_finalpercentages
+Description: This table stores final percentages calculated for each sample. In some functionality this table is replaced by fields in the gb_qc_samples table. However, removing this table may break older functionality.
+Fields:		
+id			int(11) AI PK	This is the primary key for the table.
+sample_id		int(11)		This references an ID in the table gb_qc_samples. 
+finalpercent1		double		This stores a percentage in decimal format. (i.e. 0.1091 = 10.91%)
+finalpercent2		double		This stores a percentage in decimal format. (i.e. 0.1091 = 10.91%)
+finalpercent3		double		This stores a percentage in decimal format. (i.e. 0.1091 = 10.91%)
+finalpercent4		double		This stores a percentage in decimal format. (i.e. 0.1091 = 10.91%)
+finalpercent5		double		This stores a percentage in decimal format. (i.e. 0.1091 = 10.91%)
+finalpercent6		double		This stores a percentage in decimal format. (i.e. 0.1091 = 10.91%)
+finalpercent7		double		This stores a percentage in decimal format. (i.e. 0.1091 = 10.91%)
+finalpercent8		double		This stores a percentage in decimal format. (i.e. 0.1091 = 10.91%)
+finalpercent9		double		This stores a percentage in decimal format. (i.e. 0.1091 = 10.91%)
+finalpercent10		double		This stores a percentage in decimal format. (i.e. 0.1091 = 10.91%)
+finalpercenttotal	double		This stores a percentage in decimal format. (i.e. 0.1091 = 10.91%)
+finalpercent11		double		This stores a percentage in decimal format. (i.e. 0.1091 = 10.91%)
+finalpercent12		double		This stores a percentage in decimal format. (i.e. 0.1091 = 10.91%)
+finalpercent13		double		This stores a percentage in decimal format. (i.e. 0.1091 = 10.91%)
+finalpercent14		double		This stores a percentage in decimal format. (i.e. 0.1091 = 10.91%)
+finalpercent15		double		This stores a percentage in decimal format. (i.e. 0.1091 = 10.91%)
+finalpercent16		double		This stores a percentage in decimal format. (i.e. 0.1091 = 10.91%)
+finalpercent17		double		This stores a percentage in decimal format. (i.e. 0.1091 = 10.91%)
+finalpercent18		double		This stores a percentage in decimal format. (i.e. 0.1091 = 10.91%)
+
+Table: gb_qc_k_value_records
+Description: This table stores K Values for samples. These are test results from "crush" tests". There are usually multiple records per sample, but not a fixed number of records per sample.
+Fields:		
+id		int(11) AI PK	This is the primary key for the table.
+sample_id	int(11)		This references the ID of a record in the gb_qc_samples table to which this record is associated.
+k_value_id	int(11)		This is a snapshot of the value from the gb_qc_k_values table. This has functionality in the UI.
+description	varchar(50)	This describes which "Pan" the record is associated with. K Values come in groups called Pans.
+value		double		This stores a percentage in decimal format. (i.e. 0.1091 = 10.91%). This is the input entered by the user.		
+
+Table: gb_qc_k_value
+Description: This table stored select options and multipliers related to the K Values test results. 
+Fields:		
+id		int(11) AI PK	This is the primary key for the table.
+description	varchar(50)	This is a string which is displayed to the user to select from.
+value		int(11)		This is the value of the select option. This has functionality in the UI and saved in the gb_qc_k_value_records for individual records.
+
+Table: gb_qc_locations
+Description: This table contains details about locations. Locations are areas within a plant where tests are performed.
+Fields:
+id			int(11) AI PK	This is the primary key for the table.	
+description		varchar(256)	This contains the human friendly text describing the location.
+main_site_id		int(11)		This references an ID in the main_sites table. It was copied from the legacy database and may no longer be used.
+main_plant_id		int(11)		This references an ID in the main_plants table. 
+type_code		varchar(2)	This field was copied from the legacy database and is not currently used.
+is_split_sample_only	tinyint(1)	This is a flag which controls functionality in the UI and sample calculations.
+email_list_id		int(11)		This field was copied from the legacy database and is not currently used. An email address is currently hard coded in emailfunctions.php.
+is_send_email		tinyint(1)	This is a flag which controls whether emails should be sent when samples from this location are completed.
+sort_order		int(11)		This controls the order in which this location shows up in the UI.
+is_active		tinyint(1)	This is a flag used to hide inactive locations.
+
+Table: gb_qc_locations_details
+Description: This table contains details about specific socations. Specific locations are more specific areas within a locations where tests are performed.
+Fields:
+id		int(11) AI PK	This is the primary key for the table.
+qc_location_id	int(11)		This references in ID in the table gb_qc_locations.
+description	varchar(256)	This is a human friendly text describing the specific location.
+sort_order	int(11)		This controls the order in which this specific location shows up in the UI.
+is_active	tinyint(1)	This is a flag used to hide inactive specific locations.
+
+Table: gb_qc_repeatability_pairs
+Description: This table documents which pairs of samples are connected through a Repeatability relationship. This is used when the Quality Control technician needs to exactly repeat a sample to confirm the findings of the original sample.
+Fields:
+id		bigint(20) AI PK	This is the primary key for the table.
+original_sample	bigint(20)		This references an ID in the table gb_qc_samples. It is the original sample from the pair.
+repeated_sample	bigint(20)		This references an ID in the table gb_qc_samples. It is the repeat of the original sample.
+
+Table: gb_qc_samples
+Description: This table contains the bulk of information about samples recorded by the Quality Control technicians.
+Fields:
+id					int(11) AI PK	This is the primary key for the table.
+description				varchar(50)	This is a string that the user can enter for notes.
+repeatability_id			bigint(20)	This was copied from the legacy database and is not used in the new application. It's functionality was replaced by the table gb_qc_repeatability_pairs.
+test_type_id				int(11)		This references an ID in the table gb_qc_test_types.
+composite_type_id			int(11)		This references an ID in the table gb_qc_composites.
+sieve_method_id				int(11)		This references an ID in the table gb_qc_sieve_stacks. Research the code before renaming it.
+site_id					int(11)		This references an ID in the table main_sites.
+plant_id				int(11)		This references an ID in the table main_plants.
+location_id				int(11)		This references an ID in the table gb_qc_locations.
+specific_location_id			int(4)		This references an ID in the table gb_qc_locations_details.
+date					date		This is the date of the sample. It is not the date that this record was created.
+date_short				bigint(8)	This was copied from the legacy database and may not be used in the new application. It is the date converted to an integer.
+time					time		This is the time of day of the sample. It is not the time that this record was created.
+group_time				time		This was copied from the legacy database and may not be used in the new application.
+group_start_dt				datetime	This was copied from the legacy database and may not be used in the new application.
+finish_dt				datetime 	This documents when the sample was completed. 
+duration_minutes			decimal(5,1)	This documents the number of minutes between when the sample was taken and when it was completed.
+duration				decimal(5,2)	This documents the number of hours between when the sample was taken and when it was completed.
+dt					datetime	This is the datetime of the sample. It is not the datetime that this record was created.
+dt_short				bigint(8)	This was copied from the legacy database and may not be used in the new application. It is the datetime converted to an integer.
+shift_date				date		This is the date of the shift. It may not be used in the new application.
+shift					varchar(5)	This is the name of the shift: day or night
+sampler					varchar(32)	This references an ID in the main_users table. In the legacy database it was a string containing a name.
+lab_tech				varchar(32)	This references an ID in the main_users table. In the legacy database it was a string containing a name.
+operator				varchar(32)	This references an ID in the main_users table. In the legacy database it was a string containing a name.
+rail_car_id				varchar(20)	This was copied from the legacy database and may not be used in the new application.
+rail_car_product_id			int(11)		This was copied from the legacy database and may not be used in the new application.
+rail_car_available_dt			datetime	This was copied from the legacy database and may not be used in the new application.
+starting_weight				decimal(5,1)	This stores the Starting Weight, which gets entered by a user.
+ending_weight				decimal(5,1)	This stores the Ending Weight, which gets entered by a user.
+moisture_rate				decimal(6,4)	This stores the Moisture Rate, which is calculated in the Sample Edit screen.
+drillhole_no				varchar(50)	This stores the Drillhole Number, which gets entered by a user.
+depth_from				decimal(5,1)	This stores a value which gets entered by a user.
+depth_to				decimal(5,1)	This stores a value which gets entered by a user.
+beginning_wet_weight			decimal(5,1)	This stores a value which gets entered by a user.
+prewash_dry_weight			decimal(5,1)	This stores a value which gets entered by a user.
+postwash_dry_weight			decimal(5,1)	This stores a value which gets entered by a user.
+oversize_weight				decimal(5,1)	This stores a value which gets entered by a user.
+split_sample_weight			decimal(5,1)	This stores a value which gets entered by a user.
+split_sample_weight_delta		decimal(5,1)	This stores a value which is calculated in the Sample Edit screen.
+oversize_percent			decimal(5,4)	This stores a value which is calculated in the Sample Edit screen.
+slimes_percent				decimal(5,4)	This stores a value which is calculated in the Sample Edit screen.
+ore_percent				decimal(5,4)	This stores a value which is calculated in the Sample Edit screen.
+notes					varchar(255)	This stores a value which gets entered by a user.
+review_notes				varchar(255)	This field may not be currently used. It was copied from the legacy database structure.
+turbidity				int(11)		This stores a value which gets entered by a user.
+container_slurry_weight			decimal(5,1)	This was copied from the legacy database and may not be used in the new application.
+container_water_weight			decimal(5,1)	This was copied from the legacy database and may not be used in the new application.
+container_empty_weight			decimal(5,1)	This was copied from the legacy database and may not be used in the new application.
+k_value					int(11)		This field was copied from the legacy database and is not used in the current implementation. Its functionality was replaced by the gb_qc_k_values and gb_qc_k_value_records tables.
+k_pan_1					decimal(7,4)	This field was copied from the legacy database and is not used in the current implementation. Its functionality was replaced by the gb_qc_k_values and gb_qc_k_value_records tables.
+k_pan_2					decimal(7,4)	This field was copied from the legacy database and is not used in the current implementation. Its functionality was replaced by the gb_qc_k_values and gb_qc_k_value_records tables.
+k_pan_3					decimal(7,4)	This field was copied from the legacy database and is not used in the current implementation. Its functionality was replaced by the gb_qc_k_values and gb_qc_k_value_records tables.
+k_percent_fines				decimal(5,4)	This field was copied from the legacy database and is not used in the current implementation. Its functionality was replaced by the gb_qc_k_values and gb_qc_k_value_records tables.
+k_value_fail				int(11)		This field was copied from the legacy database and is not used in the current implementation. Its functionality was replaced by the gb_qc_k_values and gb_qc_k_value_records tables.
+k_pan_1_fail				decimal(7,4)	This field was copied from the legacy database and is not used in the current implementation. Its functionality was replaced by the gb_qc_k_values and gb_qc_k_value_records tables.
+k_pan_2_fail				decimal(7,4)	This field was copied from the legacy database and is not used in the current implementation. Its functionality was replaced by the gb_qc_k_values and gb_qc_k_value_records tables.
+k_pan_3_fail				decimal(7,4)	This field was copied from the legacy database and is not used in the current implementation. Its functionality was replaced by the gb_qc_k_values and gb_qc_k_value_records tables.
+k_percent_fines_fail			decimal(5,4)	This field was copied from the legacy database and is not used in the current implementation. Its functionality was replaced by the gb_qc_k_values and gb_qc_k_value_records tables.
+roundness				decimal(5,1)	This stores a value which gets entered by a user.
+sphericity				decimal(5,1)	This stores a value which gets entered by a user.
+sieve_1_desc				char(3)		This field stores the Screen size of the associated sieve slot.
+sieve_1_value				decimal(7,4)	This field stores the Final Percent for the sieve in the associated sieve slot. The field's use may have differed in the legacy software.
+sieve_1_value_cumulative		decimal(7,4)	This field was copied from the legacy database and is not used in the current implementation.
+sieve_1_value_cumulative_passing	decimal(7,4)	This field was copied from the legacy database and is not used in the current implementation.
+sieve_2_desc				char(3)		This field stores the Screen size of the associated sieve slot.
+sieve_2_value				decimal(7,4)	This field stores the Final Percent for the sieve in the associated sieve slot. The field's use may have differed in the legacy software.
+sieve_2_value_cumulative		decimal(7,4)	This field was copied from the legacy database and is not used in the current implementation.
+sieve_2_value_cumulative_passing	decimal(7,4)	This field was copied from the legacy database and is not used in the current implementation.
+sieve_3_desc				char(3)		This field stores the Screen size of the associated sieve slot.
+sieve_3_value				decimal(7,4)	This field stores the Final Percent for the sieve in the associated sieve slot. The field's use may have differed in the legacy software.
+sieve_3_value_cumulative		decimal(7,4)	This field was copied from the legacy database and is not used in the current implementation.
+sieve_3_value_cumulative_passing	decimal(7,4)	This field was copied from the legacy database and is not used in the current implementation.
+sieve_4_desc				char(3)		This field stores the Screen size of the associated sieve slot.
+sieve_4_value				decimal(7,4)	This field stores the Final Percent for the sieve in the associated sieve slot. The field's use may have differed in the legacy software.
+sieve_4_value_cumulative		decimal(7,4)	This field was copied from the legacy database and is not used in the current implementation.
+sieve_4_value_cumulative_passing	decimal(7,4)	This field was copied from the legacy database and is not used in the current implementation.
+sieve_5_desc				char(3)		This field stores the Screen size of the associated sieve slot.
+sieve_5_value				decimal(7,4)	This field stores the Final Percent for the sieve in the associated sieve slot. The field's use may have differed in the legacy software.
+sieve_5_value_cumulative		decimal(7,4)	This field was copied from the legacy database and is not used in the current implementation.
+sieve_5_value_cumulative_passing	decimal(7,4)	This field was copied from the legacy database and is not used in the current implementation.
+sieve_6_desc				char(3)		This field stores the Screen size of the associated sieve slot.
+sieve_6_value				decimal(7,4)	This field stores the Final Percent for the sieve in the associated sieve slot. The field's use may have differed in the legacy software.
+sieve_6_value_cumulative		decimal(7,4)	This field was copied from the legacy database and is not used in the current implementation.
+sieve_6_value_cumulative_passing	decimal(7,4)	This field was copied from the legacy database and is not used in the current implementation.
+sieve_7_desc				char(3)		This field stores the Screen size of the associated sieve slot.
+sieve_7_value				decimal(7,4)	This field stores the Final Percent for the sieve in the associated sieve slot. The field's use may have differed in the legacy software.
+sieve_7_value_cumulative		decimal(7,4)	This field was copied from the legacy database and is not used in the current implementation.
+sieve_7_value_cumulative_passing	decimal(7,4)	This field was copied from the legacy database and is not used in the current implementation.
+sieve_8_desc				char(3)		This field stores the Screen size of the associated sieve slot.
+sieve_8_value				decimal(7,4)	This field stores the Final Percent for the sieve in the associated sieve slot. The field's use may have differed in the legacy software.
+sieve_8_value_cumulative		decimal(7,4)	This field was copied from the legacy database and is not used in the current implementation.
+sieve_8_value_cumulative_passing	decimal(7,4)	This field was copied from the legacy database and is not used in the current implementation.
+sieve_9_desc				char(3)		This field stores the Screen size of the associated sieve slot.
+sieve_9_value				decimal(7,4)	This field stores the Final Percent for the sieve in the associated sieve slot. The field's use may have differed in the legacy software.
+sieve_9_value_cumulative		decimal(7,4)	This field was copied from the legacy database and is not used in the current implementation.
+sieve_9_value_cumulative_passing	decimal(7,4)	This field was copied from the legacy database and is not used in the current implementation.
+sieve_10_desc				char(3)		This field stores the Screen size of the associated sieve slot.
+sieve_10_value				decimal(7,4)	This field stores the Final Percent for the sieve in the associated sieve slot. The field's use may have differed in the legacy software.
+sieve_10_value_cumulative		decimal(7,4)	This field was copied from the legacy database and is not used in the current implementation.
+sieve_10_value_cumulative_passing	decimal(7,4)	This field was copied from the legacy database and is not used in the current implementation.
+sieves_total				decimal(5,1)	This field was copied from the legacy database. It stores the total weights of sieves for the sample.
+start_weights_raw			text		This field stores the start sieve weights in a "squished string" format that was present in the legacy app. This field was used in an initial version of Silicore, but may no longer be needed.
+end_weights_raw				text		This field stores the end sieve weights in a "squished string" format that was present in the legacy app. This field was used in an initial version of Silicore, but may no longer be needed.
+sieves_raw				text		This field stores the final sieve weights in a "squished string" format that was present in the legacy app. This field was used in an initial version of Silicore, but may no longer be needed.
+feed_row_no				int(2)		This field was copied from the legacy database and may not used in the current implementation.
+plus_70					decimal(5,4)	This stores a value which is calculated in the Sample Edit screen. This represents the value for a sieve screen range.
+minus_40_plus_70			decimal(5,4)	This stores a value which is calculated in the Sample Edit screen. This represents the value for a sieve screen range.
+minus_70				decimal(5,4)	This stores a value which is calculated in the Sample Edit screen. This represents the value for a sieve screen range.
+minus_70_plus_140			decimal(5,4)	This stores a value which is calculated in the Sample Edit screen. This represents the value for a sieve screen range.
+plus_140				decimal(5,4)	This stores a value which is calculated in the Sample Edit screen. This represents the value for a sieve screen range.
+minus_140				decimal(5,4)	This stores a value which is calculated in the Sample Edit screen. This represents the value for a sieve screen range.
+near_size				decimal(5,4)	This field was copied from the legacy database and may not be used in the current implementation.
+cut_ratio				decimal(5,4)	This field was copied from the legacy database and may not be used in the current implementation.
+wp_moisture_rate			decimal(3,1)	This field was copied from the legacy database and may not be used in the current implementation.
+percent_solids				decimal(5,4)	This field was copied from the legacy database and may not be used in the current implementation.
+stph					decimal(5,1)	This field was copied from the legacy database and may not be used in the current implementation.
+tons_represented			int(11)		This field was copied from the legacy database and may not be used in the current implementation.
+recovery_plus_70			decimal(5,1)	This field was copied from the legacy database and may not be used in the current implementation.
+recovery_plus_140			decimal(5,4)	This field was copied from the legacy database and may not be used in the current implementation.
+is_removed				tinyint(1)	This field was copied from the legacy database and may not be used in the current implementation.
+void_status_code			varchar(1)	This field stores a flag of whether the sample was voided or not. A == active. V == voided.
+create_dt				datetime	This is the datetime that the database record was created.
+create_user_id				bigint(20)	This is the ID of the user who created the database record.
+edit_dt					datetime	This is the datetime that the database record was last edited.
+edit_user_id				bigint(20)	This is the ID of the user who last edited the database record.
+sieve_11_desc				char(3)		This field stores the Screen size of the associated sieve slot.
+sieve_11_value				decimal(7,4)	This field stores the Final Percent for the sieve in the associated sieve slot.
+sieve_11_value_cumulative		decimal(7,4)	This field was created to mirror the format of similar sieve slot fields. However, it is not used in the current implementation.
+sieve_11_value_cumulative_passing	decimal(7,4)	This field was created to mirror the format of similar sieve slot fields. However, it is not used in the current implementation.
+sieve_12_desc				char(3)		This field stores the Screen size of the associated sieve slot.
+sieve_12_value				decimal(7,4)	This field stores the Final Percent for the sieve in the associated sieve slot.
+sieve_12_value_cumulative		decimal(7,4)	This field was created to mirror the format of similar sieve slot fields. However, it is not used in the current implementation.
+sieve_12_value_cumulative_passing	decimal(7,4)	This field was created to mirror the format of similar sieve slot fields. However, it is not used in the current implementation.
+sieve_13_desc				char(3)		This field stores the Screen size of the associated sieve slot.
+sieve_13_value				decimal(7,4)	This field stores the Final Percent for the sieve in the associated sieve slot.
+sieve_13_value_cumulative		decimal(7,4)	This field was created to mirror the format of similar sieve slot fields. However, it is not used in the current implementation.
+sieve_13_value_cumulative_passing	decimal(7,4)	This field was created to mirror the format of similar sieve slot fields. However, it is not used in the current implementation.
+sieve_14_desc				char(3)		This field stores the Screen size of the associated sieve slot.
+sieve_14_value				decimal(7,4)	This field stores the Final Percent for the sieve in the associated sieve slot.
+sieve_14_value_cumulative		decimal(7,4)	This field was created to mirror the format of similar sieve slot fields. However, it is not used in the current implementation.
+sieve_14_value_cumulative_passing	decimal(7,4)	This field was created to mirror the format of similar sieve slot fields. However, it is not used in the current implementation.
+sieve_15_desc				char(3)		This field stores the Screen size of the associated sieve slot.
+sieve_15_value				decimal(7,4)	This field stores the Final Percent for the sieve in the associated sieve slot.
+sieve_15_value_cumulative		decimal(7,4)	This field was created to mirror the format of similar sieve slot fields. However, it is not used in the current implementation.
+sieve_15_value_cumulative_passing	decimal(7,4)	This field was created to mirror the format of similar sieve slot fields. However, it is not used in the current implementation.
+sieve_16_desc				char(3)		This field stores the Screen size of the associated sieve slot.
+sieve_16_value				decimal(7,4)	This field stores the Final Percent for the sieve in the associated sieve slot.
+sieve_16_value_cumulative		decimal(7,4)	This field was created to mirror the format of similar sieve slot fields. However, it is not used in the current implementation.
+sieve_16_value_cumulative_passing	decimal(7,4)	This field was created to mirror the format of similar sieve slot fields. However, it is not used in the current implementation.
+sieve_17_desc				char(3)		This field stores the Screen size of the associated sieve slot.
+sieve_17_value				decimal(7,4)	This field stores the Final Percent for the sieve in the associated sieve slot.
+sieve_17_value_cumulative		decimal(7,4)	This field was created to mirror the format of similar sieve slot fields. However, it is not used in the current implementation.
+sieve_17_value_cumulative_passing	decimal(7,4)	This field was created to mirror the format of similar sieve slot fields. However, it is not used in the current implementation.
+sieve_18_desc				char(3)		This field stores the Screen size of the associated sieve slot.
+sieve_18_value				decimal(7,4)	This field stores the Final Percent for the sieve in the associated sieve slot.
+sieve_18_value_cumulative		decimal(7,4)	This field was created to mirror the format of similar sieve slot fields. However, it is not used in the current implementation.
+sieve_18_value_cumulative_passing	decimal(7,4)	This field was created to mirror the format of similar sieve slot fields. However, it is not used in the current implementation.
+is_complete				tinyint(1)	This flag stores the results of a test determining if this sample is Complete, based on complex criteria.
+is_coa					tinyint(1)	This flag indicates if this is a Certificate of Analysis sample for the Texas Commission of Environmental Quality.
+
+Table: gb_qc_sieve_metrics
+Description: This table contains options for screen sizes. It was copied from the legacy database and may no longer serve a purpose. Research the code for usage before removing it.
+Fields:
+id		int(11) AI PK	This is the primary key for the table.
+screen		varchar(16)	This described what size of sand can filter through a sieve.
+
+Table: gb_qc_sieve_stacks
+Description: This table contains records documenting both sieve stacks and Camsizers. A sieve stack is a collection of sieves, which are used in taking measurements. A Camsizer is an alternative device for taking measurements, but does not use sieves.
+Fields:
+id		int(11) AI PK	This is the primary key for the table.
+description	varchar(64)	This is human friendly text describing the sieve stack/camsizer.
+main_site_id	int(11)		This references an ID in the main_sites table.
+sort_order	int(11)		This determines the order in which this appears in the UI.
+is_active	tinyint(1)	This is used to deactive a threshold.
+is_camsizer	tinyint(1)	This flag tells us whether or not to treat this record as a stack of sieves or as a camsizer device. It controls functionality in the UI and in calculations.
+
+Table: gb_qc_sieves
+Description: This table contains records of individual sieves. A sieve is a device used in taking measurements.
+Fields:
+id		int(11) AI PK	This is the primary key for the table.
+sieve_stack_id	int(11)		This references an ID in the gb_qc_sieve_stacks table.
+screen		varchar(16)	This described what size of sand can filter through the sieve.
+start_weight	decimal(5,1)	This is the default weight when a user starts entering a new sample. It gets updated when the sample is saved.
+sort_order	int(11)		This determines the order in which this appears in the UI.
+is_active	tinyint(1)	This is used to deactive a sieve.
+create_date	datetime	This is the date the the record was created.
+create_user_id	int(11)		This references an ID in the main_users table.
+edit_date	datetime	This is the date the the record was last edited.
+edit_user_id	int(11)		This references an ID in the main_users table.
+
+Table: gb_qc_test_types
+Description: This table stores drop down options for test types. These are used by the Quality Control technician to document what type of test they were performing.
+Fields:
+id		int(11) AI PK	This is the primary key for the table.
+description	varchar(64)	This is human friendly text describing the test type.
+sort_order	int(11)		This determines the order in which this appears in the UI.
+is_active	tinyint(1)	This is used to deactive a threshold.
+
+Table: gb_qc_thresholds
+Description: This table stores settings which determine when values should be highlighted in the tables on the Overview page. 
+Fields:
+id		int(11) AI PK	This is the primary key for the table.
+screen		varchar(16)	This is the screen size or range for which the setting applies.
+location_id	int(11)		This references an ID in the gb_qc_locations table.
+low_threshold	double		Values under this threshold for the location and screen should be highlighted.
+high_threshold	double		Values over this threshold for the location and screen should be highlighted.
+is_active	tinyint(1)	This is used to deactive a threshold.
+
+Table: gb_qc_user_repeatability
+Description: This table keeps track of how many samples a Quality Control technician processed since his/her last repeatability test. Quality Control technicians are supposed to perform a Repeatability test every 100 samples.
+Fields:
+id			int(11) AI PK	This is the primary key for the table.
+user_id			int(11)		This references an ID in the main_users table.
+repeatability_counter	int(11)		This stores the reverse counter for when a technician should perform a Repeatability test.

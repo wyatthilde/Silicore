@@ -1,0 +1,2281 @@
+<?php
+/* * *****************************************************************************************************************************************
+ * File Name: hroffboarding.php
+ * Project: smashbox
+ * Description: 
+ * Notes:
+ * =========================================================================================================================================
+ * Change Log ([MM/DD/YYYY]|[Developer]|[Task Ticket] - [Description]
+ * =========================================================================================================================================
+ * 05/17/2018|ktaylor|KACE:20472 - Initial creation
+ * 05/19/2018|ktaylor|KACE:20472 - First version working, no edit
+ * 05/21/2018|ktaylor|KACE:20472 - Edit added
+ * 05/22/2018|ktaylor|KACE:20472 - Change monitors to number type aqnd added IT permissions in case 5
+ * 05/22/2018|ktaylor|KACE:20472 - Changed button and heading names
+ * 05/22/2018|ktaylor|KACE:20472 - Edit added
+ * 05/23/2018|ktaylor|KACE:20472 - added offboard button and disabled manager ability to terminate
+ * 06/25/2018|gndede|KACE:23088 - Added paginantion to the report view.
+ * **************************************************************************************************************************************** */
+
+
+//======================================================================================== BEGIN PHP
+//========================================================================================== END PHP
+
+//include other files
+require_once('/var/www/configuration/db-mysql-sandbox.php'); //contains database connection info
+require_once('../../Includes/emailfunctions.php'); //contains email functionality
+require_once('../../Includes/pagevariables.php'); //contains page-level globals
+
+//suppress warning messages
+error_reporting(E_ERROR | E_PARSE);
+// Turn off all error reporting
+error_reporting(0);
+
+// Get the currently logged in user's information from the global object in /Includes/pagevariables.php
+global $singleUserObject;
+
+// <editor-fold defaultstate="collapsed" desc="Set Debugging Options">  
+$debugging = 0; //set this to 1 to see debugging output
+$currenttime = time();
+if ($debugging) 
+{
+  echo("<b>Debugging Variables</b><br />");
+  echo("\$PageName: " . $PageName . "<br />");
+  echo("\$PageDept: " . $PageDept . "<br />");
+  echo("User_ID: " . $singleUserObject->vars["id"] . "<br />");
+  echo("User: " . $singleUserObject->vars["display_name"] . "<br />");
+  echo("User deparment_id: " . $singleUserObject->vars["main_department_id"]);
+  echo("<br /><br />");
+  error_reporting(E_ALL);
+  ini_set('display_errors', TRUE);
+  ini_set('display_startup_errors', TRUE);
+  echo("<br /><br />");
+}  
+// </editor-fold>
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link type="text/css" rel="stylesheet" href="../../Includes/hrstyles.css">
+<style>
+* {
+    box-sizing: border-box;
+}
+
+input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .col-25, .col-75, input[type=submit] {
+        width: 100%;
+        margin-top: 0;
+    }
+}
+</style>
+<style type="text/css">
+    #wrapper {
+        width:450px;
+        margin:0 auto;
+        font-family:Verdana, sans-serif;
+    }
+    legend {
+        color:#0481b1;
+        font-size:16px;
+        padding:0 10px;
+        background:#fff;
+        -moz-border-radius:4px;
+        box-shadow: 0 1px 5px rgba(4, 129, 177, 0.5);
+        padding:5px 10px;
+        text-transform:uppercase;
+        font-family:Helvetica, sans-serif;
+        font-weight:bold;
+    }
+    fieldset {
+        border-radius:4px;
+        background: #fff; 
+        background: -moz-linear-gradient(#fff, #f9fdff);
+        background: -o-linear-gradient(#fff, #f9fdff);
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#f9fdff)); /
+        background: -webkit-linear-gradient(#fff, #f9fdff);
+        padding:20px;
+        border-color:rgba(4, 129, 177, 0.4);
+    }
+    input,
+    textarea {
+        color: #373737;
+        background: #fff;
+        border: 1px solid #CCCCCC;
+        color: #aaa;
+        font-size: 14px;
+        line-height: 1.2em;
+        margin-bottom:15px;
+
+        -moz-border-radius:4px;
+        -webkit-border-radius:4px;
+        border-radius:4px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset, 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    input[type="text"],
+    input[type="password"]{
+        padding: 8px 6px;
+        height: 22px;
+        width:280px;
+    }
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+        background:#f5fcfe;
+        text-indent: 0;
+        z-index: 1;
+        color: #373737;
+        -webkit-transition-duration: 400ms;
+        -webkit-transition-property: width, background;
+        -webkit-transition-timing-function: ease;
+        -moz-transition-duration: 400ms;
+        -moz-transition-property: width, background;
+        -moz-transition-timing-function: ease;
+        -o-transition-duration: 400ms;
+        -o-transition-property: width, background;
+        -o-transition-timing-function: ease;
+        width: 380px;
+        
+        border-color:#ccc;
+        box-shadow:0 0 5px rgba(4, 129, 177, 0.5);
+        opacity:0.6;
+    }
+    input[type="submit"]{
+        background: #222;
+        border: none;
+        text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
+        text-transform:uppercase;
+        color: #eee;
+        cursor: pointer;
+        font-size: 15px;
+        margin: 5px 0;
+        padding: 5px 22px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        -webkit-border-radius:4px;
+        -webkit-box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+        -moz-box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+        box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+    }
+    textarea {
+        padding:3px;
+        width:96%;
+        height:100px;
+    }
+    textarea:focus {
+        background:#ebf8fd;
+        text-indent: 0;
+        z-index: 1;
+        color: #373737;
+        opacity:0.6;
+        box-shadow:0 0 5px rgba(4, 129, 177, 0.5);
+        border-color:#ccc;
+    }
+    .small {
+        line-height:14px;
+        font-size:12px;
+        color:#999898;
+        margin-bottom:3px;
+    }
+</style>
+
+<style>
+    .header_text {
+    font-family: arial,helvetica,sans-serif;
+    font-size: 13px;
+    float: left;
+    postition: relative;
+    bottom: 4px;
+    width: 100%;
+}
+</style>
+
+<link type="text/css" rel="stylesheet" href="../../Includes/hrstyles.css">
+<script src="../../Includes/jquery-ui-1.12.1.custom/jquery.tablesorter.js"></script>
+<script>
+$(document).ready(function() 
+  { 
+    $("#myTable").tablesorter(); 
+  } 
+);
+</script>
+<script>
+$(function() 
+{
+  $("#start-date").datepicker({ dateFormat: 'yy-mm-dd' });
+  $("#start-date").datepicker("setDate", new Date());
+  $("#separation-date").datepicker({ dateFormat: 'yy-mm-dd' });
+  $("#start-date-edit").datepicker({ dateFormat: 'yy-mm-dd' });
+  setSelection();
+});
+
+function searchNames() 
+{
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("nameSearchInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 0; i < tr.length; i++) 
+  {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) 
+    {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) 
+      {
+        tr[i].style.display = "";
+      } 
+      else 
+      {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+
+<?php
+
+$dbc = databaseConnectionInfo();
+$dbconn = new mysqli
+(
+  $dbc['silicore_hostname'],
+  $dbc['silicore_username'],
+  $dbc['silicore_pwd'],
+  $dbc['silicore_dbname']
+);
+$jobTitleQuery = "call sp_hr_JobTitlesGetAll()";
+$jobTitles = mysqli_query($dbconn, $jobTitleQuery);
+mysqli_close($dbconn);
+          
+while($jobTitle = $jobTitles->fetch_assoc())
+{
+  $titleNames[] = $jobTitle['name'];
+  $titleIDs[] = $jobTitle['id'];
+  $titleDescriptions[] = $jobTitle['description'];
+  $titleDepartments[] = $jobTitle['department_id'];
+
+  if (isset($_POST['editemployee']) && isset($_POST['id']))
+  {
+    $dbc = databaseConnectionInfo();
+    $dbconn = new mysqli
+    (
+      $dbc['silicore_hostname'],
+      $dbc['silicore_username'],
+      $dbc['silicore_pwd'],
+      $dbc['silicore_dbname']
+    );
+
+    $Id = filter_input(INPUT_POST,'id',FILTER_SANITIZE_NUMBER_INT);
+
+    $data005 = "call sp_hr_EmpSelectById('$Id')";
+    $result005 = mysqli_query($dbconn, $data005);
+    $row005 = mysqli_fetch_assoc($result005);
+    mysqli_close($dbconn);
+    $titleDepartments[]= $row005['department_id'];    
+  }
+}
+
+$dbconn = new mysqli
+(
+  $dbc['silicore_hostname'],
+  $dbc['silicore_username'],
+  $dbc['silicore_pwd'],
+  $dbc['silicore_dbname']
+);
+$managerQuery = "call sp_hr_DeptManagersGetAll()";
+$managerNames = mysqli_query($dbconn, $managerQuery);
+mysqli_close($dbconn);
+          
+while($managerName = $managerNames->fetch_assoc())
+{
+  $nameMgrnames[] = $managerName['mgrname'];
+  $nameIDs[] = $managerName['id'];
+  $nameDepartments[] = $managerName['main_department_id'];
+}
+  
+$dbconn = new mysqli
+(
+  $dbc['silicore_hostname'],
+  $dbc['silicore_username'],
+  $dbc['silicore_pwd'],
+  $dbc['silicore_dbname']
+);
+
+$emailModelQuery = "call sp_hr_EmpGetAll()";
+$emailModelAfters = mysqli_query($dbconn, $emailModelQuery);
+mysqli_close($dbconn);
+          
+while($emailModelAfter = $emailModelAfters->fetch_assoc())
+{
+  $emailModelNames[] = $emailModelAfter['empname'];
+  $emailModelIDs[] = $emailModelAfter['id'];
+  $emailModelDepartments[] = $emailModelAfter['main_department_id'];
+}  
+
+?>
+
+<script>
+function populateJobTitles()
+{
+  var departmentID = document.getElementById("slcDepartmentId").value;
+  var titleSelect = document.getElementById("slcJobTitleId");
+  var managerSelect = document.getElementById("slcManager");
+  var emailModelSelect = document.getElementById("txtEmailAccountModel");
+
+  var titleNames = <?php echo json_encode($titleNames); ?>;
+  var titleIDs = <?php echo json_encode($titleIDs); ?>;
+  //var titleDscrpts = <?php // echo json_encode($titleDescriptions); ?>;
+  var titleDepts = <?php echo json_encode($titleDepartments); ?>;
+
+  var nameMgrnames = <?php echo json_encode($nameMgrnames); ?>;
+  var nameIDs = <?php echo json_encode($nameIDs); ?>;
+  var nameDepts = <?php echo json_encode($nameDepartments); ?>;
+
+  var emailModelNames = <?php echo json_encode($emailModelNames); ?>;
+  var emailModelIDs = <?php echo json_encode($emailModelIDs); ?>;
+  var emailModelDepts = <?php echo json_encode($emailModelDepartments); ?>;
+
+  var titleCount = titleIDs.length;
+
+  titleSelect.options.length = 0;
+
+  var prePopOption = document.createElement("option");
+  prePopOption.text = "Please Select";
+  prePopOption.value = "0";
+  titleSelect.add(prePopOption);
+
+  for(i = 0; i<titleCount+1; i++)
+  {  
+    if(titleDepts[i] === departmentID)
+    {
+      var option = document.createElement("option");
+      option.text = titleNames[i];
+      option.value = titleIDs[i];
+      titleSelect.add(option);
+    }
+  }
+
+  var managerCount = nameIDs.length;
+
+  managerSelect.options.length = 0;
+
+  var prePopOption = document.createElement("option");
+  prePopOption.text = "Please Select";
+  prePopOption.value = "0";
+  managerSelect.add(prePopOption);
+
+  for(i = 0; i<managerCount; i++)
+  {
+    if(nameDepts[i] === departmentID)
+    {
+      var option = document.createElement("option");
+      option.text = nameMgrnames[i];
+      option.value = nameIDs[i];
+      managerSelect.add(option);
+    }
+  }
+  
+  var emailModelCount = emailModelIDs.length;
+
+  emailModelSelect.options.length = 0;
+
+  var prePopOption = document.createElement("option");
+  prePopOption.text = "Please Select";
+  prePopOption.value = "0";
+  emailModelSelect.add(prePopOption);
+
+  for(i = 0; i<emailModelCount; i++)
+  {
+    if(emailModelDepts[i] === departmentID)
+    {
+      var option = document.createElement("option");
+      option.text = emailModelNames[i];
+      option.value = emailModelIDs[i];
+      emailModelSelect.add(option);
+    }
+  }
+
+}
+</script>
+
+<?php
+//================================================================================================= BEGIN CODE FOLDING EXAMPLES
+
+// <editor-fold defaultstate="collapsed" desc="This section of code echoes 'foo' to the screen">
+
+
+  // echo("foo");
+
+
+// </editor-fold>
+
+// <editor-fold defaultstate="collapsed" desc="This section also echoes 'foo'">
+  // this is from the mycodefold custom template
+  // echo("foo");
+  
+// </editor-fold>
+
+//=================================================================================================== END CODE FOLDING EXAMPLES
+
+$dbc = databaseConnectionInfo();
+
+// KACE:18774 - kkuehn: This switch should be kept specific to this page(s)
+switch($ServerSubDomain)
+{
+  case "silicore-dev":
+    $addressDev = "devteam@vistasand.com";
+    $addressHelp = "devteam@vistasand.com";
+    $addressUniform = "devteam@vistasand.com";
+    $addressCreditCard = "devteam@vistasand.com";
+    $addressFuelCard = "devteam@vistasand.com";
+    $sendPHPMailDebugFlag = 1;
+    break;
+  case "silicore-test":
+    $addressDev = "devteam@vistasand.com";
+    $addressHelp = "devteam@vistasand.com";
+    $addressUniform = "devteam@vistasand.com";
+    $addressCreditCard = "devteam@vistasand.com";
+    $addressFuelCard = "devteam@vistasand.com";
+    $sendPHPMailDebugFlag = 1;
+    break;
+  case "silicore":
+    $addressDev = "development@vistasand.com";
+    $addressHelp = "help@vistasand.com";
+    $addressUniform = "mine_uniforms@vprop.com";
+    $addressCreditCard = "mine_ccrequest@vprop.com";
+    $addressFuelCard = "mine_fuelcard@vprop.com";
+    $sendPHPMailDebugFlag = 0;
+    break;
+  default:
+    $addressDev = "devteam@vistasand.com";
+    $addressHelp = "devteam@vistasand.com";
+    $addressUniform = "devteam@vistasand.com";
+    $addressCreditCard = "devteam@vistasand.com";
+    $addressFuelCard = "devteam@vistasand.com";
+    $sendPHPMailDebugFlag = 1;
+    break;
+}            
+
+// Set x according to current page action/purpose
+// NOTE: 'x' (or PageAction, etc.) should be set at the form level in the HTML, then we could eliminate all of these if statements.
+//       Granted, there is other logic happening here, but it could be handled with form-submit validation.
+if (empty($_POST) || isset($_POST['selectallemployees'])) 
+{ 
+    $x = 1; // show all employees
+}
+   
+if (isset($_POST['editemployee']) && isset($_POST['id']))
+{ 
+    $x = 5; // edit existing employee
+} 
+if (isset($_POST['updateemployee']))
+{
+    $x = 6; // update existing employee then show employee table (with edit links)
+} 
+
+if (isset($_POST['offboardemployee']))
+{
+    $x = 7; // Offboard (terminate) existing employee then show employee table (with edit links)
+}
+ 
+switch ($x)
+
+{
+
+/**************************************************************************************************************************
+* CASE: Show Employee List *****************************************************************************************
+*************************************************************************************************************************/
+
+case 1:
+
+?>
+
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css"/>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+ 
+<!-- HTML -->
+  <!--<h2>Employee List</h2>-->
+              <fieldset>
+                <legend>Employee List</legend>
+
+  <div class="datagrid">
+      
+<?php
+
+    try
+    {    
+      $dbconn = new mysqli
+      (
+        $dbc['silicore_hostname'],
+        $dbc['silicore_username'],
+        $dbc['silicore_pwd'],
+        $dbc['silicore_dbname']
+      );             
+      $employeesSQL = "call sp_hr_EmpSelect()"; 
+    }
+    catch (Exception $e)
+    {
+      echo 'Caught exception: ',  $e->getMessage(), "\n";
+    }
+
+    $result01 = mysqli_query($dbconn, $employeesSQL);
+    mysqli_close($dbconn);
+    
+?> 
+<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css"> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">     
+<!--<input type="text" id="nameSearchInput" onkeyup="searchNames()" placeholder="Search in Last Names..." title="Type in a name">-->
+<br /><br />
+    <table id="myTable" class="tablesorter hrEmployeeGridTable" style="width:1000px; border-color: #000000;" cellpadding="0" cellspacing="0" border="1">
+      <thead style="text-decoration: underline">
+      <tr>
+        <th class="headerRowCell">Last Name</th>
+        <th class="headerRowCell">First Name</th>
+        <th class="headerRowCell"><?php echo $HRProgram?>  ID</th>
+        <th class="headerRowCell">Department</th>
+        <th class="headerRowCell">Manager</th>
+        <th class="headerRowCell">Site</th>
+        <th class="headerRowCell">Start Date</th>
+        <th class="headerRowCell">Active?</th>
+        <th class="headerRowCell">Action</th>
+      </tr>
+      </thead>
+      
+<?php
+  
+$UserDepartment = $singleUserObject->vars['main_department_id']  ;
+$UserType = $singleUserObject->vars['user_type_id'] ;
+$ManagerName = '';
+
+while ($employee = mysqli_fetch_assoc($result01))
+{
+  $dbconn = new mysqli
+  (
+    $dbc['silicore_hostname'],
+    $dbc['silicore_username'],
+    $dbc['silicore_pwd'],
+    $dbc['silicore_dbname']
+  );
+  $managerSQL = "call sp_hr_DeptManagersGetAll()";
+  $managerResults = mysqli_query($dbconn, $managerSQL);
+  mysqli_close($dbconn);
+
+  $NameManager=$employee['manager_user_id']; 
+
+  while($manager = mysqli_fetch_assoc($managerResults))
+  {
+    if($NameManager==$manager['id'] )
+    {
+      $ManagerName=$manager['mgrname'];
+    }
+
+  } 
+    if(($UserDepartment == $employee['department_id'] && $UserType >= 3 )||
+            $UserDepartment == 9 ||$UserDepartment == 10 || $UserType == 5)
+    {          
+      echo
+      ("
+        <tr>      
+        <td style='padding:0px;text-align:center;'>{$employee['last_name']}</td>
+        <td style='padding:0px;text-align:center;'>{$employee['first_name']}</td>
+        <td style='padding:0px;text-align:center;'>{$employee['employee_id']}</td>
+        <td style='padding:0px;text-align:center;'>{$employee['name']}</td>
+        <td style='padding:0px;text-align:center;'>{$ManagerName}</td>            
+        <td style='padding:0px;text-align:center;'>{$employee['description']}</td>     
+        <td style='padding:0px;text-align:center;'>{$employee['start_date']}</td>
+        <td style='padding:0px;text-align:center;'>"
+        . ($employee['is_active'] == '1' ? 'Yes' : 'No') . "
+        </td>
+        <td style='padding:0px;text-align:center;'>
+      ");
+
+      if($UserType >= 3 || $userPermissionsArray['vista']['granbury']['hr'] >= 1 || $userPermissionsArray['vista']['granbury']['it'] >= 1 )			
+      {
+        echo
+        ("
+          <form method='post' action='hroffboarding.php' class='inline'>
+            <input type='hidden' name='id' value='{$employee['id']}'>
+            <button type='submit' name='editemployee' value='{$employee['id']}' class='hrlink-button'>
+            <!--Off Board/Edit--><style='font-size:15px;color:red;'>Off-Board/Edit <i class='fa fa-edit'></i>
+            </button>
+          </form> 
+        ");                                                       
+      }
+      echo ("</td></tr>");
+    }        
+} 
+?>
+    </table>
+
+
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+
+    </table>
+
+  <script>
+  $(function(){
+    $("#myTable").dataTable({
+          "pagingType": "full_numbers"
+    });
+  });
+  </script>
+ 
+      </fieldset>
+    </form>
+  </div>
+  <br />&nbsp<br />&nbsp
+               
+<?php
+ break;
+  
+/**************************************************************************************************************************
+* CASE: Edit (Off Board) Employee *****************************************************************************************
+*************************************************************************************************************************/
+
+
+ case 5:
+
+  $Id = filter_input(INPUT_POST,'id',FILTER_SANITIZE_NUMBER_INT);
+    
+  $dbconn = new mysqli
+  (
+    $dbc['silicore_hostname'],
+    $dbc['silicore_username'],
+    $dbc['silicore_pwd'],
+    $dbc['silicore_dbname']
+  ); 
+  $data05 = "call sp_hr_EmpSelectById('$Id')"; 
+  $result05 = mysqli_query($dbconn, $data05);
+  $row05 = mysqli_fetch_assoc($result05);
+  mysqli_close($dbconn);
+  //echo $data05;       
+  $user_id = $_SESSION["user_id"];
+  $Date04 = date("Y/m/d H:i:s");
+?>
+  <div class="hrformgroup">
+    <form action="hroffboarding.php" method="post">
+    <table class="hrEmployeeShellTable">
+
+       <!-- <fieldset>-->
+        <legend>Edit/Offboard Employee</legend><!--<h2>Edit/Offboard Employee</h2>-->
+
+      <tr>
+        <td style="vertical-align:top; border-right: solid 1px #000000;">
+          <table style="border:none">
+            <tr>
+              <td style="border:none">Last Name:</td>
+              <td style="border:none"><input type="text" name="txtLastName" value="<?php echo $row05['last_name']?>" required/></td>
+            </tr>
+            <tr>
+              <td style="border:none">First Name:</td>
+              <td style="border:none"><input type="text" name="txtFirstName" value="<?php echo $row05['first_name']?>" required/></td>
+            </tr>
+            <tr>
+              <td style="border:none"><?php echo $HRProgram?>  ID:</td>
+              <td style="border:none"><input type="text" name="txtEmployeeId" value="<?php echo $row05['employee_id']?>" required/></td>
+            </tr>
+            
+            <tr>
+              <td style="border:none">Site:</td>
+              <td style="border:none">
+<?php  
+
+$dbconn = new mysqli
+(
+  $dbc['silicore_hostname'],
+  $dbc['silicore_username'],
+  $dbc['silicore_pwd'],
+  $dbc['silicore_dbname']
+);
+$data061 = "call sp_hr_SiteSelect()";
+$result061 = mysqli_query($dbconn, $data061);
+mysqli_close($dbconn);
+
+$dbconn = new mysqli
+(
+  $dbc['silicore_hostname'],
+  $dbc['silicore_username'],
+  $dbc['silicore_pwd'],
+  $dbc['silicore_dbname']
+);   
+$data071 = "call sp_hr_EmpDeptSiteSelectById($Id)"; 
+$result071 = mysqli_query($dbconn,$data071);
+$row071 = mysqli_fetch_assoc($result071);
+mysqli_close($dbconn);                                   
+
+?>                   
+              <select name="slcSiteId" id="slcSiteId">                                         
+<?php
+              while ($row061 = mysqli_fetch_assoc($result061))
+              {      
+                if($row061['description']==$row071['description'])                               
+                {
+
+?>
+                <option value="<?php echo($row071['site_id'])?>" selected="selected"> <?php echo($row071['description'])?></option>                      
+<?php 
+                } 
+                else
+                {
+?>
+                <option value="<?php echo($row061['id'])?>"> <?php echo($row061['description'])?></option>                      
+<?php 
+                 }
+               }
+  
+?>    
+              </select>  
+              </td>
+            </tr>
+            <tr>
+              <td style="border:none">Department:</td>
+              <td style="border:none">
+<?php
+
+              $dbconn = new mysqli
+              (
+                $dbc['silicore_hostname'],
+                $dbc['silicore_username'],
+                $dbc['silicore_pwd'],
+                $dbc['silicore_dbname']
+              );
+              $data06 = "call sp_hr_DeptSelect()";
+              $result06 = mysqli_query($dbconn, $data06);
+              mysqli_close($dbconn);
+
+              $dbconn = new mysqli
+               (
+                 $dbc['silicore_hostname'],
+                 $dbc['silicore_username'],
+                 $dbc['silicore_pwd'],
+                 $dbc['silicore_dbname']
+               );      
+              $data07 = "call sp_hr_EmpDeptSiteSelectById($Id)";                            
+              $result07 = mysqli_query($dbconn,$data07);
+              $row07 = mysqli_fetch_assoc($result07);          
+              mysqli_close($dbconn);                                   
+?>                   
+                       
+              <select onchange="populateJobTitles()" name="slcDepartmentId" id="slcDepartmentId">
+                                         
+<?php
+              while ($row06 = mysqli_fetch_assoc($result06))
+              {      
+                if($row06['name']==$row07['name'])                               
+                {
+?>
+              <option value="<?php echo($row07['department_id'])?>" selected="selected" required> <?php echo($row07['name'])?></option>
+                      
+<?php           } 
+                else
+                {
+?>
+              <option value="<?php echo($row06['id'])?>"> <?php echo($row06['name'])?></option>
+                      
+<?php           }
+              }
+ 
+                       
+?>    
+              </select>  
+              </td>
+            </tr>
+            
+              <td style="border:none">Job Title:</td>
+              <td style="border:none">
+
+<?php
+              $dbconn = new mysqli
+              (
+                $dbc['silicore_hostname'],
+                $dbc['silicore_username'],
+                $dbc['silicore_pwd'],
+                $dbc['silicore_dbname']
+              );
+              $data062 = "call sp_hr_JobSelect()";
+              $result062 = mysqli_query($dbconn, $data062);
+              mysqli_close($dbconn);
+
+              $dbconn = new mysqli
+              (
+                $dbc['silicore_hostname'],
+                $dbc['silicore_username'],
+                $dbc['silicore_pwd'],
+                $dbc['silicore_dbname']
+              ); 
+              $data072 = "call sp_hr_EmpDeptSiteSelectById($Id)";                            
+              $result072 = mysqli_query($dbconn,$data072);
+              $row072 = mysqli_fetch_assoc($result072);          
+              mysqli_close($dbconn);                                   
+?>   
+                
+              <select name="slcJobTitleId" id="slcJobTitleId" required>
+                
+<?php
+              while ($row062 = mysqli_fetch_assoc($result062))
+              {      
+                if($row062['name']==$row072['job_title_name'])                               
+                {
+?>
+              <option value="<?php echo($row072['job_title_id'])?>" selected="selected"> <?php echo($row072['job_title_name'])?></option>
+<?php     
+                } 
+                else
+                {
+?>
+              <option value="<?php echo($row062['id'])?>"> <?php echo($row062['name'])?></option>
+                      
+<?php          
+                }
+              } 
+                       
+?>    
+              </select>  
+              </td>
+            </tr>     
+            <tr>
+              <td style="border:none">Manager:</td>
+              <td style="border:none">
+                
+<?php
+              $dbconn = new mysqli
+              (
+                $dbc['silicore_hostname'],
+                $dbc['silicore_username'],
+                $dbc['silicore_pwd'],
+                $dbc['silicore_dbname']
+              );
+
+              $data063 = "call sp_hr_DeptManagersGetAll()";
+              $result063 = mysqli_query($dbconn, $data063);
+
+              mysqli_close($dbconn);
+              
+              
+              
+              $dbconn = new mysqli
+              (
+                $dbc['silicore_hostname'],
+                $dbc['silicore_username'],
+                $dbc['silicore_pwd'],
+                $dbc['silicore_dbname']
+              ); 
+
+              $data073 = "call sp_hr_EmpDeptSiteSelectById($Id)";  
+                           
+              $result073 = mysqli_query($dbconn,$data073);
+              $row073 = mysqli_fetch_assoc($result073);
+          
+              mysqli_close($dbconn);  
+?>                               
+              <select name="slcManager" id="slcManager" required >                
+<?php
+              while ($row063 = mysqli_fetch_assoc($result063))
+              {      
+                if($row063['mgrname']==$row073['mgrname'])                               
+                {
+?>
+              <option value="<?php echo($row073['manager_user_id'])?>" selected="selected"> <?php echo($row073['mgrname'])?></option>                      
+<?php           } 
+                else
+                {
+?>
+              <option value="<?php echo($row063['id'])?>"> <?php echo($row063['mgrname'])?></option>                      
+<?php
+                }
+              }
+                       
+?>    
+              </select> 
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border:none">Start Date</td>
+              <td style="border:none"><input type="text" id="start-date-edit" name="txtStartDate" value="<?php echo $row05['start_date']?>" /></td>
+            </tr>
+            <tr>
+              <td style="border:none">Separation Date</td>
+              <td style="border:none"><input type="text" id="separation-date" name="txtSeparationDate" value="<?php echo $row05['separation_date']?>" /></td>
+            </tr> 
+            
+            
+  <tr>
+    <td colspan="2">
+      <hr style="height:0px;border-top:solid 1px #000000;position:relative;top:-4px;" />
+      <nobr>
+        <input type="hidden" name="chkUniformRequested" value="0" />
+        <input type="checkbox" name="chkUniformRequested" value="1" <?php if ($row05['uniform_requested']==="1") {echo "checked";} ?>>&nbsp;Uniform(s)
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="hidden" name="chkBusinessCardsRequested" value="0" >
+        <input type="checkbox" name="chkBusinessCardsRequested" value="1" <?php if ($row05['business_card_requested']==="1") {echo "checked";} ?>>&nbsp;Business Cards
+      </nobr>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <nobr>
+        <input type="hidden" name="chkFuelCardRequested" value="0" />
+        <input type="checkbox" name="chkFuelCardRequested" value="1" <?php if ($row05['fuel_card_requested']==="1") {echo "checked";} ?>>&nbsp;Fuel Card
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="hidden" name="chkCreditCardRequested" value="0" />
+        <input type="checkbox" name="chkCreditCardRequested" value="1" <?php if ($row05['credit_card_requested']==="1") {echo "checked";} ?>>&nbsp;Credit Card
+      </nobr>
+    </td>
+  </tr> 
+  
+            <tr>
+              <td style="border:none" colspan="2">
+              <input type="hidden" name="chkIsActive" value="0" />
+              <input type="hidden" name="chkIsActive" value="1"  <?php if ($row05['is_active']==="1") {echo "checked";} ?>>&nbsp</td>
+            </tr>  
+            
+          <?php
+          if($userPermissionsArray['vista']['granbury']['hr'] < 4)
+          {
+         
+          ?>
+            </table>
+          </td>
+          
+<?php
+        
+          }
+          else
+          {
+?>
+            <tr>
+              <td style="border:none" colspan="2">
+              <input type="hidden" name="chkIsApproved" value="0" />
+              <input type="hidden" name="chkIsApproved" value="1"  <?php if ($row05['is_approved']==="1") {echo "checked";} ?>>&nbsp</td>
+            </tr> 
+            
+          </table>
+        </td>       
+        
+<?php   
+          }            
+$dbconn = new mysqli
+(
+  $dbc['silicore_hostname'],
+  $dbc['silicore_username'],
+  $dbc['silicore_pwd'],
+  $dbc['silicore_dbname']
+);
+$data054 = "call sp_hr_EmpGetAll()"; 
+$result054 = mysqli_query($dbconn, $data054);
+mysqli_close($dbconn);                         
+
+$dbconn = new mysqli
+(
+  $dbc['silicore_hostname'],
+  $dbc['silicore_username'],
+  $dbc['silicore_pwd'],
+  $dbc['silicore_dbname']
+);
+$data055 = "call sp_hr_EmpGetAll()"; 
+$result055 = mysqli_query($dbconn, $data055);
+mysqli_close($dbconn);
+  
+$nameEmailAccountModel=$row05['email_account_model_id']; 
+ 
+while($row055 = mysqli_fetch_assoc($result055))
+{
+  if($nameEmailAccountModel==$row055['id'] )
+  {
+    $EmailAccountModelName=$row055['empname'];
+  }
+
+}
+          if(isset($row05['two_way_radio_notes']) && $row05['two_way_radio_notes'] !="")
+          {
+            $radioTxt = $row05['two_way_radio_notes'];
+          }
+          else
+          {
+            $radioTxt = "Serial Number, etc." ;
+          }
+          
+// Need to eliminate all the below context switching and use a stringbuilder instead   
+
+/**
+ * Right-side HTML/CSS rebuild.
+ * Need to restructure this to use a table that mimics the left column instead of using a UL. Need to be able to line up and align the elements on the right side of the page
+ * like the left side. Not sure why the UL was used instead.
+ */
+?>               
+        <td style="padding:30px 30px 30px 20px">
+          
+<!-- Add new table to replace the UL -->
+          
+        <ul style="list-style-type:none">
+          <li>
+            <input type="hidden" name="chkSilicoreAccountRequested" value="0" />
+            <input type="checkbox" name="chkSilicoreAccountRequested" value="1" <?php if ($row05['silicore_account_requested']==="1") {echo("checked");} ?>>
+            Silicore Account 
+             
+          </li> 
+          <li>
+            <input type="hidden" name="chkEmailAccountRequested" value="0" />
+            <input type="checkbox" name="chkEmailAccountRequested" value="1" <?php if ($row05['email_account_requested']==="1") {echo "checked";} ?>>
+            Email Account
+          </li>
+          <li>
+    <label>Model After: </label>
+         
+ <?php 
+$dbconn = new mysqli
+(
+  $dbc['silicore_hostname'],
+  $dbc['silicore_username'],
+  $dbc['silicore_pwd'],
+  $dbc['silicore_dbname']
+);
+$empallSQL = "call sp_hr_EmpGetAll()";
+$empallResults = mysqli_query($dbconn, $empallSQL);
+mysqli_close($dbconn);
+
+$dbconn = new mysqli
+(
+  $dbc['silicore_hostname'],
+  $dbc['silicore_username'],
+  $dbc['silicore_pwd'],
+  $dbc['silicore_dbname']
+); 
+$empdataSQL = "call sp_hr_EmpDeptSiteSelectById($Id)"; 
+$empdataResults = mysqli_query($dbconn,$empdataSQL);
+$empdataRow = mysqli_fetch_assoc($empdataResults);
+mysqli_close($dbconn);                        
+                            
+?>                    
+ <select name="txtEmailAccountModel" id="txtEmailAccountModel"  > 
+              
+<?php
+while ($empallRow = mysqli_fetch_assoc($empallResults))
+{      
+  if($empallRow['id']==$empdataRow['email_account_model_id'])                               
+  {
+    echo("<option value=" . $empdataRow['email_account_model_id'] . " selected=\"selected\">" . $EmailAccountModelName . "</option>");
+  } 
+  else
+  {
+    echo("<option value=" . $empallRow['id'] . ">" . $empallRow['empname'] . "</option>");                      
+  }
+}                       
+?>    
+              </select>  
+          </li>      
+          <li>
+          <nobr>
+            Cell Phone:
+              <input type="hidden" name="chkCellPhoneRequested" value="0" />
+              <input type="checkbox" name="chkCellPhoneRequested" value="1" <?php if ($row05['cell_phone_requested']==="1") {echo "checked";} ?> />              
+            <input type="text" name="txtCellPhoneRequested" value="<?php echo ($row05['cell_phone_notes']) ?>" placeholder="Serial Number, Android/iPhone, etc." /> 
+          </nobr>
+          </li> 
+          <li>
+          <nobr>
+            Laptop: 
+              <input type="hidden" name="chkLaptopRequested" value="0" />
+              <input type="checkbox" name="chkLaptopRequested" value="1" <?php if ($row05['laptop_requested']==="1") {echo "checked";} ?> />             
+            <input type="text" name="txtLaptopRequested" value="<?php echo($row05['laptop_notes']) ?>" placeholder="Serial number, model number, etc." /> 
+          </nobr>
+          </li>
+          <li>
+          <nobr>
+            Desktop:
+              <input type="hidden" name="chkDesktopRequested" value="0" />
+              <input type="checkbox" name="chkDesktopRequested" value="1" <?php if ($row05['desktop_requested']==="1") {echo "checked";} ?> />              
+            <input type="text" name="txtDesktopRequested" value="<?php echo($row05['desktop_notes']) ?>" placeholder="Serial number, RAM, etc." /> 
+          </nobr>
+          </li>
+          <li>
+          <nobr>
+            Monitors:  
+            <input type="number" name="txtMonitorsRequested" value="<?php echo $row05['monitors_requested'] ?>" placeholder="Number, Size, etc." />
+          </nobr>
+          </li>       
+          <li>
+          <nobr>
+            Tablet:
+              <input type="hidden" name="chkTabletRequested" value="0" />
+              <input type="checkbox" name="chkTabletRequested" value="1" <?php if($row05['tablet_requested']==="1"){echo "checked";}?> />              
+            <input type="text" name="txtTabletRequested" value="<?php echo ($row05['tablet_notes']) ?>" placeholder="Serial Number, Android/iPad, etc." /> 
+          </nobr>
+          </li>
+          <li>
+          <nobr>
+            Radio:
+              <input type="hidden" name="chkTwoWayRadioRequested" value="0" />
+              <input type="checkbox" name="chkTwoWayRadioRequested" value="1" <?php if ($row05['two_way_radio_requested']==="1") {echo "checked";} ?> />             
+            <input type="text" name="txtTwoWayRadioRequested" value="<?php echo($row05['two_way_radio_notes']) ?>" placeholder="Serial Number, etc." /> 
+          </nobr>
+          </li>
+          <li>
+          <nobr>
+            Software: 
+            <input type="text" name="txtSpecialSoftwareRequested" value="<?php echo $row05['special_software_requested'] ?>"placeholder="Photoshop, CAD, etc." />
+          </nobr>
+          </li>
+          <li>Comments:  <br /><textarea id="hrformgrouparea" rows="15" cols="45" colspan="2" name="txaComments"><?php echo($row05['comments'])?></textarea></li>
+        </ul> 
+        </td>                        
+      </tr>            
+    </table>
+  <br />
+  <input type="hidden" name="txtId" value="<?php echo $row05['id']?>">
+  <input type="hidden" name="trythis" value="one"> 
+  <input type="hidden" name="txtEditDate" value="<?php echo($Date04)?>"/>
+  <input type="hidden" name="txtEditUserId" value="<?php echo($user_id)?>"/>  
+  <input type="submit" name="updateemployee" value="Save" class="submitButton" formnovalidate> 
+  <?php  
+  $UserDepartment = $singleUserObject->vars['main_department_id']  ;
+  $UserType = $singleUserObject->vars['user_type_id'] ;
+  if(($UserDepartment == 9 || $UserDepartment == 2))
+    {
+   ?> 
+  <input type="submit" name="offboardemployee" value="Off Board" formnovalidate>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <input type="submit" name="selectallemployees" value="See All Employees" formnovalidate>  
+    </form  >
+  </div> 
+  <?php
+    }
+    else
+    {
+    ?>
+  <input type="submit" name="selectallemployees" value="See All Employees" formnovalidate>  
+ </fieldset>
+
+    </form  >
+  </div>
+
+<?php 
+    }
+  break;
+  
+  /**************************************************************************************************************************
+   * CASE: Update existing employee, send email(s) if applicable, then show employee table again (with edit links) **********
+   *************************************************************************************************************************/
+  case 6:
+
+  $Id = filter_input(INPUT_POST,'txtId',FILTER_SANITIZE_NUMBER_INT);
+  $dbconn = new mysqli
+  (
+    $dbc['silicore_hostname'],
+    $dbc['silicore_username'],
+    $dbc['silicore_pwd'],
+    $dbc['silicore_dbname']
+  );  
+  $data08 = "call sp_hr_EmpSelectByID('$Id')";
+  $result08 = mysqli_query($dbconn, $data08);
+  $row08 = mysqli_fetch_assoc($result08);
+  mysqli_close($dbconn); 
+  
+$dbconn = new mysqli
+(
+  $dbc['silicore_hostname'],
+  $dbc['silicore_username'],
+  $dbc['silicore_pwd'],
+  $dbc['silicore_dbname']
+);
+$data056 = "call sp_hr_EmpGetAll()"; 
+$result056 = mysqli_query($dbconn, $data056);
+mysqli_close($dbconn);
+
+$dbconn = new mysqli
+(
+  $dbc['silicore_hostname'],
+  $dbc['silicore_username'],
+  $dbc['silicore_pwd'],
+  $dbc['silicore_dbname']
+);
+$data057 = "call sp_hr_EmpGetAll()"; 
+$result057 = mysqli_query($dbconn, $data057);
+mysqli_close($dbconn);
+
+$nameEmailAccountModel = filter_input(INPUT_POST,'txtEmailAccountModel',FILTER_SANITIZE_NUMBER_INT); 
+ 
+while($row057 = mysqli_fetch_assoc($result057))
+{
+  if($nameEmailAccountModel==$row057['id'] )
+  {
+    $EmailAccountModelName=$row057['empname'];
+  }
+}
+
+  $dbconn = new mysqli
+  (
+    $dbc['silicore_hostname'],
+    $dbc['silicore_username'],
+    $dbc['silicore_pwd'],
+    $dbc['silicore_dbname']
+  );
+  $Id = filter_input(INPUT_POST,'txtId',FILTER_SANITIZE_NUMBER_INT);  
+  $LastName = filter_input(INPUT_POST,'txtLastName',FILTER_SANITIZE_STRING);
+  $FirstName = filter_input(INPUT_POST,'txtFirstName',FILTER_SANITIZE_STRING);
+  $EmployeeId = filter_input(INPUT_POST,'txtEmployeeId',FILTER_SANITIZE_NUMBER_INT);  
+  $DepartmentId = filter_input(INPUT_POST,'slcDepartmentId',FILTER_SANITIZE_NUMBER_INT);
+  $JobTitleId = filter_input(INPUT_POST,'slcJobTitleId',FILTER_SANITIZE_NUMBER_INT);
+  $Manager = filter_input(INPUT_POST,'slcManager',FILTER_SANITIZE_STRING);
+  $SiteId = filter_input(INPUT_POST,'slcSiteId',FILTER_SANITIZE_NUMBER_INT);
+  $UniformRequested = filter_input(INPUT_POST,'chkUniformRequested',FILTER_SANITIZE_NUMBER_INT);
+  $BusinessCardsRequested = filter_input(INPUT_POST,'chkBusinessCardsRequested',FILTER_SANITIZE_NUMBER_INT);
+  $FuelCardRequested = filter_input(INPUT_POST,'chkFuelCardRequested',FILTER_SANITIZE_NUMBER_INT);
+  $CreditCardRequested = filter_input(INPUT_POST,'chkCreditCardRequested',FILTER_SANITIZE_NUMBER_INT);
+  
+  $SilicoreAccountRequested = filter_input(INPUT_POST,'chkSilicoreAccountRequested',FILTER_SANITIZE_NUMBER_INT);
+  $EmailAccountRequested = filter_input(INPUT_POST,'chkEmailAccountRequested',FILTER_SANITIZE_NUMBER_INT);
+  $EmailAccountModel = filter_input(INPUT_POST,'txtEmailAccountModel',FILTER_SANITIZE_NUMBER_INT); // NOTE: this is a select list (slc), not text.
+  $CellPhoneRequested = filter_input(INPUT_POST,'chkCellPhoneRequested',FILTER_SANITIZE_NUMBER_INT);
+  $CellPhoneDetail = filter_input(INPUT_POST,'txtCellPhoneRequested',FILTER_SANITIZE_STRING);
+  $LaptopRequested = filter_input(INPUT_POST,'chkLaptopRequested',FILTER_SANITIZE_NUMBER_INT);
+  $LaptopDetail = filter_input(INPUT_POST,'txtLaptopRequested',FILTER_SANITIZE_STRING);
+  $DesktopRequested = filter_input(INPUT_POST,'chkDesktopRequested',FILTER_SANITIZE_NUMBER_INT);
+  $DesktopDetail = filter_input(INPUT_POST,'txtDesktopRequested',FILTER_SANITIZE_STRING);
+  $MonitorsRequested = filter_input(INPUT_POST,'txtMonitorsRequested',FILTER_SANITIZE_STRING);
+  $TabletRequested = filter_input(INPUT_POST,'chkTabletRequested',FILTER_SANITIZE_NUMBER_INT);
+  $TabletDetail = filter_input(INPUT_POST,'txtTabletRequested',FILTER_SANITIZE_STRING);
+  $TwoWayRadioRequested = filter_input(INPUT_POST,'chkTwoWayRadioRequested',FILTER_SANITIZE_NUMBER_INT);
+  $TwoWayRadioDetail = filter_input(INPUT_POST,'txtTwoWayRadioRequested',FILTER_SANITIZE_STRING);
+  $SpecialSoftwareRequested = filter_input(INPUT_POST,'txtSpecialSoftwareRequested',FILTER_SANITIZE_STRING);
+  $Comments = filter_input(INPUT_POST,'txaComments',FILTER_SANITIZE_STRING);
+  $ApprovedUserId = $_SESSION['user_id']; // filter_input(INPUT_SESSION,[sessvar],[filter]) is not implemented in PHP yet.
+  // $CreateUserId = $_SESSION['user_id']; // Why do we need CreateUserId in this context? This should be modify only.  
+  $EditUserID = $_SESSION['user_id']; // filter_input(INPUT_SESSION,[sessvar],[filter]) is not implemented in PHP yet.
+ 
+  if (isset($_POST['txtSeparationDate']) && $_POST['txtSeparationDate'] != ''  )
+  {
+     $SeparationDate = "'" . filter_input(INPUT_POST,'txtSeparationDate',FILTER_SANITIZE_STRING) . "'";
+  }
+  else
+  {
+    $SeparationDate= "null";
+  }
+  
+  if (isset($_POST['txtStartDate']) && $_POST['txtStartDate'] != ''  )
+  {
+    $StartDate = "'" . filter_input(INPUT_POST, 'txtStartDate',FILTER_SANITIZE_STRING) . "'";
+  }
+  else
+  {
+    $StartDate= "null";
+  } 
+  
+  $IsActive = $_POST['chkIsActive'];   
+  
+/*  if($_POST['chkIsActive']=="1")
+//  if(isset($_POST['chkIsActive']) && $_POST['chkIsActive'] != '')
+  {
+    $IsActive = 1;
+  }
+  else
+  {
+    $IsActive = 0;
+  }
+*/   
+  $IsApproved = $row08['is_approved'];
+   
+ /* if ($IsApproved == "1")
+  if(isset($_POST['chkIsApproved']) && $_POST['chkIsApproved'] != '')
+  {
+    $IsApproved = "1";
+  }
+  else
+  {
+    $IsApproved = "0";
+  }
+*/
+   
+    
+  $data09 = "call sp_hr_EmpUpdate
+    ( 
+      '$Id',
+      '$LastName',                      
+      '$FirstName',
+      '$EmployeeId',
+      '$DepartmentId',
+      '$JobTitleId',            
+      '$Manager',
+      '$SiteId',
+      $StartDate,
+      $SeparationDate, 
+      '$SilicoreAccountRequested',
+      '$EmailAccountRequested',
+      '$EmailAccountModel',
+      '$CellPhoneRequested',
+      '$LaptopRequested',
+      '$DesktopRequested',
+      '$MonitorsRequested',
+      '$TabletRequested',
+      '$TwoWayRadioRequested',
+      '$SpecialSoftwareRequested',
+      '$UniformRequested',
+      '$BusinessCardsRequested',
+      '$CreditCardRequested',
+      '$FuelCardRequested',
+      '$Comments',
+      '$IsApproved',
+      '$ApprovedUserId',
+      '$EditUserID',
+      '$IsActive',
+      '$CellPhoneDetail',
+      '$LaptopDetail',
+      '$DesktopDetail',
+      '$TabletDetail',
+      '$TwoWayRadioDetail'
+     )";
+
+try
+{
+  $result09 = mysqli_query($dbconn, $data09);
+  if ($result09 == 0)
+  {
+    echo("Error description: " . mysqli_error($dbconn));
+    throw new Exception("Error! There was an issue when attempting to update this employee through sp_hr_EmpUpdate.");
+  }
+  else
+  {      
+    if ($IsActive==="0" && $row08['is_active'] == "1")
+    { 
+
+      if ($row08['silicore_account_requested'] == "1")
+      {
+         $address=$addressDev;
+         $subject ="Remove Silicore Account - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ($FirstName ." ". $LastName ."'s ". "Silicore account needs to be inactivated.");
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+      
+
+      if ($row08['email_account_requested'] =="1")
+
+      {
+         $address=$addressHelp;
+         $subject = $SiteBuildType . "Remove Access for Email Account - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please remove access for" ." ". $FirstName ." ". $LastName ."'s ". "email account.");
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0);    
+      }
+      
+      if ($row08['cell_phone_requested'] =="1")
+      {
+        $address=$addressHelp;
+        $subject ="Secure Cell Phone - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+        $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "cell phone. <br>Details: " . $CellPhoneDetail);
+        SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+
+      if ($row08['laptop_requested'] =="1")
+      {
+         $address=$addressHelp;
+         $subject ="Secure Laptop - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "laptop.<br>Details: " . $LaptopDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+
+      if ($row08['desktop_requested'] =="1")
+      {
+         $address=$addressHelp;
+         $subject ="Secure Desktop Computer - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "desktop computer with" ." ". $MonitorsRequested ." "."monitors. <br>Details: ". $DesktopDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+
+
+      if ($row08['tablet_requested'] =="1")
+      {
+         $address=$addressHelp;
+         $subject ="Secure Tablet  - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "tablet. <br>Details: " . $TabletDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+
+      if ($row08['two_way_radio_requested'] =="1")
+      {
+         $address=$addressHelp;
+         $subject ="Secure Two-Way Radio - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "two-way radio.<br> Details: " . $TwoWayRadioDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+
+      if (!empty($row08['special_software_requested']))
+      {
+         $address=$addressHelp;
+         $subject ="Secure Special Software - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "software, which is:" . " ". $SpecialSoftwareRequested .".");
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+      
+      if ($row08['uniform_requested'] =="1")
+      {
+         $address=$addressUniform;
+         $subject ="Secure Uniform - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "uniform.<br> Details: " . $TwoWayRadioDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0);
+      }
+
+      if ($row08['credit_card_requested'] =="1")
+      {
+         $address=$addressCreditCard;
+         $subject ="Secure Credit Card - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "credit card.<br> Details: " . $TwoWayRadioDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0);
+      }
+      if ($row08['fuel_card_requested'] =="1")
+      {
+         $address=$addressFuelCard;
+         $subject ="Secure Fuel Card - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "fuel card.<br> Details: " . $TwoWayRadioDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0);
+      }
+    } // end if in else   
+  } // end else
+    
+  
+     if ($IsActive==="1" && $row08['is_active'] == "1")
+      { 
+
+      if ($SilicoreAccountRequested == "0" && $row08['silicore_account_requested'] == "1")
+      {
+         $address=$addressDev;
+         $subject ="Remove Silicore Account - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ($FirstName ." ". $LastName ."'s ". "Silicore account needs to be inactivated.");
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+      
+
+      if ($EmailAccountRequested == "0" && $row08['email_account_requested'] == "1")
+
+      {
+         $address=$addressHelp;
+         $subject = $SiteBuildType . "Remove Access for Email Account - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please remove access for" ." ". $FirstName ." ". $LastName ."'s ". "email account.");
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0);    
+      }
+      
+      if ($CellPhoneRequested == "0" && $row08['cell_phone_requested'] == "1")
+      {
+        $address=$addressHelp;
+        $subject ="Secure Cell Phone - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+        $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "cell phone. <br>Details: " . $CellPhoneDetail);
+        SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+
+      if ($LaptopRequested == "0" && $row08['laptop_requested'] =="1")
+      {
+         $address=$addressHelp;
+         $subject ="Secure Laptop - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "laptop.<br>Details: " . $LaptopDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+
+      if ($DesktopRequested == "0" && $row08['desktop_requested'] == "1")
+      {
+         $address=$addressHelp;
+         $subject ="Secure Desktop Computer - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "desktop computer with" ." ". $MonitorsRequested ." "."monitors. <br>Details: ". $DesktopDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+
+
+      if ($TabletRequested == "0" && $row08['tablet_requested'] == "1")
+      {
+         $address=$addressHelp;
+         $subject ="Secure Tablet  - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "tablet. <br>Details: " . $TabletDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+
+      if ($TwoWayRadioRequested == "0" && $row08['two_way_radio_requested'] == "1")
+      {
+         $address=$addressHelp;
+         $subject ="Secure Two-Way Radio - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "two-way radio.<br> Details: " . $TwoWayRadioDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+
+ /*     if ($SpecialSoftwareRequested !== ($row08['special_software_requested']))
+      {
+         $address=$addressHelp;
+         $subject ="Secure Special Software - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ($FirstName ." ". $LastName ." ". "has an adjustment to his software, which is now:" . " ". $SpecialSoftwareRequested .".");
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+ */     
+      if ($UniformRequested == "0" && $row08['uniform_requested'] == "1")
+      {
+         $address=$addressUniform;
+         $subject ="Secure Uniform - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "uniform.<br> Details: " . $TwoWayRadioDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0);
+      }
+
+      if ($CreditCardRequested == "0" && $row08['credit_card_requested'] == "1")
+      {
+         $address=$addressCreditCard;
+         $subject ="Secure Credit Card - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "credit card.<br> Details: " . $TwoWayRadioDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0);
+      }
+      if ($FuelCardRequested == "0" && $row08['fuel_card_requested'] == "1")
+      {
+         $address=$addressFuelCard;
+         $subject ="Secure Fuel Card - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "fuel card.<br> Details: " . $TwoWayRadioDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0);
+      }
+    }
+    
+    
+} // end try   
+catch (Exception $e)
+{ 
+  echo 'Caught exception: ',  $e->getMessage(), "\n";
+} // end catch    
+ mysqli_close($dbconn);
+ 
+$dbconn = new mysqli
+(
+  $dbc['silicore_hostname'],
+  $dbc['silicore_username'],
+  $dbc['silicore_pwd'],
+  $dbc['silicore_dbname']
+);
+$data10 = "call sp_hr_EmpSelect";
+$result10 = mysqli_query($dbconn, $data10);
+mysqli_close($dbconn);
+
+//echo $data09;
+
+?>   
+  <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+  <!--<h2>Employee List</h2>--> <fieldset>
+                <legend>Employee List</legend>
+  <div class="datagrid">   
+ 
+    <br />            
+    <table id="myTable" class="tablesorter hrEmployeeGridTable" style="width:1000px; border-color: #000000;" cellpadding="0" cellspacing="0" border="1">
+      <thead style="text-decoration: underline">
+      <tr>
+      <!--    <th>ID</th>  -->
+        <th>Last Name</th>
+        <th>First Name</th>
+        <th><?php echo $HRProgram?>  ID</th>
+        <th>Department</th>
+        <th>Manager</th>
+        <th>Site</th>
+        <th>Start Date</th>
+        <th>Active?</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+ 
+<?php
+$UserDepartment = $singleUserObject->vars['main_department_id']  ;
+$UserType = $singleUserObject->vars['user_type_id'] ;
+
+while ($row10 = mysqli_fetch_assoc($result10))
+{
+  if(($UserDepartment == $row10['department_id'] && $UserType >= 3 )||
+          ($UserDepartment == 9 )|| ($UserType == 5 && $UserDepartment == 2)|| ($UserDepartment == 10 ))
+  {
+?>
+    
+   <tr>
+    <td><?php echo($row10['last_name']) ?></td>
+    <td><?php echo($row10['first_name']) ?> </td>
+    <td><?php echo($row10['employee_id']) ?> </td>
+    <td><?php echo($row10['name']) ?> </td>      
+      
+<?php
+// change manager user_id to name
+    $dbconn = new mysqli
+    (
+      $dbc['silicore_hostname'],
+      $dbc['silicore_username'],
+      $dbc['silicore_pwd'],
+      $dbc['silicore_dbname']
+    );
+    $data101 = "call sp_hr_DeptManagersGetAll()";
+    $result101 = mysqli_query($dbconn, $data101);
+    mysqli_close($dbconn);
+
+    $NameManagerId=$row10['manager_user_id']; 
+    $ManagerName = '';
+
+    while($row101 = mysqli_fetch_assoc($result101))
+    {
+      if($NameManagerId==$row101['id'] )
+      {
+        $ManagerName=$row101['mgrname'];
+      }
+
+    } 
+?>
+    
+      <td><?php echo($ManagerName) ?> </td>
+      <td><?php echo($row10['description']) ?> </td>
+      <td><?php echo($row10['start_date']) ?> </td>
+      <td>
+        
+<?php       
+    if($row10['is_active']=="1")
+    {
+      echo("Yes");
+    }
+    if($row10['is_active']=="0")
+    {
+      echo("No");
+    }
+?>
+        
+      </td>
+      
+      <td>
+        
+<?php        
+    if($row10['is_active']=="1")
+    {
+?> 
+        
+      <form method="post" action="hroffboarding.php" class="inline">
+        <input type="hidden" name="id" value="<?php echo($row10['id']) ?>">
+        <button type="submit" name="editemployee" value="<?php echo($row10['id']) ?>" class="hrlink-button">
+         Edit
+        </button> </fieldset>
+      </form> 
+
+<?php 
+    }
+    else 
+    {
+    //echo "<a href='hrchecklist.php'>None</a>";
+    echo "<a href='#'>None</a>";
+    }
+?>  
+        
+      </td>
+    </tr>  
+             
+<?php 
+  } // end if
+} // end while
+?>
+    </table>            
+    <br />
+ 
+  </div>
+  <br />&nbsp<br />&nbsp
+ 
+
+  
+  
+  
+<?php 
+  break;
+  
+  
+/**************************************************************************************************************************
+ * CASE: Offboard (terminate) existing employee, send email(s) if applicable, then show employee table again (with edit links) **********
+ *************************************************************************************************************************/  
+
+case 7:
+
+  $Id = filter_input(INPUT_POST,'txtId',FILTER_SANITIZE_NUMBER_INT);
+  $dbconn = new mysqli
+  (
+    $dbc['silicore_hostname'],
+    $dbc['silicore_username'],
+    $dbc['silicore_pwd'],
+    $dbc['silicore_dbname']
+  );  
+  $data08 = "call sp_hr_EmpSelectByID('$Id')";
+  $result08 = mysqli_query($dbconn, $data08);
+  $row08 = mysqli_fetch_assoc($result08);
+  mysqli_close($dbconn); 
+  
+$dbconn = new mysqli
+(
+  $dbc['silicore_hostname'],
+  $dbc['silicore_username'],
+  $dbc['silicore_pwd'],
+  $dbc['silicore_dbname']
+);
+$data056 = "call sp_hr_EmpGetAll()"; 
+$result056 = mysqli_query($dbconn, $data056);
+mysqli_close($dbconn);
+
+$dbconn = new mysqli
+(
+  $dbc['silicore_hostname'],
+  $dbc['silicore_username'],
+  $dbc['silicore_pwd'],
+  $dbc['silicore_dbname']
+);
+$data057 = "call sp_hr_EmpGetAll()"; 
+$result057 = mysqli_query($dbconn, $data057);
+mysqli_close($dbconn);
+
+$nameEmailAccountModel = filter_input(INPUT_POST,'txtEmailAccountModel',FILTER_SANITIZE_NUMBER_INT); 
+ 
+while($row057 = mysqli_fetch_assoc($result057))
+{
+  if($nameEmailAccountModel==$row057['id'] )
+  {
+    $EmailAccountModelName=$row057['empname'];
+  }
+}
+
+  $dbconn = new mysqli
+  (
+    $dbc['silicore_hostname'],
+    $dbc['silicore_username'],
+    $dbc['silicore_pwd'],
+    $dbc['silicore_dbname']
+  );
+  $Id = filter_input(INPUT_POST,'txtId',FILTER_SANITIZE_NUMBER_INT);  
+  $LastName = filter_input(INPUT_POST,'txtLastName',FILTER_SANITIZE_STRING);
+  $FirstName = filter_input(INPUT_POST,'txtFirstName',FILTER_SANITIZE_STRING);
+  $EmployeeId = filter_input(INPUT_POST,'txtEmployeeId',FILTER_SANITIZE_NUMBER_INT);  
+  $DepartmentId = filter_input(INPUT_POST,'slcDepartmentId',FILTER_SANITIZE_NUMBER_INT);
+  $JobTitleId = filter_input(INPUT_POST,'slcJobTitleId',FILTER_SANITIZE_NUMBER_INT);
+  $Manager = filter_input(INPUT_POST,'slcManager',FILTER_SANITIZE_STRING);
+  $SiteId = filter_input(INPUT_POST,'slcSiteId',FILTER_SANITIZE_NUMBER_INT);
+  $UniformRequested = filter_input(INPUT_POST,'chkUniformRequested',FILTER_SANITIZE_NUMBER_INT);
+  $BusinessCardsRequested = filter_input(INPUT_POST,'chkBusinessCardsRequested',FILTER_SANITIZE_NUMBER_INT);
+  $FuelCardRequested = filter_input(INPUT_POST,'chkFuelCardRequested',FILTER_SANITIZE_NUMBER_INT);
+  $CreditCardRequested = filter_input(INPUT_POST,'chkCreditCardRequested',FILTER_SANITIZE_NUMBER_INT);
+  
+  $SilicoreAccountRequested = filter_input(INPUT_POST,'chkSilicoreAccountRequested',FILTER_SANITIZE_NUMBER_INT);
+  $EmailAccountRequested = filter_input(INPUT_POST,'chkEmailAccountRequested',FILTER_SANITIZE_NUMBER_INT);
+  $EmailAccountModel = filter_input(INPUT_POST,'txtEmailAccountModel',FILTER_SANITIZE_NUMBER_INT); // NOTE: this is a select list (slc), not text.
+  $CellPhoneRequested = filter_input(INPUT_POST,'chkCellPhoneRequested',FILTER_SANITIZE_NUMBER_INT);
+  $CellPhoneDetail = filter_input(INPUT_POST,'txtCellPhoneRequested',FILTER_SANITIZE_STRING);
+  $LaptopRequested = filter_input(INPUT_POST,'chkLaptopRequested',FILTER_SANITIZE_NUMBER_INT);
+  $LaptopDetail = filter_input(INPUT_POST,'txtLaptopRequested',FILTER_SANITIZE_STRING);
+  $DesktopRequested = filter_input(INPUT_POST,'chkDesktopRequested',FILTER_SANITIZE_NUMBER_INT);
+  $DesktopDetail = filter_input(INPUT_POST,'txtDesktopRequested',FILTER_SANITIZE_STRING);
+  $MonitorsRequested = filter_input(INPUT_POST,'txtMonitorsRequested',FILTER_SANITIZE_STRING);
+  $TabletRequested = filter_input(INPUT_POST,'chkTabletRequested',FILTER_SANITIZE_NUMBER_INT);
+  $TabletDetail = filter_input(INPUT_POST,'txtTabletRequested',FILTER_SANITIZE_STRING);
+  $TwoWayRadioRequested = filter_input(INPUT_POST,'chkTwoWayRadioRequested',FILTER_SANITIZE_NUMBER_INT);
+  $TwoWayRadioDetail = filter_input(INPUT_POST,'txtTwoWayRadioRequested',FILTER_SANITIZE_STRING);
+  $SpecialSoftwareRequested = filter_input(INPUT_POST,'txtSpecialSoftwareRequested',FILTER_SANITIZE_STRING);
+  $Comments = filter_input(INPUT_POST,'txaComments',FILTER_SANITIZE_STRING);
+  $ApprovedUserId = $_SESSION['user_id']; // filter_input(INPUT_SESSION,[sessvar],[filter]) is not implemented in PHP yet.
+  // $CreateUserId = $_SESSION['user_id']; // Why do we need CreateUserId in this context? This should be modify only.  
+  $EditUserID = $_SESSION['user_id']; // filter_input(INPUT_SESSION,[sessvar],[filter]) is not implemented in PHP yet.
+ 
+  if (isset($_POST['txtSeparationDate']) && $_POST['txtSeparationDate'] != ''  )
+  {
+     $SeparationDate = "'" . filter_input(INPUT_POST,'txtSeparationDate',FILTER_SANITIZE_STRING) . "'";
+  }
+  else
+  {
+    $SeparationDate= "null";
+  }
+  
+  if (isset($_POST['txtStartDate']) && $_POST['txtStartDate'] != ''  )
+  {
+    $StartDate = "'" . filter_input(INPUT_POST, 'txtStartDate',FILTER_SANITIZE_STRING) . "'";
+  }
+  else
+  {
+    $StartDate= "null";
+  } 
+    
+  $IsActive = "0"; 
+  
+/*  if($_POST['chkIsActive']=="1")
+//  if(isset($_POST['chkIsActive']) && $_POST['chkIsActive'] != '')
+  {
+    $IsActive = 1;
+  }
+  else
+  {
+    $IsActive = 0;
+  }
+*/   
+  $IsApproved = $row08['is_approved'];
+   
+ /* if ($IsApproved == "1")
+  if(isset($_POST['chkIsApproved']) && $_POST['chkIsApproved'] != '')
+  {
+    $IsApproved = "1";
+  }
+  else
+  {
+    $IsApproved = "0";
+  }
+*/
+   
+    
+  $data09 = "call sp_hr_EmpUpdate
+    ( 
+      '$Id',
+      '$LastName',                      
+      '$FirstName',
+      '$EmployeeId',
+      '$DepartmentId',
+      '$JobTitleId',            
+      '$Manager',
+      '$SiteId',
+      $StartDate,
+      $SeparationDate, 
+      '$SilicoreAccountRequested',
+      '$EmailAccountRequested',
+      '$EmailAccountModel',
+      '$CellPhoneRequested',
+      '$LaptopRequested',
+      '$DesktopRequested',
+      '$MonitorsRequested',
+      '$TabletRequested',
+      '$TwoWayRadioRequested',
+      '$SpecialSoftwareRequested',
+      '$UniformRequested',
+      '$BusinessCardsRequested',
+      '$CreditCardRequested',
+      '$FuelCardRequested',
+      '$Comments',
+      '$IsApproved',
+      '$ApprovedUserId',
+      '$EditUserID',
+      '$IsActive',
+      '$CellPhoneDetail',
+      '$LaptopDetail',
+      '$DesktopDetail',
+      '$TabletDetail',
+      '$TwoWayRadioDetail'
+     )";
+
+try
+{
+  $result09 = mysqli_query($dbconn, $data09);
+  if ($result09 == 0)
+  {
+    echo("Error description: " . mysqli_error($dbconn));
+    throw new Exception("Error! There was an issue when attempting to update this employee through sp_hr_EmpUpdate.");
+  }
+  else
+  {      
+    if ($IsActive==="0" && $row08['is_active'] == "1")
+    { 
+
+      if ($row08['silicore_account_requested'] == "1")
+      {
+         $address=$addressDev;
+         $subject ="Remove Silicore Account - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ($FirstName ." ". $LastName ."'s ". "Silicore account needs to be inactivated.");
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+      
+
+      if ($row08['email_account_requested'] =="1")
+
+      {
+         $address=$addressHelp;
+         $subject = $SiteBuildType . "Remove Access for Email Account - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please remove access for" ." ". $FirstName ." ". $LastName ."'s ". "email account.");
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0);    
+      }
+      
+      if ($row08['cell_phone_requested'] =="1")
+      {
+        $address=$addressHelp;
+        $subject ="Secure Cell Phone - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+        $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "cell phone. <br>Details: " . $CellPhoneDetail);
+        SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+
+      if ($row08['laptop_requested'] =="1")
+      {
+         $address=$addressHelp;
+         $subject ="Secure Laptop - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "laptop.<br>Details: " . $LaptopDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+
+      if ($row08['desktop_requested'] =="1")
+      {
+         $address=$addressHelp;
+         $subject ="Secure Desktop Computer - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "desktop computer with" ." ". $MonitorsRequested ." "."monitors. <br>Details: ". $DesktopDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+
+
+      if ($row08['tablet_requested'] =="1")
+      {
+         $address=$addressHelp;
+         $subject ="Secure Tablet  - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "tablet. <br>Details: " . $TabletDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+
+      if ($row08['two_way_radio_requested'] =="1")
+      {
+         $address=$addressHelp;
+         $subject ="Secure Two-Way Radio - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "two-way radio.<br> Details: " . $TwoWayRadioDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+
+      if (!empty($row08['special_software_requested']))
+      {
+         $address=$addressHelp;
+         $subject ="Secure Special Software - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "software, which is:" . " ". $SpecialSoftwareRequested .".");
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+      
+      if ($row08['uniform_requested'] =="1")
+      {
+         $address=$addressUniform;
+         $subject ="Secure Uniform - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "uniform.<br> Details: " . $TwoWayRadioDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0);
+      }
+
+      if ($row08['credit_card_requested'] =="1")
+      {
+         $address=$addressCreditCard;
+         $subject ="Secure Credit Card - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "credit card.<br> Details: " . $TwoWayRadioDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0);
+      }
+      if ($row08['fuel_card_requested'] =="1")
+      {
+         $address=$addressFuelCard;
+         $subject ="Secure Fuel Card - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "fuel card.<br> Details: " . $TwoWayRadioDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0);
+      }
+    } // end if in else   
+  } // end else
+    
+  
+     if ($IsActive==="1" && $row08['is_active'] == "1")
+      { 
+
+      if ($SilicoreAccountRequested == "0" && $row08['silicore_account_requested'] == "1")
+      {
+         $address=$addressDev;
+         $subject ="Remove Silicore Account - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ($FirstName ." ". $LastName ."'s ". "Silicore account needs to be inactivated.");
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+      
+
+      if ($EmailAccountRequested == "0" && $row08['email_account_requested'] == "1")
+
+      {
+         $address=$addressHelp;
+         $subject = $SiteBuildType . "Remove Access for Email Account - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please remove access for" ." ". $FirstName ." ". $LastName ."'s ". "email account.");
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0);    
+      }
+      
+      if ($CellPhoneRequested == "0" && $row08['cell_phone_requested'] == "1")
+      {
+        $address=$addressHelp;
+        $subject ="Secure Cell Phone - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+        $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "cell phone. <br>Details: " . $CellPhoneDetail);
+        SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+
+      if ($LaptopRequested == "0" && $row08['laptop_requested'] =="1")
+      {
+         $address=$addressHelp;
+         $subject ="Secure Laptop - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "laptop.<br>Details: " . $LaptopDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+
+      if ($DesktopRequested == "0" && $row08['desktop_requested'] == "1")
+      {
+         $address=$addressHelp;
+         $subject ="Secure Desktop Computer - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "desktop computer with" ." ". $MonitorsRequested ." "."monitors. <br>Details: ". $DesktopDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+
+
+      if ($TabletRequested == "0" && $row08['tablet_requested'] == "1")
+      {
+         $address=$addressHelp;
+         $subject ="Secure Tablet  - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "tablet. <br>Details: " . $TabletDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+
+      if ($TwoWayRadioRequested == "0" && $row08['two_way_radio_requested'] == "1")
+      {
+         $address=$addressHelp;
+         $subject ="Secure Two-Way Radio - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "two-way radio.<br> Details: " . $TwoWayRadioDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+
+ /*     if ($SpecialSoftwareRequested !== ($row08['special_software_requested']))
+      {
+         $address=$addressHelp;
+         $subject ="Secure Special Software - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ($FirstName ." ". $LastName ." ". "has an adjustment to his software, which is now:" . " ". $SpecialSoftwareRequested .".");
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0); 
+      }
+ */     
+      if ($UniformRequested == "0" && $row08['uniform_requested'] == "1")
+      {
+         $address=$addressUniform;
+         $subject ="Secure Uniform - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "uniform.<br> Details: " . $TwoWayRadioDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0);
+      }
+
+      if ($CreditCardRequested == "0" && $row08['credit_card_requested'] == "1")
+      {
+         $address=$addressCreditCard;
+         $subject ="Secure Credit Card - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "credit card.<br> Details: " . $TwoWayRadioDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0);
+      }
+      if ($FuelCardRequested == "0" && $row08['fuel_card_requested'] == "1")
+      {
+         $address=$addressFuelCard;
+         $subject ="Secure Fuel Card - " . $FirstName . " " . $LastName . " " . $SiteBuildType;
+         $body = ("Please secure and return"." ". $FirstName ." ". $LastName ."'s ". "fuel card.<br> Details: " . $TwoWayRadioDetail);
+         SendPHPMail($address, $subject, $body,("/$PageDept/$PageName"),$sendPHPMailDebugFlag,0);
+      }
+    }
+    
+    
+} // end try   
+catch (Exception $e)
+{ 
+  echo 'Caught exception: ',  $e->getMessage(), "\n";
+} // end catch    
+ mysqli_close($dbconn);
+ 
+$dbconn = new mysqli
+(
+  $dbc['silicore_hostname'],
+  $dbc['silicore_username'],
+  $dbc['silicore_pwd'],
+  $dbc['silicore_dbname']
+);
+$data10 = "call sp_hr_EmpSelect";
+$result10 = mysqli_query($dbconn, $data10);
+mysqli_close($dbconn);
+
+//echo $data09;
+
+?> 
+      <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+  <script>
+  $(function(){
+    $("#myTable").dataTable();
+  })
+  </script>
+  
+    <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+  <!--<h2>Employee List</h2>-->
+              <fieldset>
+                <legend>Employee List</legend>
+  <div class="datagrid">   
+ 
+    <br/>            
+    <table id="myTable" class="tablesorter hrEmployeeGridTable" style="width:1000px; border-color: #000000;" cellpadding="0" cellspacing="0" border="1">
+      <thead style="text-decoration: underline">
+      <tr>
+      <!--    <th>ID</th>  -->
+        <th>Last Name</th>
+        <th>First Name</th>
+        <th><?php echo $HRProgram?>  ID</th>
+        <th>Department</th>
+        <th>Manager</th>
+        <th>Site</th>
+        <th>Start Date</th>
+        <th>Active?</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+ 
+<?php
+$UserDepartment = $singleUserObject->vars['main_department_id']  ;
+$UserType = $singleUserObject->vars['user_type_id'] ;
+
+while ($row10 = mysqli_fetch_assoc($result10))
+{
+  if(($UserDepartment == $row10['department_id'] && $UserType >= 3 )||
+          ($UserDepartment == 9 )|| ($UserType == 5 && $UserDepartment == 2)|| ($UserDepartment == 10 ))
+  {
+?>
+    
+   <tr>
+    <td><?php echo($row10['last_name']) ?></td>
+    <td><?php echo($row10['first_name']) ?> </td>
+    <td><?php echo($row10['employee_id']) ?> </td>
+    <td><?php echo($row10['name']) ?> </td>      
+      
+<?php
+// change manager user_id to name
+    $dbconn = new mysqli
+    (
+      $dbc['silicore_hostname'],
+      $dbc['silicore_username'],
+      $dbc['silicore_pwd'],
+      $dbc['silicore_dbname']
+    );
+    $data101 = "call sp_hr_DeptManagersGetAll()";
+    $result101 = mysqli_query($dbconn, $data101);
+    mysqli_close($dbconn);
+
+    $NameManagerId=$row10['manager_user_id']; 
+    $ManagerName = '';
+
+    while($row101 = mysqli_fetch_assoc($result101))
+    {
+      if($NameManagerId==$row101['id'] )
+      {
+        $ManagerName=$row101['mgrname'];
+      }
+
+    } 
+?>
+    
+      <td><?php echo($ManagerName) ?> </td>
+      <td><?php echo($row10['description']) ?> </td>
+      <td><?php echo($row10['start_date']) ?> </td>
+      <td>
+        
+<?php       
+    if($row10['is_active']=="1")
+    {
+      echo("Yes");
+    }
+    if($row10['is_active']=="0")
+    {
+      echo("No");
+    }
+?>
+        
+      </td>
+      
+      <td>
+        
+<?php        
+    if($row10['is_active']=="1")
+    {
+?> 
+        
+      <form method="post" action="hroffboarding.php" class="inline">
+        <input type="hidden" name="id" value="<?php echo($row10['id']) ?>">
+        <button type="submit" name="editemployee" value="<?php echo($row10['id']) ?>" class="hrlink-button">
+         Edit
+        </button> </fieldset> 
+      </form> 
+
+<?php 
+    }
+    else 
+    {
+    //echo "<a href='hrchecklist.php'>None</a>";
+    echo "<a href='#'>None</a>";
+    }
+?>  
+        
+      </td>
+    </tr>  
+             
+<?php 
+  } // end if
+} // end while
+?>
+    </table>            
+    <br />
+ 
+  </div>
+  <br />&nbsp<br />&nbsp
+      <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+  <script>
+  $(function(){
+    $("#myTable").dataTable();
+  })
+  </script>
+<?php 
+  break;
+  
+  /**************************************************************************************************************************
+   * CASE: Code to be executed if x isn't associated with a defined action **************************************************
+   *************************************************************************************************************************/
+  default:
+    echo("<br /><br />One of two things happened, either click an employee to edit or put in the information to add employee.");
+    echo("<br /><br />");
+    echo("
+      <form>
+        <input type=\"submit\"  name=\"selectallemployees\" 
+          value=\"Go back to all Employees\" class=\"submitButton\" formnovalidate>
+      </form>");
+}
+//====================================================================== END PHP
+?>

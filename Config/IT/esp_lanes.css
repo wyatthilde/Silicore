@@ -1,0 +1,58 @@
+/*******************************************************************************************************************************************
+ * File Name: esp_lane.css
+ * Project: Silicore
+ * Description:Styles for ESP lane reading pages
+ * Notes:
+ * =========================================================================================================================================
+ * Change Log ([MM/DD/YYYY]|[Developer]|[Task Ticket] - [Description])
+ * =========================================================================================================================================
+ * 10/13/2017|kkuehn|KACE:19117 - Initial creation
+ * 07/09/2018|zthale|KACE:24067 - Edited table colors, adjusted font sizes to be responsive.
+ ******************************************************************************************************************************************/
+
+/*==================================================================================================== Begin Block */
+
+.tableESPLaneDefault
+{
+	color: #990000;
+	font-family: arial, helvetica;
+	font-weight: bold;
+	text-align: center;
+}
+
+#tableESPLaneReader
+{	
+    color: #FFFFFF;
+    background-color: #4C7AD0;
+	font-family: arial, helvetica;
+	font-size: 1.5vw;
+	font-weight: bold;
+	border: 1px solid #333333;
+    text-align: center;
+}
+
+th
+{
+	color: #000000;
+	background-color: #BADBAA;
+	font-family: arial,helvetica;
+	font-size: 1.5vw;
+	font-weight: bold;
+	text-align: center;
+	border: 1px solid #333333;
+}
+
+td
+{
+	color: #000000;
+	font-family: arial,helvetica;
+	text-align: center;
+    font-size: 1.5vw;
+	border: 1px solid #333333;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #BADBAA;
+}
+
+/*====================================================================================================== End Block */

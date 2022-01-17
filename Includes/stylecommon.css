@@ -1,0 +1,149 @@
+/*******************************************************************************************************************************************
+ * File Name: stylecommon.css
+ * Project: Silicore
+ * Description: Main style sheet to be included on all pages in the site 
+ * Notes: To use global variables, define them in the root class below, and reference them by using the following syntax:
+ *        .colorclass
+ *        {
+ *          color: var(--colorvarsample);
+ *        }
+ *        Using the above class in a PHP,HTML,etc. element would result in its color attribute being set to full red.
+ * =========================================================================================================================================
+ * Change Log ([MM/DD/YYYY]|[Developer]|[Task Ticket] - [Description])
+ * =========================================================================================================================================
+ * 10/30/2016|kkuehn|KACE:10499 - Initial creation
+ * 04/10/2017|mnutsch|KACE:10499 - Edited
+ * 07/28/2017|kkuehn|KACE:10499 - Added root class with sample variables and usage notes, updated DocBlock page header
+ ******************************************************************************************************************************************/
+
+/******************************************************************************** BEGIN Foo Styles */
+/********************************************************************************** END Foo Styles */
+
+/******************************************************************************** BEGIN Global Style Variables */
+:root
+{
+  --vprop_blue: #003087;
+  --vprop_blue_medium: #4C7AD0;
+  --vprop_blue_light: #A2BCED;
+  --vprop_green: #78D64B;
+  --vprop_green_light: #BADBAA;
+}
+/********************************************************************************** END Global Style Variables */
+
+/******************************************************************************** BEGIN Main Element Styles */
+body
+{
+  color: #666666;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: arial,helvetica,sans-serif;
+  overflow-x: hidden;
+  
+}
+
+/*  */
+.footer_content
+{
+  text-align: center;
+  background-color: #262626; /* color the background a dark gray white */
+  color: white; /* color the text white */
+  font-size: 0.75em;
+  padding-top: 5px;
+}
+
+input[type=text].general_style
+{
+  width: 110px;
+}
+
+select.general_style
+{
+  width: 220px;
+}
+
+button.general_style
+{
+  background-color: var(--vprop_blue);
+  width: 150px;
+  color: black;
+  padding: 2px 2px;
+  border-radius: 5px;
+}
+
+input[type=submit].general_style
+{
+  background-color: var(--vprop_blue);
+  width: 150px;
+  cursor: pointer;
+  border: 0;
+  box-shadow:none;
+  border-radius: 5px;
+}
+
+textarea.general_style
+{
+  width: 450px;
+  height: 180px;
+}
+/********************************************************************************** END Main Element Styles */
+
+/******************************************************************************** BEGIN Analytics Dashboard Styles */
+
+input[type=text].hasDatepicker
+{
+  width: 110px;
+}
+
+button.analyticsDashboard
+{
+  background-color: var(--vprop_blue);
+  width: 150px;
+}
+/********************************************************************************** END Analytics Dashboard Styles */
+
+/******************************************************************************** BEGIN Oil Price Chart Styles */
+
+.oil_price_chart
+{
+  padding-left: 3px;
+  padding-top: 10px;
+}
+
+ iframe 
+ {
+  -moz-transform: scale(0.90, 0.90); 
+  -webkit-transform: scale(0.90, 0.90); 
+  -o-transform: scale(0.90, 0.90);
+  -ms-transform: scale(0.90, 0.90);
+  transform: scale(0.90, 0.90); 
+  -moz-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  -o-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+}
+/********************************************************************************** END Oil Price Chart Styles */
+
+/********************************************************************************** BEGIN Quick Links Styles */
+
+div.quicklinks a 
+{
+  color: var(--vprop_blue);
+  font-weight: bold;
+}
+
+div.quicklinks ul
+{
+  list-style-type: square;
+  margin-left: 0%;
+}
+
+div.quicklinks li
+{
+  list-style-type: square;
+  margin-left: 0%;
+}
+
+/********************************************************************************** END Quick Links Styles */

@@ -1,0 +1,579 @@
+/*******************************************************************************************************************************************
+ * File Name: qcstyles.css
+ * Project: Silicore
+ * Description: 
+ * Notes: 
+ * =========================================================================================================================================
+ * Change Log ([MM/DD/YYYY]|[Developer]|[Task Ticket] - [Description])
+ * =========================================================================================================================================
+ * 00/00/2017|mnutsch|KACE:XXXXX - Inital Creation
+ * 11/13/2017|nolliff|KACE:19182 - Added border radius to div.form-group and added comment section
+ * 11/13/2017|mnutsch|KACE:19061 - Added table styles for QC Threshold Maintenance.
+ * 11/05/2017|mnutsch|KACE:18470 - Added styles for checkboxes on QC forms.
+ * 01/25/2018|mnutsch|KACE:20305 - Added CSS for the div inputSpacer.
+ * 02/01/2018|mnutsch|KACE:19755 - Added CSS for fixed headers and columns in the Samples page.
+ * 02/05/2018|mnutsch|KACE:19755 - Added additional code related to fixed headers and left columns in the Details table.
+ * 02/05/2018|mnutsch|KACE:19755 - Added additional code related to fixed headers and left columns in the Details table.
+ * 02/07/2018|mnutsch|KACE:19755 - Changed some percentage based sizes to fixed pixel sizes. Needed for fixed positioning of frozen table headers on Samples pages.
+ * 
+ ******************************************************************************************************************************************/
+:root
+{
+/******************************************************************************** BEGIN Global Style Variables */
+  --vprop_blue: #003087;
+  --vprop_blue_medium: #4C7AD0;
+  --vprop_blue_light: #A2BCED;
+  --vprop_blue_very_light: #D5DEEF;
+  --vprop_green: #78D64B;
+  --vprop_green_light: #BADBAA;
+/********************************************************************************** END Global Style Variables */
+
+/******************************************************************************** BEGIN Samples page Variables */
+  --samples_table_width: 950px;
+  --samples_table_height: 470px;
+  --samples_table_header_cell_width: 76px;
+  --samples_table_header_cell_height: 30px;
+  --samples_table_body_cell_width: 76px;
+  --samples_table_body_cell_height: 30px;
+  --samples_table_left_offset: 343px;
+  --samples_table_top_offset: 512px;
+
+/********************************************************************************** END Samples page Variables */
+
+}
+
+/******************************************************************************** END Global Style Variables */
+.buttons-excel {
+  background-color: #4C7AD0;
+  color: white;
+  margin: 5px;
+
+}
+/* Style the tab */
+div.tab 
+{
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    position: relative;
+    top: -2.5%;
+    left: -1.2%;
+    width: 100%;
+    border-radius: 0px;
+}
+
+/* Style the buttons inside the tab */
+div.tab button 
+{
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    color: black;
+    width: 20%;
+    border-radius: 0px;
+    margin: 0;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover 
+{
+background-color: #ddd;
+    border-radius: 0px;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active 
+{
+    background-color: #ccc;
+    border-radius: 0px;
+}
+
+/* Style the tab content */
+.tabcontent 
+{
+
+}
+
+.tabcontent a
+{
+    color: #0000EE;
+}
+
+.tabcontent a:link
+{
+    color: #0000EE;
+}
+
+.tabcontent a:visited
+{
+    color: #551A8B;
+}
+
+.tabcontent a:active
+{
+    color: #FF0000;
+}
+
+
+
+
+.tabcontent tr:hover 
+{
+    background-color: #f5f5f5;
+}
+
+.tabcontent th 
+{
+    background-color: var(--vprop_blue_medium);
+    color: white;
+}
+
+.overviewTableSpecificLocation th 
+{
+    background-color: var(--vprop_green);
+    color: white;
+}
+
+#qc_general
+{
+    display: block;
+    font-size: small;
+}
+
+#qc_specifics
+{
+    font-size: small;
+}
+
+#qc_characteristics
+{
+    font-size: small;
+}
+
+#qc_groups
+{
+    display: block;
+}
+
+
+
+div.tabcontent input[type=text], input[type=password], input[type=email], input[type=number], select
+{
+  width: 135px;
+  padding: 8px 8px;
+  margin: 0px 0;
+  height: 34px;
+}
+
+/* Style the buttons that are used to open and close the accordion panel on the Samples page */
+button.filter_button 
+{
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  width: 800px;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) on the Samples page*/
+button.filter_button.active, button.filter_button:hover 
+{
+  background-color: #ddd;
+}
+
+/* Style the accordion panel on the Samples page. Note: hidden by default */
+div.filter_options 
+{
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  width: 800px;
+  font-size: small;
+}
+
+/* "submit" button for the Samples filter settings */
+button.applyFilters
+{
+  background-color: #ccc;
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: small;
+  width: 180px;
+  margin-left: 130px;
+}
+
+/* general button for QC pages */
+button.qcButtons
+{
+  background-color: #ccc;
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: small;
+  width: 180px;
+  margin-left: 130px;
+}
+
+div.filter_options label
+{
+  color: #333;
+  height: 20px;
+  width: 115px;
+  margin-top: 10px;
+  text-align: right;
+  margin-right:15px;
+  float:left;
+}
+
+div.filter_options input
+{
+  height: 20px;
+  width: 300px;
+  border: 1px solid #000;
+  margin-top: 10px;
+}
+
+button.filter_button.active, button.filter_button:hover 
+{
+  background-color: #ddd;
+}
+
+div.form-group label
+{
+  color: #333;
+  height: 20px;
+  width: 115px;
+  margin-top: 10px;
+  padding-top: 10px;
+  text-align: right;
+  margin-right:15px;
+  float:left;
+}
+
+div.form-group label.plant_settings_label
+{
+  width: 250px;
+}
+
+div.form-group input[type=text], input[type=number], input[type=email], select
+{
+  /*height: 20px;*/
+  width: 200px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  border-radius: 3px;
+}
+
+div.form-group input[type=checkbox]
+{
+  margin-top: 20px;
+}
+
+/* Style the accordion panel on the Add Sample Group and Samples pages. Note: hidden by default */
+div.location_options, div.test_type_options, div.lab_tech_options, div.site_options, div.plant_options, div.specific_location_options
+{
+  max-height: 0;
+  padding: 5px 5px;
+  background-color: #eee; /* light gray */
+  color: black;
+  overflow: scroll;
+  transition: max-height 0.2s ease-out;
+  width: 560px;
+  font-size: small;
+  visibility: hidden;
+  margin-left: 128px;
+}
+
+button.location_button, button.test_type_button, button.lab_tech_button, button.sites_button, button.plant_button, button.specific_location_button /* Add Sample Group and Samples pages */
+{
+  background-color: #eee; /* light gray */
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: small;
+  width: 180px;
+}
+
+
+div.location_options label
+{
+  color: #333;
+  height: 20px;
+  width: 115px;
+  margin-top: 10px;
+  text-align: right;
+  margin-right:15px;
+  float:left;
+}
+
+div.specific_location_options label
+{
+  color: #333;
+  height: 20px;
+  width: 115px;
+  margin-top: 10px;
+  text-align: right;
+  margin-right:15px;
+  float:left;
+}
+
+div.test_type_options label
+{
+  color: #333;
+  height: 20px;
+  width: 115px;
+  margin-top: 10px;
+  text-align: right;
+  margin-right:15px;
+  float:left;
+}
+
+div.lab_tech_options label
+{
+  color: #333;
+  height: 20px;
+  width: 115px;
+  margin-top: 10px;
+  text-align: right;
+  margin-right:15px;
+  float:left;
+}
+
+div.site_options label
+{
+  color: #333;
+  height: 20px;
+  width: 115px;
+  margin-top: 10px;
+  text-align: right;
+  margin-right:15px;
+  float:left;
+}
+
+div.plant_options label
+{
+  color: #333;
+  height: 20px;
+  width: 115px;
+  margin-top: 10px;
+  text-align: right;
+  margin-right:15px;
+  float:left;
+}
+
+div.location_options input
+{
+  height: 18px;
+  width: 18px;
+  border: 1px solid #000;
+  margin-top: 5px;
+}
+
+div.specific_location_options input
+{
+  height: 18px;
+  width: 18px;
+  border: 1px solid #000;
+  margin-top: 5px;
+}
+
+div.test_type_options input
+{
+  height: 18px;
+  width: 18px;
+  border: 1px solid #000;
+  margin-top: 5px;
+}
+
+div.lab_tech_options input
+{
+  height: 18px;
+  width: 18px;
+  border: 1px solid #000;
+  margin-top: 5px;
+}
+
+div.site_options input
+{
+  height: 18px;
+  width: 18px;
+  border: 1px solid #000;
+  margin-top: 5px;
+}
+
+div.plant_options input
+{
+  height: 18px;
+  width: 18px;
+  border: 1px solid #000;
+  margin-top: 5px;
+}
+
+p.filters_displayed
+{
+  font-size: small;
+}
+
+div.tableWrapper
+{
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+
+div.tableWrapper input[type=text], input[type=number], input[type=email], select
+{
+  width: 135px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+}
+
+
+
+
+/*necessary due to presence of the Repeatability Counter on QC screens*/
+div.left_content
+{  
+  width: 75%;
+  float: left;
+}
+
+div.left_content input[type=submit]
+{
+    margin-left: 130px;
+}
+
+/*location of the Repeatability Counter on QC screens*/
+div.right_content
+{  
+  width: 25%;
+  float: right;
+}
+
+div.overviewTableWrapper
+{
+    width:100%;
+    overflow: hidden;
+}
+
+div.overviewBottomContent
+{
+    width:100%;
+}
+
+div.overviewTable, div.overviewTableSpecificLocation
+{
+    float: left;
+    padding: 13px;
+}
+
+div.overviewTable table
+{
+    border-spacing: 0px;
+    border: 1px solid black;
+    border-collapse: collapse;
+    color: black;
+    text-align: center;
+}
+
+div.overviewTable tr:nth-child(even) 
+{
+    background-color: var(--vprop_blue_very_light)
+}
+
+div.overviewTable tr:nth-child(odd) 
+{
+    background-color: #fff; /* white */
+}
+
+div.overviewTable td:nth-child(n+3)
+{
+    background-color: #eee /* gray */
+}
+
+div.overviewTableSpecificLocation table
+{
+    border-spacing: 0px;
+    border: 1px solid black;
+    border-collapse: collapse;
+    color: black;
+    text-align: center;
+}
+
+div.overviewTableSpecificLocation tr:nth-child(even) 
+{
+    background-color: var(--vprop_green_light)
+}
+
+div.overviewTableSpecificLocation tr:nth-child(odd) 
+{
+    background-color: #fff; /* white */
+}
+
+div.overviewTableSpecificLocation td:nth-child(n+3)
+{
+    background-color: #eee /* gray */
+}
+
+div.overviewTableSpecificLocation th 
+{
+    color: #000000;
+}
+
+.sectionTitle, .sectionTitle
+{
+    text-align: center;
+    background-color: #262626; /* dark gray */
+    color: white;
+    font-weight: bold;
+}
+
+div.overviewTable th 
+{
+    color: #000000;
+}
+
+/* Make the text white in the Location boxes on the QC Overview pages. */
+div.overviewTable th.sectionTitle
+{
+    color: white;
+}
+
+/* DEV NOTE: tablesort was disabled, because it interfered with the Select All checkbox on the Samples page */
+/*
+table.tablesorter thead tr .header 
+{
+    background-image: url(../Images/Icons/bg.gif);
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer;
+    padding-right: 18px;
+}
+
+table.tablesorter thead tr .headerSortUp 
+{
+    background-image: url(../Images/Icons/asc.gif);
+}
+
+
+table.tablesorter thead tr .headerSortDown 
+{
+    background-image: url(../Images/Icons/desc.gif);
+}
+*/
+

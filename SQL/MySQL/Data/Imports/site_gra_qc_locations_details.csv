@@ -1,0 +1,433 @@
+id,site_gra_location_id,description,sort_order,is_active
+0,0,NA,0,1
+1,3,Wet Plant Gate 01,1,1
+2,3,Wet Plant Gate 02,2,1
+3,3,Wet Plant Gate 03,3,1
+4,3,Wet Plant Gate 04,4,1
+5,3,Wet Plant Gate 05,5,1
+6,3,Wet Plant Gate 06,6,1
+7,3,Wet Plant Gate 07,7,1
+8,3,Wet Plant Gate 08,8,1
+9,3,Wet Plant Gate 09,9,0
+10,3,Wet Plant Gate 10,10,0
+11,3,Wet Plant Gate 11,11,0
+12,3,Wet Plant Gate 12,12,0
+13,3,Wet Plant Gate 13,13,0
+14,3,Wet Plant Gate 14,14,0
+15,3,Wet Plant Gate 15,15,0
+16,3,Wet Plant Gate 16,16,0
+17,3,Wet Plant Gate 17,17,0
+18,3,Wet Plant Gate 18,18,0
+19,4,Wet Plant Gate 01,19,0
+20,4,Wet Plant Gate 02,20,0
+21,4,Wet Plant Gate 03,21,0
+22,4,Wet Plant Gate 04,22,0
+23,4,Wet Plant Gate 05,23,0
+24,4,Wet Plant Gate 06,24,0
+25,4,Wet Plant Gate 07,25,0
+26,4,Wet Plant Gate 08,26,0
+27,4,Wet Plant Gate 09,27,1
+28,4,Wet Plant Gate 10,28,1
+29,4,Wet Plant Gate 11,29,1
+30,4,Wet Plant Gate 12,30,1
+31,4,Wet Plant Gate 13,31,1
+32,4,Wet Plant Gate 14,32,1
+33,4,Wet Plant Gate 15,33,1
+34,4,Wet Plant Gate 16,34,1
+35,4,Wet Plant Gate 17,35,0
+36,4,Wet Plant Gate 18,36,0
+37,9,Wet Plant Gate 01,37,1
+38,9,Wet Plant Gate 02,38,1
+39,9,Wet Plant Gate 03,39,1
+40,9,Wet Plant Gate 04,40,1
+41,9,Wet Plant Gate 05,41,1
+42,9,Wet Plant Gate 06,42,1
+43,9,Wet Plant Gate 07,43,1
+44,9,Wet Plant Gate 08,44,1
+45,9,Wet Plant Gate 09,45,1
+46,9,Wet Plant Gate 10,46,1
+47,9,Wet Plant Gate 11,47,1
+48,9,Wet Plant Gate 12,48,1
+49,9,Wet Plant Gate 13,49,1
+50,9,Wet Plant Gate 14,50,1
+51,9,Wet Plant Gate 15,51,1
+52,9,Wet Plant Gate 16,52,1
+53,9,Wet Plant Gate 17,53,0
+54,9,Wet Plant Gate 18,54,0
+55,3,Stockpile 01 (Wet Plant Coarse 1),61,1
+56,9,Stockpile 01 (Wet Plant Coarse 1),62,1
+57,4,Stockpile 02 (Wet Plant Fine 1),63,1
+58,4,Stockpile 03 (Wet Plant Fine 2),64,1
+59,9,Stockpile 02 (Wet Plant Fine 1),66,1
+60,9,Stockpile 03 (Wet Plant Fine 2),67,1
+61,20,Stockpile 04 (Old Wet Plant Coarse 1),68,1
+62,20,Stockpile 05 (Old Wet Plant Coarse 2),69,1
+63,20,Stockpile 06 (Old Wet Plant Coarse 3),70,1
+64,20,Stockpile 07 (Old Wet Plant Coarse 4),71,1
+65,20,Stockpile 08 (Old Wet Plant Coarse 5),72,1
+66,22,Stockpile 04 (Old Wet Plant Coarse 1),73,1
+67,22,Stockpile 05 (Old Wet Plant Coarse 2),74,1
+68,22,Stockpile 06 (Old Wet Plant Coarse 3),75,1
+69,22,Stockpile 07 (Old Wet Plant Coarse 4),76,1
+70,22,Stockpile 08 (Old Wet Plant Coarse 5),77,1
+71,9,Stockpile 04 (Old Wet Plant Coarse 1),78,1
+72,9,Stockpile 05 (Old Wet Plant Coarse 2),79,1
+73,9,Stockpile 06 (Old Wet Plant Coarse 3),80,1
+74,9,Stockpile 07 (Old Wet Plant Coarse 4),81,1
+75,9,Stockpile 08 (Old Wet Plant Coarse 5),82,1
+76,21,Stockpile 09 (Old Wet Plant Fine 1),83,1
+77,21,Stockpile 10 (Old Wet Plant Fine 2),84,1
+78,21,Stockpile 11 (Old Wet Plant Fine 3),85,1
+79,21,Stockpile 12 (Old Wet Plant Fine 4),86,1
+80,21,Stockpile 13 (Old Wet Plant Fine 5),87,1
+81,23,Stockpile 09 (Old Wet Plant Fine 1),88,1
+82,23,Stockpile 10 (Old Wet Plant Fine 2),89,1
+83,23,Stockpile 11 (Old Wet Plant Fine 3),90,1
+84,23,Stockpile 12 (Old Wet Plant Fine 4),91,1
+85,23,Stockpile 13 (Old Wet Plant Fine 5),92,1
+86,9,Stockpile 09 (Old Wet Plant Fine 1),93,1
+87,9,Stockpile 10 (Old Wet Plant Fine 2),94,1
+88,9,Stockpile 11 (Old Wet Plant Fine 3),95,1
+89,9,Stockpile 12 (Old Wet Plant Fine 4),96,1
+90,9,Stockpile 13 (Old Wet Plant Fine 5),97,1
+91,14,Stockpile 14 (Dry Plant Coarse 1),98,0
+92,16,Stockpile 14 (Dry Plant Coarse 1),99,0
+93,9,Stockpile 14 (Dry Plant Coarse 1),100,1
+94,13,Stockpile 15 (Dry Plant Fine 1),101,0
+95,15,Stockpile 15 (Dry Plant Fine 1),102,0
+96,17,Stockpile 15 (Dry Plant Fine 1),103,0
+97,9,Stockpile 15 (Dry Plant Fine 1),104,1
+98,11,Wet Plant Gate 01,105,1
+99,11,Wet Plant Gate 02,106,1
+100,11,Wet Plant Gate 03,107,1
+101,11,Wet Plant Gate 04,108,1
+102,11,Wet Plant Gate 05,109,1
+103,11,Wet Plant Gate 06,110,1
+104,11,Wet Plant Gate 07,111,1
+105,11,Wet Plant Gate 08,112,1
+106,11,Wet Plant Gate 09,113,1
+107,11,Wet Plant Gate 10,114,1
+108,11,Wet Plant Gate 11,115,1
+109,11,Wet Plant Gate 12,116,1
+110,11,Wet Plant Gate 13,117,1
+111,11,Wet Plant Gate 14,118,1
+112,11,Wet Plant Gate 15,119,1
+113,11,Wet Plant Gate 16,120,1
+114,11,Stockpile 01 (Wet Plant Coarse 1),121,1
+115,11,Stockpile 02 (Wet Plant Fine 1),122,1
+116,11,Stockpile 03 (Wet Plant Fine 2),123,1
+117,11,Stockpile 04 (Old Wet Plant Coarse 1),124,1
+118,11,Stockpile 05 (Old Wet Plant Coarse 2),125,1
+119,11,Stockpile 06 (Old Wet Plant Coarse 3),126,1
+120,11,Stockpile 07 (Old Wet Plant Coarse 4),127,1
+121,11,Stockpile 08 (Old Wet Plant Coarse 5),128,1
+122,11,Stockpile 09 (Old Wet Plant Fine 1),129,1
+123,11,Stockpile 10 (Old Wet Plant Fine 2),130,1
+124,11,Stockpile 11 (Old Wet Plant Fine 3),131,1
+125,11,Stockpile 12 (Old Wet Plant Fine 4),132,1
+126,11,Stockpile 13 (Old Wet Plant Fine 5),133,1
+127,11,Stockpile 14 (Dry Plant Coarse 1),134,1
+128,11,Stockpile 15 (Dry Plant Fine 1),135,1
+129,12,Wet Plant Gate 09,136,1
+130,12,Wet Plant Gate 10,137,1
+131,12,Wet Plant Gate 11,138,1
+132,12,Wet Plant Gate 12,139,1
+133,12,Wet Plant Gate 13,140,1
+134,12,Wet Plant Gate 14,141,1
+135,12,Wet Plant Gate 15,142,1
+136,12,Wet Plant Gate 16,143,1
+137,12,Stockpile 02 (Wet Plant Fine 1),144,1
+138,12,Stockpile 03 (Wet Plant Fine 2),145,1
+139,12,Stockpile 09 (Old Wet Plant Fine 1),146,1
+140,12,Stockpile 10 (Old Wet Plant Fine 2),147,1
+141,12,Stockpile 11 (Old Wet Plant Fine 3),148,1
+142,12,Stockpile 12 (Old Wet Plant Fine 4),149,1
+143,12,Stockpile 13 (Old Wet Plant Fine 5),150,1
+144,12,Stockpile 15 (Dry Plant Fine 1),151,1
+145,13,Wet Plant Gate 01,152,0
+146,13,Wet Plant Gate 02,153,0
+147,13,Wet Plant Gate 03,154,0
+148,13,Wet Plant Gate 04,155,0
+149,13,Wet Plant Gate 05,156,0
+150,13,Wet Plant Gate 06,157,0
+151,13,Wet Plant Gate 07,158,0
+152,13,Wet Plant Gate 08,159,0
+153,13,Wet Plant Gate 09,160,1
+154,13,Wet Plant Gate 10,161,1
+155,13,Wet Plant Gate 11,162,1
+156,13,Wet Plant Gate 12,163,1
+157,13,Wet Plant Gate 13,164,1
+158,13,Wet Plant Gate 14,165,1
+159,13,Wet Plant Gate 15,166,1
+160,13,Wet Plant Gate 16,167,1
+161,13,Stockpile 01 (Wet Plant Coarse 1),168,0
+162,13,Stockpile 02 (Wet Plant Fine 1),169,1
+163,13,Stockpile 03 (Wet Plant Fine 2),170,1
+164,13,Stockpile 04 (Old Wet Plant Coarse 1),171,0
+165,13,Stockpile 05 (Old Wet Plant Coarse 2),172,0
+166,13,Stockpile 06 (Old Wet Plant Coarse 3),173,0
+167,13,Stockpile 07 (Old Wet Plant Coarse 4),174,0
+168,13,Stockpile 08 (Old Wet Plant Coarse 5),175,0
+169,13,Stockpile 09 (Old Wet Plant Fine 1),176,1
+170,13,Stockpile 10 (Old Wet Plant Fine 2),177,1
+171,13,Stockpile 11 (Old Wet Plant Fine 3),178,1
+172,13,Stockpile 12 (Old Wet Plant Fine 4),179,1
+173,13,Stockpile 13 (Old Wet Plant Fine 5),180,1
+174,13,Stockpile 14 (Dry Plant Coarse 1),181,0
+175,13,Stockpile 15 (Dry Plant Fine 1),182,1
+176,14,Wet Plant Gate 01,183,1
+177,14,Wet Plant Gate 02,184,1
+178,14,Wet Plant Gate 03,185,1
+179,14,Wet Plant Gate 04,186,1
+180,14,Wet Plant Gate 05,187,1
+181,14,Wet Plant Gate 06,188,1
+182,14,Wet Plant Gate 07,189,1
+183,14,Wet Plant Gate 08,190,1
+184,14,Stockpile 01 (Wet Plant Coarse 1),191,1
+185,14,Stockpile 04 (Old Wet Plant Coarse 1),192,1
+186,14,Stockpile 05 (Old Wet Plant Coarse 2),193,1
+187,14,Stockpile 06 (Old Wet Plant Coarse 3),194,1
+188,14,Stockpile 07 (Old Wet Plant Coarse 4),195,1
+189,14,Stockpile 08 (Old Wet Plant Coarse 5),196,1
+190,14,Stockpile 14 (Dry Plant Coarse 1),197,1
+191,16,Wet Plant Gate 01,198,1
+192,16,Wet Plant Gate 02,199,1
+193,16,Wet Plant Gate 03,200,1
+194,16,Wet Plant Gate 04,201,1
+195,16,Wet Plant Gate 05,202,1
+196,16,Wet Plant Gate 06,203,1
+197,16,Wet Plant Gate 07,204,1
+198,16,Wet Plant Gate 08,205,1
+199,16,Stockpile 01 (Wet Plant Coarse 1),206,1
+200,16,Stockpile 04 (Old Wet Plant Coarse 1),207,1
+201,16,Stockpile 05 (Old Wet Plant Coarse 2),208,1
+202,16,Stockpile 06 (Old Wet Plant Coarse 3),209,1
+203,16,Stockpile 07 (Old Wet Plant Coarse 4),210,1
+204,16,Stockpile 08 (Old Wet Plant Coarse 5),211,1
+205,16,Stockpile 14 (Dry Plant Coarse 1),212,1
+206,15,Wet Plant Gate 09,221,1
+207,15,Wet Plant Gate 10,222,1
+208,15,Wet Plant Gate 11,223,1
+209,15,Wet Plant Gate 12,224,1
+210,15,Wet Plant Gate 13,225,1
+211,15,Wet Plant Gate 14,226,1
+212,15,Wet Plant Gate 15,227,1
+213,15,Wet Plant Gate 16,228,1
+214,15,Stockpile 02 (Wet Plant Fine 1),230,1
+215,15,Stockpile 03 (Wet Plant Fine 2),231,1
+216,15,Stockpile 09 (Old Wet Plant Fine 1),237,1
+217,15,Stockpile 10 (Old Wet Plant Fine 2),238,1
+218,15,Stockpile 11 (Old Wet Plant Fine 3),239,1
+219,15,Stockpile 12 (Old Wet Plant Fine 4),240,1
+220,15,Stockpile 13 (Old Wet Plant Fine 5),241,1
+221,15,Stockpile 15 (Dry Plant Fine 1),243,1
+222,17,Wet Plant Gate 09,252,1
+223,17,Wet Plant Gate 10,253,1
+224,17,Wet Plant Gate 11,254,1
+225,17,Wet Plant Gate 12,255,1
+226,17,Wet Plant Gate 13,256,1
+227,17,Wet Plant Gate 14,257,1
+228,17,Wet Plant Gate 15,258,1
+229,17,Wet Plant Gate 16,259,1
+230,17,Stockpile 02 (Wet Plant Fine 1),261,1
+231,17,Stockpile 03 (Wet Plant Fine 2),262,1
+232,17,Stockpile 09 (Old Wet Plant Fine 1),268,1
+233,17,Stockpile 10 (Old Wet Plant Fine 2),269,1
+234,17,Stockpile 11 (Old Wet Plant Fine 3),270,1
+235,17,Stockpile 12 (Old Wet Plant Fine 4),271,1
+236,17,Stockpile 13 (Old Wet Plant Fine 5),272,1
+237,17,Stockpile 15 (Dry Plant Fine 1),274,1
+238,15,Wet Plant Gate 01,213,1
+239,15,Wet Plant Gate 02,214,1
+240,15,Wet Plant Gate 03,215,1
+241,15,Wet Plant Gate 04,216,1
+242,15,Wet Plant Gate 05,217,1
+243,15,Wet Plant Gate 06,218,1
+244,15,Wet Plant Gate 07,219,1
+245,15,Wet Plant Gate 08,220,1
+246,15,Stockpile 01 (Wet Plant Coarse 1),229,1
+247,15,Stockpile 04 (Old Wet Plant Coarse 1),232,1
+248,15,Stockpile 05 (Old Wet Plant Coarse 2),233,1
+249,15,Stockpile 06 (Old Wet Plant Coarse 3),234,1
+250,15,Stockpile 07 (Old Wet Plant Coarse 4),235,1
+251,15,Stockpile 08 (Old Wet Plant Coarse 5),236,1
+252,15,Stockpile 14 (Dry Plant Coarse 1),242,1
+253,17,Wet Plant Gate 01,244,1
+254,17,Wet Plant Gate 02,245,1
+255,17,Wet Plant Gate 03,246,1
+256,17,Wet Plant Gate 04,247,1
+257,17,Wet Plant Gate 05,248,1
+258,17,Wet Plant Gate 06,249,1
+259,17,Wet Plant Gate 07,250,1
+260,17,Wet Plant Gate 08,251,1
+261,17,Stockpile 01 (Wet Plant Coarse 1),260,1
+262,17,Stockpile 04 (Old Wet Plant Coarse 1),263,1
+263,17,Stockpile 05 (Old Wet Plant Coarse 2),264,1
+264,17,Stockpile 06 (Old Wet Plant Coarse 3),265,1
+265,17,Stockpile 07 (Old Wet Plant Coarse 4),266,1
+266,17,Stockpile 08 (Old Wet Plant Coarse 5),267,1
+267,17,Stockpile 14 (Dry Plant Coarse 1),273,1
+268,24,Wet Plant Gate 09,275,1
+269,24,Wet Plant Gate 10,276,1
+270,24,Wet Plant Gate 11,277,1
+271,24,Wet Plant Gate 12,278,1
+272,24,Wet Plant Gate 13,279,1
+273,24,Wet Plant Gate 14,280,1
+274,24,Wet Plant Gate 15,281,1
+275,24,Wet Plant Gate 16,282,1
+276,24,Stockpile 02 (Wet Plant Fine 1),283,1
+277,24,Stockpile 03 (Wet Plant Fine 2),284,1
+278,24,Stockpile 09 (Old Wet Plant Fine 1),285,1
+279,24,Stockpile 10 (Old Wet Plant Fine 2),286,1
+280,24,Stockpile 11 (Old Wet Plant Fine 3),287,1
+281,24,Stockpile 12 (Old Wet Plant Fine 4),288,1
+282,24,Stockpile 13 (Old Wet Plant Fine 5),289,1
+283,24,Stockpile 15 (Dry Plant Fine 1),290,1
+284,20,Old Wet Plant Coarse Side A,55,0
+285,20,Old Wet Plant Coarse Side B,56,0
+286,20,Old Wet Plant Coarse Pile,57,1
+287,21,Old Wet Plant Fine Side A,58,0
+288,21,Old Wet Plant Fine Side B,59,0
+289,21,Old Wet Plant Fine Pile,60,1
+290,4,Stockpile 16 (Wet Plant Fine 3),65,1
+291,22,Old Wet Plant Coarse Pile,57,1
+292,23,Old Wet Plant Fine Pile,60,1
+293,49,Wet Plant Gate 09,136,1
+294,49,Wet Plant Gate 10,137,1
+295,49,Wet Plant Gate 11,138,1
+296,49,Wet Plant Gate 12,139,1
+297,49,Wet Plant Gate 13,140,1
+298,49,Wet Plant Gate 14,141,1
+299,49,Wet Plant Gate 15,142,1
+300,49,Wet Plant Gate 16,143,1
+301,49,Stockpile 02 (Wet Plant Fine 1),144,1
+302,49,Stockpile 03 (Wet Plant Fine 2),145,1
+303,49,Stockpile 09 (Old Wet Plant Fine 1),146,1
+304,49,Stockpile 10 (Old Wet Plant Fine 2),147,1
+305,49,Stockpile 11 (Old Wet Plant Fine 3),148,1
+306,49,Stockpile 12 (Old Wet Plant Fine 4),149,1
+307,49,Stockpile 13 (Old Wet Plant Fine 5),150,1
+308,49,Stockpile 15 (Dry Plant Fine 1),151,1
+309,50,Wet Plant Gate 09,160,1
+310,50,Wet Plant Gate 10,161,1
+311,50,Wet Plant Gate 11,162,1
+312,50,Wet Plant Gate 12,163,1
+313,50,Wet Plant Gate 13,164,1
+314,50,Wet Plant Gate 14,165,1
+315,50,Wet Plant Gate 15,166,1
+316,50,Wet Plant Gate 16,167,1
+317,50,Stockpile 02 (Wet Plant Fine 1),169,1
+318,50,Stockpile 03 (Wet Plant Fine 2),170,1
+319,50,Stockpile 09 (Old Wet Plant Fine 1),176,1
+320,50,Stockpile 10 (Old Wet Plant Fine 2),177,1
+321,50,Stockpile 11 (Old Wet Plant Fine 3),178,1
+322,50,Stockpile 12 (Old Wet Plant Fine 4),179,1
+323,50,Stockpile 13 (Old Wet Plant Fine 5),180,1
+324,50,Stockpile 15 (Dry Plant Fine 1),182,1
+325,51,Wet Plant Gate 09,183,1
+326,51,Wet Plant Gate 10,184,1
+327,51,Wet Plant Gate 11,185,1
+328,51,Wet Plant Gate 12,186,1
+329,51,Wet Plant Gate 13,187,1
+330,51,Wet Plant Gate 14,188,1
+331,51,Wet Plant Gate 15,189,1
+332,51,Wet Plant Gate 16,190,1
+333,51,Stockpile 02 (Wet Plant Fine 1),191,1
+334,51,Stockpile 03 (Wet Plant Fine 2),192,1
+335,51,Stockpile 09 (Old Wet Plant Fine 1),193,1
+336,51,Stockpile 10 (Old Wet Plant Fine 2),194,1
+337,51,Stockpile 11 (Old Wet Plant Fine 3),195,1
+338,51,Stockpile 12 (Old Wet Plant Fine 4),196,1
+339,51,Stockpile 13 (Old Wet Plant Fine 5),197,1
+340,51,Stockpile 15 (Dry Plant Fine 1),198,1
+341,54,Wet Plant Gate 01,199,1
+342,54,Wet Plant Gate 02,200,1
+343,54,Wet Plant Gate 03,201,1
+344,54,Wet Plant Gate 04,202,1
+345,54,Wet Plant Gate 05,203,1
+346,54,Wet Plant Gate 06,204,1
+347,54,Wet Plant Gate 07,205,1
+348,54,Wet Plant Gate 08,206,1
+349,54,Stockpile 01 (Wet Plant Coarse 1),207,1
+350,54,Stockpile 04 (Old Wet Plant Coarse 1),208,1
+351,54,Stockpile 05 (Old Wet Plant Coarse 2),209,1
+352,54,Stockpile 06 (Old Wet Plant Coarse 3),210,1
+353,54,Stockpile 07 (Old Wet Plant Coarse 4),211,1
+354,54,Stockpile 08 (Old Wet Plant Coarse 5),212,1
+355,54,Stockpile 14 (Dry Plant Coarse 1),213,1
+356,55,Wet Plant Gate 01,214,1
+357,55,Wet Plant Gate 02,215,1
+358,55,Wet Plant Gate 03,216,1
+359,55,Wet Plant Gate 04,217,1
+360,55,Wet Plant Gate 05,218,1
+361,55,Wet Plant Gate 06,219,1
+362,55,Wet Plant Gate 07,220,1
+363,55,Wet Plant Gate 08,221,1
+364,55,Wet Plant Gate 09,222,1
+365,55,Wet Plant Gate 10,223,1
+366,55,Wet Plant Gate 11,224,1
+367,55,Wet Plant Gate 12,225,1
+368,55,Wet Plant Gate 13,226,1
+369,55,Wet Plant Gate 14,227,1
+370,55,Wet Plant Gate 15,228,1
+371,55,Wet Plant Gate 16,229,1
+372,55,Stockpile 01 (Wet Plant Coarse 1),230,1
+373,55,Stockpile 02 (Wet Plant Fine 1),231,1
+374,55,Stockpile 03 (Wet Plant Fine 2),232,1
+375,55,Stockpile 04 (Old Wet Plant Coarse 1),233,1
+376,55,Stockpile 05 (Old Wet Plant Coarse 2),234,1
+377,55,Stockpile 06 (Old Wet Plant Coarse 3),235,1
+378,55,Stockpile 07 (Old Wet Plant Coarse 4),236,1
+379,55,Stockpile 08 (Old Wet Plant Coarse 5),237,1
+380,55,Stockpile 09 (Old Wet Plant Fine 1),238,1
+381,55,Stockpile 10 (Old Wet Plant Fine 2),239,1
+382,55,Stockpile 11 (Old Wet Plant Fine 3),240,1
+383,55,Stockpile 12 (Old Wet Plant Fine 4),241,1
+384,55,Stockpile 13 (Old Wet Plant Fine 5),242,1
+385,55,Stockpile 14 (Dry Plant Coarse 1),243,1
+386,55,Stockpile 15 (Dry Plant Fine 1),244,1
+387,101,Wet Plant Gate 01,0,1
+388,101,Wet Plant Gate 02,0,1
+389,101,Wet Plant Gate 03,0,1
+390,101,Wet Plant Gate 04,0,1
+391,101,Wet Plant Gate 05,0,1
+392,101,Wet Plant Gate 06,0,1
+393,101,Wet Plant Gate 07,0,1
+394,101,Wet Plant Gate 08,0,1
+395,101,Stockpile 01 (Wet Plant Coarse 1),0,1
+396,101,Stockpile 04 (Old Wet Plant Coarse 1),0,1
+397,101,Stockpile 05 (Old Wet Plant Coarse 2),0,1
+398,101,Stockpile 06 (Old Wet Plant Coarse 3),0,1
+399,101,Stockpile 07 (Old Wet Plant Coarse 4),0,1
+400,101,Stockpile 08 (Old Wet Plant Coarse 5),0,1
+401,101,Stockpile 14 (Dry Plant Coarse 1),0,1
+402,102,Wet Plant Gate 01,0,1
+403,102,Wet Plant Gate 02,0,1
+404,102,Wet Plant Gate 03,0,1
+405,102,Wet Plant Gate 04,0,1
+406,102,Wet Plant Gate 05,0,1
+407,102,Wet Plant Gate 06,0,1
+408,102,Wet Plant Gate 07,0,1
+409,102,Wet Plant Gate 08,0,1
+410,102,Stockpile 01 (Wet Plant Coarse 1),0,1
+411,102,Stockpile 04 (Old Wet Plant Coarse 1),0,1
+412,102,Stockpile 05 (Old Wet Plant Coarse 2),0,1
+413,102,Stockpile 06 (Old Wet Plant Coarse 3),0,1
+414,102,Stockpile 07 (Old Wet Plant Coarse 4),0,1
+415,102,Stockpile 08 (Old Wet Plant Coarse 5),0,1
+416,102,Stockpile 14 (Dry Plant Coarse 1),0,1
+417,103,Wet Plant Gate 01,0,1
+418,103,Wet Plant Gate 02,0,1
+419,103,Wet Plant Gate 03,0,1
+420,103,Wet Plant Gate 04,0,1
+421,103,Wet Plant Gate 05,0,1
+422,103,Wet Plant Gate 06,0,1
+423,103,Wet Plant Gate 07,0,1
+424,103,Wet Plant Gate 08,0,1
+425,103,Stockpile 01 (Wet Plant Coarse 1),0,1
+426,103,Stockpile 04 (Old Wet Plant Coarse 1),0,1
+427,103,Stockpile 05 (Old Wet Plant Coarse 2),0,1
+428,103,Stockpile 06 (Old Wet Plant Coarse 3),0,1
+429,103,Stockpile 07 (Old Wet Plant Coarse 4),0,1
+430,103,Stockpile 08 (Old Wet Plant Coarse 5),0,1
+431,103,Stockpile 14 (Dry Plant Coarse 1),0,1

@@ -1,0 +1,209 @@
+/*******************************************************************************************************************************************
+ * File Name: hrstyles.css
+ * Project: smashbox
+ * Description: 
+ * Notes:
+ * =========================================================================================================================================
+ * Change Log ([MM/DD/YYYY]|[Developer]|[Task Ticket] - [Description]
+ * =========================================================================================================================================
+ * 07/17/2017|ktaylor|KACE:16070 - Initial creation
+ * 08/10/2017|kkuehn|KACE:17915 - Added root class and global variables, cleaned up header
+ * 08/10/2017|kkuehn|KACE:17915 - Changed Blue at last minute
+ * 10/09/2017|nolliff|KACE:18775 - Added padding to text input
+ ******************************************************************************************************************************************/
+
+/******************************************************************************** BEGIN Global Style Variables */
+:root
+{
+  --vprop_blue: #003087;
+  --vprop_blue_medium: #4C7AD0;
+  --vprop_blue_light: #A2BCED;
+  --vprop_green: #78D64B;
+  --vprop_green_light: #BADBAA;
+  --vprop_blue_very_light: #B2C3E3;
+}
+/********************************************************************************** END Global Style Variables */
+
+.tablesorter.hrEmployeeGridTable table
+{
+  width: 1200px;
+  border-color: #000000;
+}
+
+.tablesorter.hrEmployeeGridTable td
+{
+  
+}
+
+.hrEmployeeShellTable
+{
+  border: 1px solid #000000;
+}
+
+.hrEmployeeSingleTable
+{
+  width: 100%;
+  border: solid 0px #FF0000;
+  border-collapse: collapse;
+}
+
+.hrEmployeeSingleTableRTAlign
+{
+  width: 100%;
+  text-align: right;
+}
+
+.datagrid table thead th 
+{
+	background-color: var(--vprop_blue_medium);
+	color:#FFFFFF;   
+  font-weight: bold;
+	border-left: 1px solid #000000;
+  border-right: 1px solid #000000;
+} 
+
+.datagrid table td
+{ 
+  font-size: 14px;
+  padding: 0px; 
+}
+
+.datagrid table tr:nth-child(even) 
+{
+    background-color: var(--vprop_blue_very_light)
+}
+
+.datagrid table  tr:nth-child(odd) 
+{
+    background-color: #FFFFFF 
+}
+
+.submitButton-test-disabled
+{
+/*  color: #FFFFFF;  
+  background-color: var(--vprop_blue_medium);
+  padding: 5px;
+*/
+background-color: var(--vprop_blue_light);
+color: #000000;
+padding: 1px 1px;
+margin: 4px 0;
+border: none;
+cursor: pointer;
+border-radius: 5px;
+}
+
+.hrfront-table 
+{
+    border: 1px solid #000000;
+}
+
+.hrfront-table table 
+{
+    border-collapse: collapse;
+    width: 100%;    
+}
+
+.hrfront-table th 
+{
+    height: 35px;
+}
+.hrfront-table th, td 
+{
+    padding: 0px;
+    text-align:center;
+}
+
+div.addemployee 
+{
+    border:none;
+}
+
+.inline 
+{
+  display: inline;
+}
+
+.hrlink-button 
+{
+  background: none;
+  border: none;
+  color: blue;
+  text-decoration: none;
+  padding:0px;
+  cursor: pointer;
+  font-size: 1em;
+  font-family: arial,helvetica,sans-serif;
+  text-decoration: underline;
+}
+.hrlink-button:focus 
+{
+  outline: none;
+}
+.hrlink-button:active 
+{
+  color:red;
+}
+
+/*.hrlink-button a:link {
+    text-decoration: underline;
+}
+*/
+
+.hrformgroup label
+{
+  color: #333;
+  height: 20px;
+  width: 115px;
+  margin-top: 5px;
+  padding-top: 5px;
+  text-align: right;
+  margin-right:5px;
+  float:left;
+}
+
+.hrformgroup input[type=number], input[type=email], select
+{
+  /*height: 20px;*/
+  width: 200px;
+  border: 1px solid #ccc;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 5px 5px;
+}
+
+.hrformgroup input[type=checkbox]
+{
+  border: 1px solid #ccc;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 5px 5px;
+}
+
+.hrTextboxRight
+{
+  width:275px;
+}
+
+.hrTextboxLeft
+{
+  width:200px;
+}
+
+.hrTextArea
+{
+  width:100%;
+}
+
+.hrformgroup
+{  
+/*   color:#000000;*/
+   width: 800px;
+   
+}
+
+.hrformgroup  th, td
+{  
+   padding: 5px;
+   text-align:left;
+}

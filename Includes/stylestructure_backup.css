@@ -1,0 +1,900 @@
+/*******************************************************************************************************************************************
+ * File Name: stylestructure.css
+ * Project: Silicore
+ * Description: Main structure control style sheet to be included on all pages in the site, unless a custom template is needed for a section/page.
+ *              This page will only contain CSS information related to maintaining the container structure of the site.
+ * Notes: To use global variables, define them in the root class below, and reference them by using the following syntax:
+ *        .colorclass
+ *        {
+ *          color: var(--colorvarsample);
+ *        }
+ *        Using the above class in a PHP,HTML,etc. element would result in its color attribute being set to full red.
+ * =========================================================================================================================================
+ * Change Log ([MM/DD/YYYY]|[Developer]|[Task Ticket] - [Description])
+ * =========================================================================================================================================
+ * 10/30/2016|kkuehn|KACE:10499 - Initial creation
+ * 05/25/2017|mnutsch|KACE:10499 - Moved from gbdevserver to smashbox
+ * 08/10/2017|kkuehn|KACE:10499 - Added root class with sample variables and usage notes, updated DocBlock page header
+ * 08/10/2017|kkuehn|KACE:17915 - Added new Logo colors and branding
+ * 08/31/2017|nolliff|KACE:18394 - Added usertable class and tablesort class
+ * 09/01/2017|nolliff|KACE:18394 - Added class for floating input fields
+ * 09/21/2017|mnutsch|KACE:18693 - Fixed a problem with the CSS in the new user registration modal popup.
+ * 09/22/2017|kkuehn|KACE:18762 - added UL class .navUL for the menu. Removed the usage of the generic UL class.
+ * 10/23/2017|nolliff|KACE:10499 - added class for production tables and user tables
+ * 12/28/2017|whildebrandt|KACE:17644 - Changed left-nav and div-header's position to fixed. Added left padding to sub_header_content. Added menu class.
+ * 02/07/2018|mnutsch|KACE:19755 - Changed some percentage based sizes to fixed pixel sizes. Needed for fixed positioning of frozen table headers on Samples pages.
+ *
+ ******************************************************************************************************************************************/
+
+/******************************************************************************** BEGIN Foo */
+/********************************************************************************** END Foo */
+
+/******************************************************************************** BEGIN Global Style Variables */
+:root
+{
+  --vprop_blue: #003087;
+  --vprop_blue_medium: #4C7AD0;
+  --vprop_blue_light: #A2BCED;
+  --vprop_green: #78D64B;
+  --vprop_green_light: #BADBAA;
+}
+/********************************************************************************** END Global Style Variables */
+
+/******************************************************************************** BEGIN Master Control Shell */
+.div-master
+{
+  background-color: #ffffff;
+  width: 100%;
+  height: 100%;
+}
+/********************************************************************************** END Master Control Shell */
+
+/******************************************************************************** BEGIN Header Control Shell */
+.div-header
+{
+  background-color: #262626; /* color the background a dark gray white */
+  width: 100%;
+  height: 50px;
+  order: 1;
+  position:fixed;
+  top: 0px;
+  color: white; /* color the text white */
+  z-index: 10;
+}
+
+.sub_header
+{
+    background-color: var(--vprop_blue);/* #003087; */
+    width: 100%;
+    height: 24px;
+    position: absolute;
+    top: 50px;
+    color: white;
+    z-index: 10;
+    text-align: right;
+}
+
+.sub_header_content
+{
+    padding-left: 0.8%;
+    padding-top: 0.3%;
+    padding-right: 1.5%;
+    font-size: 0.75em;
+}
+
+.sub_header_text_right
+{
+    float: right;
+}
+
+.sub_header_text_left
+{
+    float: left;
+	width: 225px;
+}
+
+.sub_header_text_left a:link, a:visited
+{
+	color: white;
+	text-decoration: none;
+}
+
+.sub_header_text_left a:hover
+{
+	text-decoration: underline;
+}
+    
+.header_text
+{
+  padding-left: 1.5%;
+  padding-top: 15px;
+  position: relative;
+  max-width: 100px;
+}
+
+.header_image
+{
+  padding-left: 0%;
+  padding-top: 0%;
+  float:left;
+  /* max-width: 13%; */
+}
+
+.sign_in_block
+{
+  padding-top: 0.5%;
+  padding-right: 22px;
+}
+
+.question_mark
+{
+    height: 20px;
+    right: 8px;
+    top: 14px;
+    position: absolute;
+    visibility: visible;
+	cursor: pointer;
+}
+
+.question_mark_highlight
+{
+  height: 20px;
+  right: 8px;
+  top: 14px;
+  position: absolute;
+  visibility: hidden;
+	cursor: pointer;
+}
+
+/********************************************************************************** END Header Control Shell */
+
+/******************************************************************************** BEGIN Nav and Content Wrapper */
+.div-mid-nav-and-content
+{
+  width: 100%;
+  height: 100%;
+}
+/********************************************************************************** END Nav and Content Wrapper */
+
+
+/******************************************************************************** BEGIN Left Nav Control Shell */
+.div-nav-left
+{
+  background-image: url("../Images/nav-left-bg.png");
+  height: 100%;
+  width: 160px;
+  order: 2;
+  position: fixed;
+  left: 0px;
+  top: auto;
+  bottom: -50;
+  padding-left: 15px;
+  z-index: 10;
+}
+/********************************************************************************** END Left Nav Control Shell */
+
+/********************************************************************************** BEGIN Menu Class */
+.menu
+{
+  padding-top: 15%;
+}
+/********************************************************************************** END Menu Class */
+
+/******************************************************************************** BEGIN Content Control Shell */
+.div-content
+{
+  background-color: #FFFFFF;
+  height: calc(100% - 74px);
+  flex: 2;
+  order: 3;
+  position:absolute;
+  top: 74px;
+  left: 160px;
+  padding-left: 30px;
+  padding-top: 1%;
+
+}
+/********************************************************************************** END Content Control Shell */
+
+/******************************************************************************** BEGIN Footer Control Shell */
+.div-footer
+{
+  background-color: #262626; /* color the background a dark gray white */
+  width: 100%;
+  height:0px;
+  position:absolute;
+  bottom: 0px;
+  padding-left: 0.5%;
+  padding-top: 0.5%;
+  color: white; /* color the text white */
+  display: none;
+}
+/********************************************************************************** END Footer Control Shell */
+
+
+/******************************************************************************** BEGIN Notifications Icon */
+/*DEV NOTE: this functionality was commented out*/
+.notifications_icon
+{
+  width: 25px;
+  position: absolute;
+  right: calc(1% + 214px);
+  cursor: pointer;
+}
+
+#notification_count 
+{
+  border-radius: 3px;
+  background: red;
+  padding: 3px;
+  width: 8px;
+  height: 8px;
+  font-size: 8px;
+  position: absolute;
+  top: -9px;
+  right: 1px;
+}
+
+#notification_bell
+{
+  height: 17px;
+  position: absolute;
+  left: 0px;
+  top: 1px;
+}
+/********************************************************************************** END Notifications Icon */
+
+/******************************************************************************** BEGIN Password Reset Styles */
+
+input#password, input#passwordConfirm
+{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 5px; /*rounds corners*/
+}
+
+button#passwordSubmit
+{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 5px; /*rounds corners*/
+}
+
+meter 
+{
+  /* Reset the default appearance 
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  */
+  margin: 0 auto 1em;
+  width: 50%;
+  height: 0.5em;
+
+  /* Applicable only to Firefox */
+  background: none;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+meter::-webkit-meter-bar 
+{
+  background: none;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Webkit based browsers */
+meter[value="1"]::-webkit-meter-optimum-value { background: red; }
+meter[value="2"]::-webkit-meter-optimum-value { background: orange; }
+meter[value="3"]::-webkit-meter-optimum-value { background: yellow; }
+meter[value="4"]::-webkit-meter-optimum-value { background: green; }
+
+/* Gecko based browsers */
+meter[value="1"]::-moz-meter-bar { background: red; }
+meter[value="2"]::-moz-meter-bar { background: orange; }
+meter[value="3"]::-moz-meter-bar { background: yellow; }
+meter[value="4"]::-moz-meter-bar { background: green; }
+
+/********************************************************************************** END Password Reset Styles */
+
+/******************************************************************************** BEGIN Navigation Styles */
+.nav-top-level
+{
+  font-weight: bold;
+  font-size: 100%;
+}
+.nav-left-link:link
+{
+  color: #E7F3FD;
+  text-decoration: none;
+  font-size: 100%;
+  padding-right: 10px;
+}
+.nav-left-link:visited
+{  
+  color: #E7F3FD;
+  text-decoration: none;
+  font-size: 100%;
+}
+.nav-left-link:hover
+{  
+  color: #FFFFFF;
+  text-decoration: underline;
+  font-size: 100%;
+}
+.nav-left-link:active
+{  
+  color: #FF0000;
+  text-decoration: underline;
+  font-size: 100%;
+}
+.nav-left-link-current
+{
+  color: var(--vprop_green); 
+  text-decoration: none;
+  font-size: 100%;
+
+}
+.nav-left-link-dead
+{
+  color: #A5ACB7; 
+  text-decoration: none;
+  font-size: 100%;
+}
+
+/*hides the bullet points in the menu list*/
+.navUL
+{
+  margin-left: -32px;
+  margin-top: 1%;
+}
+
+.navLI
+{
+  list-style-type: none;  
+  margin-left: -0px;
+}
+
+/*set the fade in and out animations for menu items*/
+/*dev note: this functionality was commented out from the nav menu*/
+@-webkit-keyframes fadeIn 
+{
+    from { opacity: 0;}
+      to { opacity: 1;}
+}  
+@-moz-keyframes fadeIn 
+{
+    from { opacity: 0;}
+      to { opacity: 1;}
+}	
+@-o-keyframes fadeIn 
+{
+    from { opacity: 0;}
+      to { opacity: 1;}
+}	
+@keyframes fadeIn 
+{
+    from { opacity: 0;}
+      to { opacity: 1;}
+}
+
+/********************************************************************************** END Navigation Styles */
+/******************************************************************************** BEGIN User Table Styles */
+.usertable 
+{
+  overflow: auto;
+	font: normal 12px/150% Arial, Helvetica, sans-serif;
+	background: #fff;
+  padding-bottom: 10px;
+}
+.usertable input
+{
+    background: none;
+    border: none;
+    color: blue;
+    text-decoration: none;
+    padding: 0px;
+    cursor: pointer;
+    font-size: 1em;
+    font-family: arial,helvetica,sans-serif;
+    text-decoration: underline;
+}
+.usertable table
+{
+	border-collapse: collapse;
+  border:1px solid black;
+	text-align: left;
+	width: 97.5%;
+
+} 
+
+.usertable table td, .usertable table th 
+{
+	padding: 1px 3px;
+}
+.usertable table thead th 
+{
+	background-color: var(--vprop_blue_medium);
+	color:#FFFFFF;
+	font-size: 15px;
+	font-weight: bold;
+	border-left: 1px solid #000000;
+  border-right: 1px solid #000000;
+} 
+
+	.usertable table tbody td 
+{
+	color: #00496B;
+	border-left: 1px solid #000000;
+  border-right: 1px solid #000000;
+	font-size: 14px;
+	border-bottom: 1px solid #000000;
+	font-weight: normal;
+}
+
+.usertable table tfoot td div 
+{
+	border-top: 1px solid var(--vprop_blue_medium);
+	background: #E1EEF4;
+} 
+.usertable table tfoot td 
+{
+	padding: 0;
+	font-size: 12px;
+  background-color: var(--vprop_blue_medium);
+} 
+.usertable table tfoot td div
+{
+	padding: 2px;
+}
+
+.usertable table tr:nth-child(even) 
+{
+    background-color: var(--vprop_blue_light);  
+} 
+.usertable table tr:hover
+{
+  background-color: var(--vprop_green_light);
+}
+a:visited 
+{
+    color: var(--vprop_blue);
+}
+/********************************************************************************** END User Table Styles */
+/******************************************************************************** BEGIN Production Table Styles */
+.prodtable 
+{
+  overflow: auto;
+	font: normal 12px/150% Arial, Helvetica, sans-serif;
+	background: #fff;
+  padding-bottom: 10px;
+}
+
+.prodtable table
+{
+	border-collapse: collapse;
+  border:1px solid black;
+	text-align: left;
+	width: 97.5%;
+
+} 
+
+.prodtable table td, .prodtable table th 
+{
+	padding: 3px 3px;
+}
+.prodtable table thead th 
+{
+	background-color: var(--vprop_blue_medium);
+	color:#FFFFFF;
+	font-size: 15px;
+	font-weight: bold;
+  border-top: 1px solid #000000;
+  border-right: 1px solid #000000;
+} 
+
+.prodtable table thead th:first-child 
+{
+	text-align: center
+} 
+	.prodtable table tbody td 
+{
+	color: #00496B;
+	border-left: 1px solid #000000;
+  border-right: 1px solid #000000;
+	font-size: 14px;
+	border-bottom: 1px solid #000000;
+	font-weight: normal;
+  width:100px
+}
+
+.prodtable table tfoot td div 
+{
+	border-top: 1px solid var(--vprop_blue_medium);
+	background: #E1EEF4;
+} 
+.prodtable table tfoot td 
+{
+  color: var(--vprop_green);
+	padding: 0;
+	font-size: 12px;
+  background-color: var(--vprop_blue_medium);
+} 
+.prodtable table tfoot td div
+{
+	padding: 2px;
+}
+
+.prodtable table tr:nth-child(even) 
+{
+    background-color: var(--vprop_blue_light);  
+} 
+.prodtable table tr:hover
+{
+  background-color: var(--vprop_green_light);
+}
+a:visited 
+{
+    color: var(--vprop_blue);
+}
+.prod-datepicker input
+{
+  width:150px !important;
+  margin: 0;
+  margin-bottom: 15px;
+  border-radius: 3px;
+  padding: 5px 5px;
+  border: 1px solid #ccc;
+}
+/********************************************************************************** END Production Table Styles */
+/********************************************************************************** BEGIN Tablesort Styles */
+table.tablesorter thead tr .header 
+{
+	background-image: url(../Images/Icons/bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+table.tablesorter tbody td 
+{
+	color: #3D3D3D;
+	padding: 4px;
+	vertical-align: top;
+}
+table.tablesorter tfoot td
+{
+  border-left: 1px solid #000000;
+  font-size: 14px;
+  padding-left: 2px;
+}
+table.tablesorter thead tr .headerSortUp 
+{
+	background-image: url(../Images/Icons/asc.gif);
+}
+table.tablesorter thead tr .headerSortDown 
+{
+	background-image: url(../Images/Icons/desc.gif);
+} 
+/********************************************************************************** END Tablesort Styles */
+/********************************************************************************** BEGIN Float Input Styles */
+
+.float-inputs label 
+{
+  position: absolute;
+  width: 150px;
+
+}
+.float-inputs input, select 
+{
+  width:50%;
+  margin:0;
+  margin-left: 160px;
+  margin-bottom: 15px;
+}
+.float-inputs input[type=checkbox]
+{
+  margin-top: 5px;
+  width:5%
+}
+  .float-inputs.check-select 
+{
+    margin-left: 0;
+}
+.float-inputs input[type=text].hasDatepicker
+{
+  width:50%;
+}
+.float-inputs.permissions input, select 
+{
+  margin-bottom: 0px;
+}
+/********************************************************************************** END Float Input Styles */
+
+/********************************************************************************** BEGIN DisplayClasses Styles */
+
+
+.display-none 
+{
+    display: none !important;
+}
+
+.display-inline 
+{
+    display: inline !important;
+}
+
+.display-inline-block 
+{
+    display: inline-block !important;
+}
+/********************************************************************************** END DisplayClasses Styles */
+
+/******************************************************************************** BEGIN Sign In Styles */
+/*Added 3-13-2017 by mnutsch.*/
+/*Based in part on sample code at: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_login_form_modal*/
+
+/* Prevents the header content from overlapping the Sign In button. */
+.header_text
+{
+    width: 50%;
+    float: left;
+}
+
+.site_name
+{
+  float: left;
+}
+
+.site_version
+{
+  float: left;
+  margin-left: 4%;
+  font-size: 0.75em;
+  padding-top: 3%;
+}
+
+/* Puts a small space in between the Register button and the Sign In button. */
+.register_button
+{
+    margin-right: 5px;
+}
+
+/* Full-width input fields */
+.container input[type=text], input[type=password], input[type=email], input[type=number], select
+{
+  background-color: var(--vprop_gray_light);
+  width: 100%;
+  padding: 12px 18px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 5px; /*rounds corners*/
+}
+
+input.testtextinput
+{
+  padding: 1px 1px
+}
+
+/* Set a style for all buttons */
+button 
+{
+  background-color: var(--vprop_green);
+  color: white;
+  padding: 13px 18px;
+  margin: 4px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 5px; /*rounds corners*/
+}
+
+.testtablebutton
+{
+  background-color: var(--vprop_blue_light);
+  color: #000000;
+  padding: 1px 1px;
+  margin: 4px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 5px; /*rounds corners*/
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn 
+{
+  width: auto;
+  padding: 10px 18px;
+  background-color: var(--vprop_blue);
+  border-radius: 5px; /*rounds corners*/
+}
+
+/* Center the image and position the close button */
+.imgcontainer 
+{
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+    color: #262626; /* set the color of the text to a dark gray */
+}
+
+/* logo in the modal window */
+img.logo 
+{
+    width: 20%;
+    border-radius: 50%;
+}
+
+.container 
+{
+    padding: 16px;
+    border-radius: 5px; /*rounds corners*/
+    color: #262626; /* set the color of the text to a dark gray */
+}
+
+span.psw 
+{
+    float: right;
+    padding-top: 16px;
+}
+
+span.psw  a:link
+{
+    color: #0000EE;
+}
+
+span.psw  a:visited
+{
+    color: #551A8B;
+}
+
+span.psw  a:active
+{
+    color: #FF0000;
+}
+
+/* The Modal (background) */
+.modal 
+{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 15; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content 
+{
+    background-color: #fefefe;
+    margin: 2% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    border-radius: 5px; /*rounds corners*/
+    max-width: 540px; /*limits the maximum size of the modal window*/
+}
+
+/* The Close Button (x) */
+.close 
+{
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+    border-radius: 5px; /*rounds corners*/
+}
+
+.close:hover,
+.close:focus 
+{
+    color: red;
+    cursor: pointer;
+    border-radius: 5px; /*rounds corners*/
+}
+
+/* Add Zoom Animation */
+.animate 
+{
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom 
+{
+    from {-webkit-transform: scale(0)} 
+    to {-webkit-transform: scale(1)}
+}
+    
+@keyframes animatezoom 
+{
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) 
+{
+    span.psw 
+    {
+       display: block;
+       float: none;
+    }
+    .cancelbtn 
+    {
+       width: 100%;
+    }
+}
+
+/* position the sign in button */
+div.sign_in_out
+{
+    float:right;	
+    padding-right: 1%;
+    padding-top: 12px;
+}
+
+/*drop down user menu for the header*/
+/*based loosely on the example at: https://www.w3schools.com/howto/howto_css_dropdown.asp*/
+.dropbtn 
+{
+    cursor: pointer;
+}
+
+.dropdown 
+{
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content 
+{
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 11;
+	right: 0px;
+}
+
+.dropdown-content a 
+{
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover 
+{
+	background-color: #f1f1f1
+}
+
+.dropdown:hover .dropdown-content 
+{
+    display: block;
+}
+
+.dropdown:hover .dropbtn 
+{
+    background-color: var(--vprop_green);
+}
+
+/********************************************************************************** END Sign In Styles */

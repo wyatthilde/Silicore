@@ -1,0 +1,98 @@
+id,description,main_site_id,main_plant_id,site_gra_product_id,type_code,is_split_sample_only,email_list_id,is_send_email,sort_order,is_active
+0,NA,NULL,0,NULL,S,0,NULL,0,0,0
+1,Feed Rows,10,0,NULL,S,0,NULL,0,1,0
+2,Wet Plant Feed,10,3,3,S,0,NULL,0,30,0
+3,Wet Plant C4 (Coarse),10,3,4,S,0,3,1,50,1
+4,Wet Plant C7 (Fine),10,3,5,S,0,NULL,1,60,1
+5,Wet Plant Hydro 1 Over,10,3,NULL,S,0,NULL,0,70,1
+6,Wet Plant Hydro 2 Over,10,3,NULL,S,0,NULL,0,80,1
+7,Wet Plant Hydro 1 Under,10,3,NULL,S,0,NULL,0,90,1
+8,Wet Plant Hydro 2 Under,10,3,NULL,S,0,NULL,0,91,1
+9,Wet Plant Moisture Rate,10,3,NULL,M,0,NULL,0,223,1
+11,Carrier Feed 40/70,10,6,11,S,1,NULL,1,350,1
+12,Rotary Feed,10,5,9,S,0,NULL,0,64,0
+13,Rotary 100,10,5,10,S,1,15,1,66,0
+14,Carrier 140 40/70,10,6,NULL,S,1,NULL,0,360,1
+15,Carrier 140 100,10,6,NULL,S,1,NULL,0,400,1
+16,Carrier 145 40/70,10,6,NULL,S,1,NULL,0,370,1
+17,Carrier 145 100,10,6,NULL,S,1,NULL,0,410,1
+18,Pit,10,1,NULL,S,0,NULL,0,10,1
+19,Old Wet Plant Feed,10,4,6,S,0,4,1,230,1
+20,Old Wet Plant Coarse Side A,10,4,7,S,0,NULL,1,230,1
+21,Old Wet Plant Fine Side A,10,4,8,S,0,NULL,1,250,1
+22,Old Wet Plant Coarse Side B,10,4,7,S,0,0,1,240,1
+23,Old Wet Plant Fine Side B,10,4,8,S,0,NULL,1,260,1
+24,Carrier Feed 100,10,6,12,S,1,NULL,0,390,1
+25,Old Wet Plant Hydro Side A Over,10,4,NULL,S,0,NULL,0,270,1
+26,Old Wet Plant Hydro Side B Over,10,4,NULL,S,0,NULL,0,280,1
+27,Wet Plant Cyclones 1-2 Over,10,3,15,S,0,NULL,0,190,1
+28,Wet Plant Cyclones 3-6 Over,10,3,15,S,0,NULL,0,200,1
+29,Old Wet Plant Cyclones,10,4,NULL,S,0,NULL,0,0,0
+30,Wet Plant Feed (Slurry),10,3,3,S,0,NULL,0,30,0
+31,Wet Plant Cyclones 1-2 Feed,10,3,3,S,0,4,1,40,1
+32,Wet Plant Cyclones 3-4 Feed,10,3,NULL,S,0,NULL,0,180,1
+33,Wet Plant Cyclone 1 Under,10,3,NULL,S,0,NULL,0,110,1
+34,Wet Plant Cyclone 2 Under,10,3,NULL,S,0,NULL,0,120,1
+35,Wet Plant Cyclone 1 B Under,10,3,NULL,S,0,NULL,0,130,1
+36,Wet Plant Cyclone 2 B Under,10,3,NULL,S,0,NULL,0,140,1
+37,Old Wet Plant Cyclone 1 Feed Side B,10,4,6,S,0,NULL,0,330,1
+38,Old Wet Plant Cyclone 1 Tails Side A,10,4,NULL,S,0,NULL,0,290,1
+39,Old Wet Plant Cyclone 2 Tails Side A,10,4,NULL,S,0,NULL,0,300,1
+40,Old Wet Plant Cyclone 3 Tails Side A,10,4,NULL,S,0,NULL,0,310,1
+41,Old Wet Plant Cyclones 1-2 Tails Side B,10,4,NULL,S,0,NULL,0,340,1
+42,Old Wet Plant Cyclones 4-5 Over Side B,10,4,NULL,S,0,NULL,0,320,1
+43,Track 1,30,0,NULL,S,1,NULL,0,300,1
+44,Track 2,30,0,NULL,S,1,NULL,0,305,1
+45,Wet Plant Cyclone 5 Under,10,3,NULL,S,0,NULL,0,150,1
+46,Wet Plant Cyclone 6 Under,10,3,NULL,S,0,NULL,0,160,1
+47,Wet Plant Cyclone 7 Under,10,3,NULL,S,0,NULL,0,170,1
+48,Core Samples,10,0,NULL,S,0,NULL,0,20,1
+49,Rotary Feed,10,7,16,S,0,NULL,1,440,1
+50,Rotary 100,10,7,17,S,1,37,1,450,1
+51,Rotary Discharge,10,7,NULL,S,1,NULL,1,460,1
+52,Rotary Baghouse,10,7,NULL,S,0,NULL,1,470,1
+53,Carrier Baghouse,10,6,NULL,S,0,NULL,1,380,1
+54,Carrier 40/70 Silo,10,6,13,S,0,40,1,375,1
+55,Carrier 100,10,6,14,S,0,15,1,416,1
+56,Generic Sample,10,6,NULL,S,0,NULL,1,420,1
+57,Carrier Vehicle/Truck 100,10,6,NULL,S,0,NULL,0,430,0
+58,Wet Plant Cyclones 8-9 Feed,10,3,NULL,S,0,NULL,0,210,1
+59,Wet Plant Cyclone 8 Over,10,3,NULL,S,0,NULL,0,211,1
+60,Wet Plant Cyclone 8 Under,10,3,NULL,S,0,NULL,0,212,1
+61,Wet Plant Cyclone 9 Over,10,3,NULL,S,0,NULL,0,213,1
+62,Wet Plant Cyclone 9 Under,10,3,NULL,S,0,NULL,0,214,1
+63,Wet Plant Hydro 1 B Over,10,3,NULL,S,0,NULL,0,85,1
+64,Wet Plant Hydro 1 B Under,10,3,NULL,S,0,NULL,0,92,1
+65,Wet Plant Hydro 2 B Over,10,3,NULL,S,0,NULL,0,86,1
+66,Wet Plant Hydro 2 B Under,10,3,NULL,S,0,NULL,0,93,1
+67,James Hardie Moisture Rate,10,6,NULL,M,0,43,1,435,1
+68,UFR 200 Belt Composite,10,3,NULL,S,0,NULL,1,345,0
+69,UFR 200 (NWP),10,3,21,S,0,NULL,1,345,1
+70,UFR 200 (OWP),10,3,NULL,S,0,NULL,1,346,1
+100,Inhibited Sample,NULL,0,NULL,S,0,NULL,0,1000,0
+101,Carrier 40/70 Lab Composite,10,6,13,S,1,15,1,377,1
+102,Carrier 2 100 Silo,10,8,22,S,1,15,1,417,1
+103,Carrier 2 Feed,10,8,22,S,1,15,1,418,1
+104,Carrier 140 40/70 (L),10,6,NULL,S,1,NULL,0,480,1
+105,Carrier 140 40/70 (R),10,6,NULL,S,1,NULL,0,490,1
+106,Carrier 140 Fine (L),10,6,NULL,S,1,NULL,0,500,1
+107,Carrier 140 Fine (R),10,6,NULL,S,1,NULL,0,510,1
+108,Carrier 140 Fine,10,6,NULL,S,1,NULL,0,520,1
+109,Carrier 140 OS (L),10,6,NULL,S,1,NULL,0,530,1
+110,Carrier 140 OS (R),10,6,NULL,S,1,NULL,0,540,1
+111,Carrier 140 OS,10,6,NULL,S,1,NULL,0,550,1
+112,Carrier 145 40/70 (L),10,6,NULL,S,1,NULL,0,560,1
+113,Carrier 145 40/70 (R),10,6,NULL,S,1,NULL,0,570,1
+114,Carrier 145 Fine (L),10,6,NULL,S,1,NULL,0,580,1
+115,Carrier 145 Fine (R),10,6,NULL,S,1,NULL,0,590,1
+116,Carrier 145 Fine,10,6,NULL,S,1,NULL,0,600,1
+117,Carrier 145 OS (L),10,6,NULL,S,1,NULL,0,610,1
+118,Carrier 145 OS (R),10,6,NULL,S,1,NULL,0,620,1
+119,Carrier 145 OS,10,6,NULL,S,1,NULL,0,630,1
+120,Rail Car 40/70,10,6,NULL,S,1,NULL,0,640,1
+121,Rail Car 100,10,6,NULL,S,1,NULL,0,650,1
+122,Truck 40/70,10,6,NULL,S,1,NULL,0,660,1
+123,Truck 100,10,6,NULL,S,1,NULL,0,670,1
+124,Carrier 2 40/70,10,8,NULL,S,1,15,1,419,1
+125,Carrier 2 OS,10,8,NULL,S,1,15,1,421,1
+126,Carrier 2 Baghouse,10,8,NULL,S,1,15,1,420,1

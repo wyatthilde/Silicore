@@ -1,0 +1,18 @@
+id,description,type_code,contains_employees,sort_order,is_active
+10,Granbury,C,Y,0,1
+11,Maalt North,C,N,100,1
+12,Maalt South,C,N,200,1
+13,Maalt Cleburne,C,N,300,1
+14,Maalt Gardendale,C,N,310,1
+15,Maalt Big Spring,C,N,320,1
+16,Maalt Enid,C,N,330,1
+17,Maalt Sweetwater,C,N,340,1
+18,Maalt Dilley,C,N,350,1
+19,Maalt Pecos,C,Y,360,1
+20,Cresson,S,Y,400,1
+25,Maalt Big Lake,C,N,450,1
+30,Fort Stockon,C,Y,500,1
+210,Momentive,C,N,600,1
+700,Tidewater San Angelo,C,N,700,1
+701,Pinnacle San Angelo,C,N,701,1
+999,Unknown/Customer,C,N,999,1

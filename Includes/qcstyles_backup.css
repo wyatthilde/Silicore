@@ -1,0 +1,1267 @@
+/*******************************************************************************************************************************************
+ * File Name: qcstyles.css
+ * Project: Silicore
+ * Description: 
+ * Notes: 
+ * =========================================================================================================================================
+ * Change Log ([MM/DD/YYYY]|[Developer]|[Task Ticket] - [Description])
+ * =========================================================================================================================================
+ * 00/00/2017|mnutsch|KACE:XXXXX - Inital Creation
+ * 11/13/2017|nolliff|KACE:19182 - Added border radius to div.form-group and added comment section
+ * 11/13/2017|mnutsch|KACE:19061 - Added table styles for QC Threshold Maintenance.
+ * 11/05/2017|mnutsch|KACE:18470 - Added styles for checkboxes on QC forms.
+ * 01/25/2018|mnutsch|KACE:20305 - Added CSS for the div inputSpacer.
+ * 02/01/2018|mnutsch|KACE:19755 - Added CSS for fixed headers and columns in the Samples page.
+ * 02/05/2018|mnutsch|KACE:19755 - Added additional code related to fixed headers and left columns in the Details table.
+ * 02/05/2018|mnutsch|KACE:19755 - Added additional code related to fixed headers and left columns in the Details table.
+ * 02/07/2018|mnutsch|KACE:19755 - Changed some percentage based sizes to fixed pixel sizes. Needed for fixed positioning of frozen table headers on Samples pages.
+ * 
+ ******************************************************************************************************************************************/
+:root
+{
+/******************************************************************************** BEGIN Global Style Variables */
+  --vprop_blue: #003087;
+  --vprop_blue_medium: #4C7AD0;
+  --vprop_blue_light: #A2BCED;
+  --vprop_blue_very_light: #D5DEEF;
+  --vprop_green: #78D64B;
+  --vprop_green_light: #BADBAA;
+/********************************************************************************** END Global Style Variables */
+
+/******************************************************************************** BEGIN Samples page Variables */
+  --samples_table_width: 950px;
+  --samples_table_height: 470px;
+  --samples_table_header_cell_width: 76px;
+  --samples_table_header_cell_height: 30px;
+  --samples_table_body_cell_width: 76px;
+  --samples_table_body_cell_height: 30px;
+  --samples_table_left_offset: 343px;
+  --samples_table_top_offset: 512px;
+
+/********************************************************************************** END Samples page Variables */
+
+}
+
+/******************************************************************************** END Global Style Variables */
+
+/* Style the tab */
+div.tab 
+{
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    position: relative;
+    top: -2.5%;
+    left: -1.2%;
+    width: 100%;
+    border-radius: 0px;
+}
+
+/* Style the buttons inside the tab */
+div.tab button 
+{
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    color: black;
+    width: 20%;
+    border-radius: 0px;
+    margin: 0;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover 
+{
+background-color: #ddd;
+    border-radius: 0px;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active 
+{
+    background-color: #ccc;
+    border-radius: 0px;
+}
+
+/* Style the tab content */
+.tabcontent 
+{
+    display: none;
+    padding: 6px 17px;
+    border: 0px solid #ccc;
+    border-top: none;
+    position: relative;
+    top: -1.5%;
+    left: -1.2%;
+    min-width: 1477px;
+    max-width: 1477px;
+    border-radius: 0px;
+}
+
+.tabcontent a
+{
+    color: #0000EE;
+}
+
+.tabcontent a:link
+{
+    color: #0000EE;
+}
+
+.tabcontent a:visited
+{
+    color: #551A8B;
+}
+
+.tabcontent a:active
+{
+    color: #FF0000;
+}
+
+.tabcontent table
+{
+    border-collapse: collapse;
+}
+
+.tabcontent table, th, td 
+{
+    border: 1px solid black;
+    font-size: 90%;
+    padding: 3px;
+}
+
+.tabcontent tr:hover 
+{
+    background-color: #f5f5f5;
+}
+
+.tabcontent th 
+{
+    background-color: var(--vprop_blue_medium);
+    color: white;
+}
+
+.overviewTableSpecificLocation th 
+{
+    background-color: var(--vprop_green);
+    color: white;
+}
+
+#qc_general
+{
+    display: block;
+    font-size: small;
+}
+
+#qc_specifics
+{
+    font-size: small;
+}
+
+#qc_characteristics
+{
+    font-size: small;
+}
+
+#qc_groups
+{
+    display: block;
+}
+
+#qc_sieves
+{
+    display: block;
+}
+
+div.tabcontent input[type=text], input[type=password], input[type=email], input[type=number], select
+{
+  width: 135px;
+  padding: 8px 8px;
+  margin: 0px 0;
+  height: 34px;
+}
+
+/* Style the buttons that are used to open and close the accordion panel on the Samples page */
+button.filter_button 
+{
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  width: 800px;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) on the Samples page*/
+button.filter_button.active, button.filter_button:hover 
+{
+  background-color: #ddd;
+}
+
+/* Style the accordion panel on the Samples page. Note: hidden by default */
+div.filter_options 
+{
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  width: 800px;
+  font-size: small;
+}
+
+/* "submit" button for the Samples filter settings */
+button.applyFilters
+{
+  background-color: #ccc;
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: small;
+  width: 180px;
+  margin-left: 130px;
+}
+
+/* general button for QC pages */
+button.qcButtons
+{
+  background-color: #ccc;
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: small;
+  width: 180px;
+  margin-left: 130px;
+}
+
+div.filter_options label
+{
+  color: #333;
+  height: 20px;
+  width: 115px;
+  margin-top: 10px;
+  text-align: right;
+  margin-right:15px;
+  float:left;
+}
+
+div.filter_options input
+{
+  height: 20px;
+  width: 300px;
+  border: 1px solid #000;
+  margin-top: 10px;
+}
+
+button.filter_button.active, button.filter_button:hover 
+{
+  background-color: #ddd;
+}
+
+div.form-group label
+{
+  color: #333;
+  height: 20px;
+  width: 115px;
+  margin-top: 10px;
+  padding-top: 10px;
+  text-align: right;
+  margin-right:15px;
+  float:left;
+}
+
+div.form-group label.plant_settings_label
+{
+  width: 250px;
+}
+
+div.form-group input[type=text], input[type=number], input[type=email], select
+{
+  /*height: 20px;*/
+  width: 200px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  border-radius: 3px;
+}
+
+div.form-group input[type=checkbox]
+{
+  margin-top: 20px;
+}
+
+/* Style the accordion panel on the Add Sample Group and Samples pages. Note: hidden by default */
+div.location_options, div.test_type_options, div.lab_tech_options, div.site_options, div.plant_options, div.specific_location_options
+{
+  max-height: 0;
+  padding: 5px 5px;
+  background-color: #eee; /* light gray */
+  color: black;
+  overflow: scroll;
+  transition: max-height 0.2s ease-out;
+  width: 560px;
+  font-size: small;
+  visibility: hidden;
+  margin-left: 128px;
+}
+
+button.location_button, button.test_type_button, button.lab_tech_button, button.sites_button, button.plant_button, button.specific_location_button /* Add Sample Group and Samples pages */
+{
+  background-color: #eee; /* light gray */
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: small;
+  width: 180px;
+}
+
+button.add_new_button /* Sieve Tracking Page */
+{
+  background-color: #eee; /* light gray */
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: small;
+  width: 180px;
+}
+
+div.location_options label
+{
+  color: #333;
+  height: 20px;
+  width: 115px;
+  margin-top: 10px;
+  text-align: right;
+  margin-right:15px;
+  float:left;
+}
+
+div.specific_location_options label
+{
+  color: #333;
+  height: 20px;
+  width: 115px;
+  margin-top: 10px;
+  text-align: right;
+  margin-right:15px;
+  float:left;
+}
+
+div.test_type_options label
+{
+  color: #333;
+  height: 20px;
+  width: 115px;
+  margin-top: 10px;
+  text-align: right;
+  margin-right:15px;
+  float:left;
+}
+
+div.lab_tech_options label
+{
+  color: #333;
+  height: 20px;
+  width: 115px;
+  margin-top: 10px;
+  text-align: right;
+  margin-right:15px;
+  float:left;
+}
+
+div.site_options label
+{
+  color: #333;
+  height: 20px;
+  width: 115px;
+  margin-top: 10px;
+  text-align: right;
+  margin-right:15px;
+  float:left;
+}
+
+div.plant_options label
+{
+  color: #333;
+  height: 20px;
+  width: 115px;
+  margin-top: 10px;
+  text-align: right;
+  margin-right:15px;
+  float:left;
+}
+
+div.location_options input
+{
+  height: 18px;
+  width: 18px;
+  border: 1px solid #000;
+  margin-top: 5px;
+}
+
+div.specific_location_options input
+{
+  height: 18px;
+  width: 18px;
+  border: 1px solid #000;
+  margin-top: 5px;
+}
+
+div.test_type_options input
+{
+  height: 18px;
+  width: 18px;
+  border: 1px solid #000;
+  margin-top: 5px;
+}
+
+div.lab_tech_options input
+{
+  height: 18px;
+  width: 18px;
+  border: 1px solid #000;
+  margin-top: 5px;
+}
+
+div.site_options input
+{
+  height: 18px;
+  width: 18px;
+  border: 1px solid #000;
+  margin-top: 5px;
+}
+
+div.plant_options input
+{
+  height: 18px;
+  width: 18px;
+  border: 1px solid #000;
+  margin-top: 5px;
+}
+
+p.filters_displayed
+{
+  font-size: small;
+}
+
+div.tableWrapper
+{
+  overflow-x: scroll;
+  overflow-y: scroll;
+  max-width: 97%;
+  max-height: 75%;
+}
+
+div.tableWrapper input[type=text], input[type=number], input[type=email], select
+{
+  width: 135px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+}
+
+table.sieveTable
+{
+  width: 90%;
+  min-width: 400px;
+}
+
+div.sievestackform
+{
+  display: none;
+}
+
+div.sievestackform label
+{
+  color: #333;
+  height: 20px;
+  width: 115px;
+  margin-top: 10px;
+  padding-top: 10px;
+  text-align: right;
+  margin-right:15px;
+  float:left;
+}
+
+div.sievestackform input[type=text], input[type=number], input[type=email], select
+{
+  /*height: 20px;*/
+  width: 200px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+}
+
+/*necessary due to presence of the Repeatability Counter on QC screens*/
+div.left_content
+{  
+  width: 75%;
+  float: left;
+}
+
+div.left_content input[type=submit]
+{
+    margin-left: 130px;
+}
+
+/*location of the Repeatability Counter on QC screens*/
+div.right_content
+{  
+  width: 25%;
+  float: right;
+}
+
+div.overviewTableWrapper
+{
+    width:100%;
+    overflow: hidden;
+}
+
+div.overviewBottomContent
+{
+    width:100%;
+}
+
+div.overviewTable, div.overviewTableSpecificLocation
+{
+    float: left;
+    padding: 13px;
+}
+
+div.overviewTable table
+{
+    border-spacing: 0px;
+    border: 1px solid black;
+    border-collapse: collapse;
+    color: black;
+    text-align: center;
+}
+
+div.overviewTable tr:nth-child(even) 
+{
+    background-color: var(--vprop_blue_very_light)
+}
+
+div.overviewTable tr:nth-child(odd) 
+{
+    background-color: #fff; /* white */
+}
+
+div.overviewTable td:nth-child(n+3)
+{
+    background-color: #eee /* gray */
+}
+
+div.overviewTableSpecificLocation table
+{
+    border-spacing: 0px;
+    border: 1px solid black;
+    border-collapse: collapse;
+    color: black;
+    text-align: center;
+}
+
+div.overviewTableSpecificLocation tr:nth-child(even) 
+{
+    background-color: var(--vprop_green_light)
+}
+
+div.overviewTableSpecificLocation tr:nth-child(odd) 
+{
+    background-color: #fff; /* white */
+}
+
+div.overviewTableSpecificLocation td:nth-child(n+3)
+{
+    background-color: #eee /* gray */
+}
+
+div.overviewTableSpecificLocation th 
+{
+    color: #000000;
+}
+
+.sectionTitle, .sectionTitle
+{
+    text-align: center;
+    background-color: #262626; /* dark gray */
+    color: white;
+    font-weight: bold;
+}
+
+div.overviewTable th 
+{
+    color: #000000;
+}
+
+/* Make the text white in the Location boxes on the QC Overview pages. */
+div.overviewTable th.sectionTitle
+{
+    color: white;
+}
+
+/* DEV NOTE: tablesort was disabled, because it interfered with the Select All checkbox on the Samples page */
+/*
+table.tablesorter thead tr .header 
+{
+    background-image: url(../Images/Icons/bg.gif);
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer;
+    padding-right: 18px;
+}
+
+table.tablesorter thead tr .headerSortUp 
+{
+    background-image: url(../Images/Icons/asc.gif);
+}
+
+
+table.tablesorter thead tr .headerSortDown 
+{
+    background-image: url(../Images/Icons/desc.gif);
+}
+*/
+
+.SampleDetailColumnWrapper
+{
+    width: 100%;
+    min-height: 45%;
+    min-height: 435px;
+}
+
+/*Left input column on the General tab of Sample detail screens (edit and view)*/
+.leftcolumnsampledetail
+{  
+  width: 50%;
+  float: left;
+}
+
+/*Right input column on the General tab of Sample detail screens (edit and view)*/
+.rightcolumnsampledetail
+{  
+  width: 50%;
+  float: right;
+}
+
+/*bottom center on the General tab of Sample detail screens (edit and view)*/
+.sieveAreaSampleDetail
+{
+  width: 100%;   
+  float: left;
+}
+
+/* Table on the QC Threshold Maintenance */
+.qcThresholdMaintenanceTable
+{
+  width: 90%;
+  border: 1px solid black;
+  font-size: 90%;
+  padding: 3px;
+  border-spacing: 0px;
+  border: 1px solid black;
+  border-collapse: collapse;
+  color: black;
+  text-align: center;
+}
+
+.qcThresholdMaintenanceTable tr:nth-child(even) 
+{
+    background-color: var(--vprop_blue_very_light);
+}
+
+.qcThresholdMaintenanceTable tr:nth-child(odd) 
+{
+    background-color: #fff; /* white */
+}
+
+.qcThresholdMaintenanceTable tr:hover 
+{
+    background-color: #f5f5f5;
+}
+
+.qcThresholdMaintenanceTable th 
+{
+    background-color: var(--vprop_blue_medium);
+    color: white;
+}
+
+.qcThresholdMaintenanceTable>select, .qcThresholdMaintenanceTable>input[type=number], .qcThresholdMaintenanceTable>input[type=text], .qcThresholdMaintenanceTable>input[type=password], .qcThresholdMaintenanceTable>input[type=email]
+{
+    margin: auto;
+}
+
+/* basic table styling */
+div.samplesTableWrapperBox table 
+{  
+  border-spacing: 0;
+  border-top: 1px solid grey;
+}
+
+/* basic table cell styling */
+#samplesTable td 
+{
+  margin: 0;
+
+  border: 1px solid grey;
+  height: 30px;
+  width: 76px;
+  max-width: 76px;
+  max-height: 30px;
+  min-width: 76px;
+  min-height: 30px;
+
+  overflow: hidden;
+  
+  vertical-align: middle;
+  
+  background-color:white;
+}
+
+/* Wrapper inside each table cell. Needed to set height properly. */
+div.tableCellContent
+{
+    height: 30px;    
+}
+
+/* table header cell styling */
+div.samplesTableWrapperBox th 
+{
+  width: 77px;
+  height: 30px;
+  
+  border: 1px solid grey;
+  border-top-width: 0px;
+  
+  position: fixed;
+  margin: 0; 
+  margin-top: 0px;
+  
+  overflow: none;
+}
+
+/* wrapper around the table for scrolling */
+div.samplesTableScrollingContent 
+{
+  width: var(--samples_table_width);
+  overflow-x: scroll;
+  margin-left: 343px;
+  margin-top: 37px;
+  overflow-y: scroll;
+  padding: 0;
+  max-height: 470px;
+}
+
+/* wrapper around the table for clipping absolutely positioned overflow */
+div.samplesTableWrapperBox 
+{
+  position: absolute;
+  clip: rect(0px,1293,507px,0px); /* Adjust these values so that it exactly surrounds your table. */
+  background-color: lightgray;
+}
+
+/* empty div to push relative content down below the absolute content */
+div.detailsTableRelativeSpacer
+{
+    width: 100%;
+    height: 507px;
+}
+
+/* This is the leftmost column other than the header */
+.leftCol1 
+{
+  position: fixed;
+  width: var(--samples_table_body_cell_width);
+  top: auto;
+  height: var(--samples_table_body_cell_height); 
+  background-color: white; 
+  z-index: 2;
+  text-align: center;
+  left: 190px;
+}
+
+.leftCol2
+{
+  position: fixed;
+  width: var(--samples_table_body_cell_width);
+  left: 273px;
+  top: auto;
+  height: var(--samples_table_body_cell_height); 
+  background-color: white; 
+  z-index: 2;
+}
+
+.leftCol3
+{
+  position: fixed;
+  width: var(--samples_table_body_cell_width);
+  left: 358px;
+  top: auto;
+  height: var(--samples_table_body_cell_height); 
+  background-color: white; 
+  z-index: 2;
+}
+
+.leftCol4
+{
+  position: fixed;
+  width: var(--samples_table_body_cell_width);
+  left: 443px;
+  top: auto;
+  height: var(--samples_table_body_cell_height); 
+  background-color: white; 
+  z-index: 2;
+}
+
+/* DEV NOTE: add leftCol2 - 4 */
+
+/* This is the leftmost column inside the header row. */
+.leftHead1 
+{
+  left: 190px;
+  z-index: 4; /* This is needed so that we don't see the other cells as they slide behind it */
+}
+
+/* This is the second from left column inside the header row. */
+.leftHead2 
+{ 
+  left: 274px;
+  z-index: 4; /* This is needed so that we don't see the other cells as they slide behind it */
+}
+
+/* This is the second from left column inside the header row. */
+.leftHead3 
+{
+  left: 359px;
+  z-index: 4; /* This is needed so that we don't see the other cells as they slide behind it */
+}
+
+/* This is the second from left column inside the header row. */
+.leftHead4
+{
+  left: 444px;
+  z-index: 4; /* This is needed so that we don't see the other cells as they slide behind it */
+}
+
+/* This is the header columns in Summary mode. */
+.headContentNotLeft
+{
+  z-index: 3; /* This is needed so that we don't see the other cells as they slide behind it */
+}
+
+/* This is the header columns in Verbose mode. */
+.headContentNotLeftVerbose
+{
+  z-index: 3; /* This is needed so that we don't see the other cells as they slide behind it */
+}
+
+/* This is for cells inside the table that are not absolutely positioned. */
+.samplesTableBodyContent 
+{
+  position: relative;
+  background-color: yellow; /* This is here just so that the example is easy to see */
+  min-width: var(--samples_table_body_cell_width); /* This is necessary so that the browser doesn't automatically resize the cell ' */
+  max-width: var(--samples_table_body_cell_width); /* This is necessary so that the browser doesn't automatically resize the cell ' */
+  overflow: hidden; /* This is so that excess content doesn't bleed over into other cells. It obiously assumes that the content won't be bigger than this. */
+}
+
+/* This is for header row cells other than the 2 leftmost columns */ 
+.samplesTableHeadContent 
+{
+  border-top-width: 1px; /* This is only relevant for first row. */  
+  margin-top: -1px; /* This compensates for the top border.*/ 
+  background-color: white; /* This is needed so that we don't see the other cells as they slide behind it */
+  z-index: 1; /* This is needed so that we don't see the other cells as they slide behind it */
+  min-width: var(--samples_table_header_cell_width); /* This is necessary so that the browser doesn't automatically resize the cell ' */
+  max-width: var(--samples_table_header_cell_width); /* This is necessary so that the browser doesn't automatically resize the cell ' */
+  overflow: hidden; /* This is so that excess content doesn't bleed over into other cells. It obiously assumes that the content won't be bigger than this. */
+}
+
+/* These are for specific columns in the header */
+.col0 
+{
+    position: relative;
+    left: 530px; 
+}
+
+.col1 
+{
+    position: relative;
+    left: 614px;
+}
+
+.col2
+{
+    position: relative;
+    left: 699px;
+}
+
+.col3 
+{
+    position: relative;
+    left: 784px;
+}
+
+.col4 
+{
+    position: relative;
+    left: 869px;
+}
+
+.col5 
+{
+    position: relative;
+    left: 954px;
+}
+
+.col6 
+{
+    position: relative;
+    left: 1039px;
+}
+
+.col7 
+{
+    position: relative;
+    left: 1124px;
+}
+
+.col8 
+{
+    position: relative;
+    left: 1209px;
+}
+
+.col9 
+{
+    position: relative;
+    left: 1294px;
+}
+
+.col10
+{
+    position: relative;
+    left: 1379px; 
+}
+
+.col11 
+{
+    position: relative;
+    left: 1464px; 
+}
+
+.col12 
+{
+    position: relative;
+    left: 1549px;
+}
+
+.col13 
+{
+    position: relative;
+    left: 1634px;
+}
+
+.col14 
+{
+    position: relative;
+    left: 1719px;
+}
+
+.col15 
+{
+    position: relative;
+    left: 1804px;
+}
+
+.col16 
+{
+    position: relative;
+    left: 1889px;
+}
+
+.col17
+{
+    position: relative;
+    left: 1974px;
+}
+
+/* this is the start of Verbose column headers */
+
+.col18
+{
+    position: relative;
+    left: 2059px;    
+}
+
+.col19
+{
+    position: relative;
+    left: 2144px;
+}
+
+.col20
+{
+    position: relative;
+    left: 2229px;
+}
+
+.col21
+{
+    position: relative;
+    left: 2314px;
+}
+
+.col22
+{
+    position: relative;
+    left: 2399px;
+}
+
+.col23
+{
+    position: relative;
+    left: 2484px;
+}
+
+.col24
+{
+    position: relative;
+    left: 2569px;
+}
+
+.col25
+{
+    position: relative;
+    left: 2654px;
+}
+
+.col26
+{
+    position: relative;
+    left: 2739px;
+}
+
+.col27
+{
+    position: relative;
+    left: 2824px;
+}
+
+.col28
+{
+    position: relative;
+    left: 2909px;
+}
+
+.col29
+{
+    position: relative;
+    left: 2994px;
+}
+
+.col30
+{
+    position: relative;
+    left: 3079px;
+}
+
+.col31
+{
+    position: relative;
+    left: 3164px;
+}
+
+.col32
+{
+    position: relative;
+    left: 3249px;
+}
+
+.col33
+{
+    position: relative;
+    left: 3334px;
+}
+
+.col34
+{
+    position: relative;
+    left: 3419px;
+}
+
+.col35
+{
+    position: relative;
+    left: 3504px;
+}
+
+.col36
+{
+    position: relative;
+    left: 3589px;
+}
+
+.col37
+{
+    position: relative;
+    left: 3674px;
+}
+
+.col38
+{
+    position: relative;
+    left: 3759px;
+}
+
+.col39
+{
+    position: relative;
+    left: 3844px;
+}
+
+.col40
+{
+    position: relative;
+    left: 3929px;
+}
+
+.col41
+{
+    position: relative;
+    left: 4014px;
+}
+
+.col42
+{
+    position: relative;
+    left: 4099px;
+}
+
+.col43
+{
+    position: relative;
+    left: 4184px;
+}
+
+.col44
+{
+    position: relative;
+    left: 4269px;
+}
+
+.col45
+{
+    position: relative;
+    left: 4354px;
+}
+
+.col46
+{
+    position: relative;
+    left: 4439px;
+}
+
+.col47
+{
+    position: relative;
+    left: 4524px;
+}
+
+.col48
+{
+    position: relative;
+    left: 4609px;
+}
+
+.col49
+{
+    position: relative;
+    left: 4694px;
+}
+
+.col50
+{
+    position: relative;
+    left: 4779px;
+}
+
+.col51
+{
+    position: relative;
+    left: 4864px;
+}
+
+.col52
+{
+    position: relative;
+    left: 4949px;
+}
+.col53
+{
+    position: relative;
+    left: 5034px;
+}
+
+.col54
+{
+    position: relative;
+    left: 5119px;
+}
+
+.col55
+{
+    position: relative;
+    left: 5204px;
+}
+.col56
+{
+    position: relative;
+    left: 5289px;
+}
+
+.col57
+{
+    position: relative;
+    left: 5374px;
+}
+
+.col58
+{
+    position: relative;
+    left: 5459px;
+}
+
+.col59
+{
+    position: relative;
+    left: 5544px;
+}
+
+.col60
+{
+    position: relative;
+    left: 5629px;
+}
+
+/* This div is used to balance an off number of columns on the Sample Edit and Sample View pages.*/
+.inputSpacer
+{    
+    height: 44px;
+}
+
+.summationsTable
+{
+    max-width: 1293px; /* Match the summations table width to the details table width. */
+}

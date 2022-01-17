@@ -1,0 +1,8 @@
+id,main_site_id,name,name_short,description,sort_order,tceq_max_tpy,tceq_max_tph,tceq_max_upy,tceq_moisture_rate,tecq_description,tceq_notes,tceq_sort_order,is_active
+1,10,Pit,Pit,Pit,0,NULL,NULL,NULL,0.05,NULL,,0,0
+3,10,Wet Plant 2,Wet Plant 2,Wet Plant 2,6,2500000,350,7000,0.07,Wet Plant #2 (New),,6,1
+4,10,Wet Plant 1,Wet Plant 1,Wet Plant 1,2,2500000,350,7000,0.05,Wet Plant #1 (Old),,2,1
+5,10,Dry Plant (Rotary),Dry Plant (Rotary),Dry Plant (Rotary),100,1400000,200,7000,0.05,Drying Plant #3 (Rotary)[Removed],,100,0
+6,10,Carrier 1,Carrier 1,Carrier 1,10,750000,110,7000,0.05,Drying Plant #1 (Carrier #1),,10,1
+7,10,Rotary 1,Rotary 1,Rotary 1,16,1500000,300,5000,0.05,Drying Plant #3 (Rotary),,16,1
+8,10,Carrier 2,Carrier 2,Carrier 2,12,750000,110,7000,0.05,Drying Plant #4 (Carrier #2),,12,1

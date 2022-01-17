@@ -1,0 +1,25 @@
+/*******************************************************************************************************************************************
+ * File Name: sp_tl_qc_SampleGetByID.sql
+ * Project: Silicore
+ * Description: 
+ * Notes:
+ * =========================================================================================================================================
+ * Change Log ([MM/DD/YYYY]|[Developer]|[Task Ticket] - [Description]
+ * =========================================================================================================================================
+ * 09/11/2017|mnutsch|KACE:17959 - Initial creation
+ * 
+ ******************************************************************************************************************************************/
+
+DELIMITER //
+DROP PROCEDURE IF EXISTS sp_tl_qc_SampleGetByID//
+CREATE DEFINER=`root`@`localhost` PROCEDURE sp_tl_qc_SampleGetByID
+(
+    IN  p_sampleId varchar(64)
+)
+BEGIN
+SELECT * FROM tl_qc_samples
+    WHERE id = p_sampleId
+LIMIT 1; 
+END//
+DELIMITER ;
+

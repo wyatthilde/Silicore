@@ -1,0 +1,12 @@
+{
+  "July2018":
+          [{
+            "NetSetting":"3700",
+            "SiloSetting":"3500"
+           }],
+  "August2018":
+    [{
+      "NetSetting":"3700",
+      "SiloSetting":"3500"
+    }]
+}

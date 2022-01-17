@@ -1,0 +1,2 @@
+//document.write('<IFRAME MARGINWIDTH="0" MARGINHEIGHT="0" FRAMEBORDER="0" SCROLLING="no" SRC="https://oilprice.com/widgets/crude/crudechart.html" width="142" height="187" title="WTI Chart" allowtransparency="true"></IFRAME>');
+document.write('<IFRAME MARGINWIDTH="0" MARGINHEIGHT="0" FRAMEBORDER="0" SCROLLING="no" SRC="https://oilprice.com/widgets/crude/crudechart.html" width="210" height="187" title="WTI Chart" allowtransparency="true"></IFRAME>');

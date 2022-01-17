@@ -1,0 +1,33 @@
+/*******************************************************************************************************************************************
+ * File Name: sp_gb_qc_MostRecentSampleBySpecificLocation.sql
+ * Project: Silicore
+ * Description: 
+ * Notes:
+ * =========================================================================================================================================
+ * Change Log ([MM/DD/YYYY]|[Developer]|[Task Ticket] - [Description]
+ * =========================================================================================================================================
+ * 10/04/2017|mnutsch|KACE:17957 - Initial creation
+ * 02/12/2018|mnutsch|KACE:20683 - Add filter to exclude Resample tests.
+ * 
+ ******************************************************************************************************************************************/
+
+DELIMITER //
+
+DROP PROCEDURE IF EXISTS sp_gb_qc_MostRecentSampleBySpecificLocation//
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE sp_gb_qc_MostRecentSampleBySpecificLocation
+(
+    IN  p_specific_location_id int(11)
+)
+BEGIN
+SELECT * FROM gb_qc_samples 
+    WHERE void_status_code != 'V' 
+    AND test_type_id != '7'
+    AND specific_location_id = p_specific_location_id
+    AND is_complete = 1 
+    ORDER BY id DESC 
+    LIMIT 1;
+END//
+
+DELIMITER ;
+

@@ -1,0 +1,62 @@
+CREATE DATABASE  IF NOT EXISTS `silicore_site` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `silicore_site`;
+-- MySQL dump 10.13  Distrib 8.0.25, for Win64 (x86_64)
+--
+-- Host: localhost    Database: silicore_site
+-- ------------------------------------------------------
+-- Server version	5.7.22-0ubuntu0.16.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `main_hr_job_titles`
+--
+
+DROP TABLE IF EXISTS `main_hr_job_titles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `main_hr_job_titles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `description` varchar(45) DEFAULT NULL,
+  `site_id` int(11) NOT NULL,
+  `department_id` int(11) NOT NULL,
+  `user_type_id` int(11) NOT NULL DEFAULT '1',
+  `create_date` datetime NOT NULL,
+  `create_user_id` int(11) NOT NULL,
+  `edit_date` datetime DEFAULT NULL,
+  `edit_user_id` int(11) DEFAULT NULL,
+  `is_active` tinyint(4) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `main_hr_job_titles`
+--
+
+LOCK TABLES `main_hr_job_titles` WRITE;
+/*!40000 ALTER TABLE `main_hr_job_titles` DISABLE KEYS */;
+INSERT INTO `main_hr_job_titles` VALUES (1,'Programmer','Standard programmer',10,2,5,'2017-09-21 15:22:48',11,'2017-09-21 15:22:48',11,1),(2,'Senior Programmer','Dev lead programmer',10,2,5,'2017-09-21 15:22:48',11,'2017-09-21 15:22:48',11,1),(3,'Programming Manager','Development team manager',10,2,5,'2017-09-21 15:22:49',11,'2017-09-21 15:22:49',11,1),(4,'Project Manager','Manages projects, deliverables, and timelines',10,2,5,'2017-09-21 15:22:49',11,'2017-09-21 15:22:49',11,1),(5,'Lab Tech',NULL,10,4,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(6,'Lab Manager',NULL,10,4,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(7,'Sr. Lab Technician',NULL,10,4,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(8,'Sr Lab Technician II',NULL,10,4,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(9,'Sr Lab Technician I',NULL,10,4,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(10,'Human Resources Director',NULL,10,9,4,'2017-11-10 15:33:00',121,NULL,NULL,1),(11,'Human Resources Manager',NULL,10,9,3,'2017-11-10 15:33:00',121,NULL,NULL,1),(12,'Office Manager',NULL,10,9,3,'2017-11-10 15:33:00',121,NULL,NULL,1),(13,'Warehouse Clerk',NULL,10,9,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(14,'Recruiting Coordinator',NULL,10,9,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(15,'IT Senior Developer',NULL,10,2,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(16,'Staff Accountant',NULL,10,7,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(17,'COO',NULL,10,7,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(18,'Sr. Desktop Technician',NULL,10,2,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(19,'CFO',NULL,10,7,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(20,'Controller',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(21,'Sr. Help Desk Support',NULL,10,2,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(22,'PHP Web Developer',NULL,10,2,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(23,'A/P Specialist',NULL,10,9,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(24,'A/R Clerk',NULL,10,9,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(25,'Procurement Manager',NULL,10,9,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(26,'A/R Specialist',NULL,10,9,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(27,'Procurement Specialist',NULL,10,9,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(28,'Employee Logistics Coordinator',NULL,10,9,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(29,'Buyer/Inventory Control',NULL,10,9,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(30,'Office Support',NULL,10,10,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(31,'Help Desk Support',NULL,10,10,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(32,'Sales Manager',NULL,10,9,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(33,'IT Manager',NULL,10,10,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(34,'Technical Services Director',NULL,10,10,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(35,'Engineering Director',NULL,10,2,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(36,'Programmer Analyst',NULL,10,2,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(37,'Specialist',NULL,10,9,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(38,'Recruiting and Performance Mgmnt Mgr',NULL,10,9,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(39,'Payroll and Benefits Administrator',NULL,10,9,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(40,'Safety Support',NULL,10,9,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(41,'Programming Manager',NULL,10,2,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(42,'HR Site Mgr',NULL,10,9,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(43,'Custodial Support',NULL,10,9,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(44,'Plant Operator II',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(45,'Geologist',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(46,'Maintenance Reliability Coordinator',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(47,'Process Engr III',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(48,'Process Engineer',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(49,'Technical Data Analyst',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(50,'Mining Director',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(51,'Plant Manager',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(52,'Sr. Logistics Manager',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(53,'Safety Specialist',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(54,'Plant Project Manager',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(55,'Production Supervisor',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(56,'Staff Accountant',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(57,'General Manager',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(58,'Survey Technician',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(59,'Sr. Engineering Manager',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(60,'Haul Truck Operator',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(61,'Heavy Equipment Operator Dual Level 2',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(62,'Hvy Equipment Operator',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(63,'Fueler',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(64,'Truck Boss Level 1',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(65,'Loader Operator',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(66,'Heavy Equipment Operator Dual Level 1',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(67,'Fleet Assets Mgr',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(68,'Heavy Equipment Operator Lead',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(69,'Pit Foreman',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(70,'Off Site Projects',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(71,'Front End Loader Lead',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(72,'Mine Superintendent',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(73,'Front End Loader Dual Level 1',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(74,'Expert Front End Loader',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(75,'Loader Supervisor',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(76,'Haul Truck Operator Dual Level 1',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(77,'Sr. Front End Loader',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(78,'Front End Loader Dual Level 2',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(79,'Heavy Equipment Operator Level 2',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(80,'Pit Supervisor',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(81,'Heavy Equipment Operator Level 1 & 2',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(82,'Assistant Mine Superintendent',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(83,'Fueler / Haul Truck Operator',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(84,'Water Truck Operator',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(85,'Sr Haul Truck Operator II',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(86,'Truck Boss Level 1 & 2',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(87,'Plant Shift Supervisor',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(88,'Plant Operator',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(89,'Wet Plant Operator',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(90,'Check In Attendant',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(91,'Plant Operator I',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(92,'Groundskeeper',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(93,'Load Out Operator',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(94,'Dry Plant Lead',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(95,'Dry Plant Operator',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(96,'Plant Operator III',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(97,'Transload Operator',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(98,'Conductor/Engineer',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(99,'Rail Operator',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(100,'Trucking Manager',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(101,'Railyard Lead',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(102,'Sr. Rail Engineer',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(103,'Rail Transload Operator',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(104,'Electronics House Operator',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(105,'Sr. Rail Operator',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(106,'Night E-House Operator',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(107,'Railyard Mechanic',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(108,'Loadout Operator/Conductor',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(109,'Transload Supv',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(110,'Loadout Operator/Conductor',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(111,'Electrician',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(112,'Mechanic',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(113,'Mechanic Lead',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(114,'Lube Tech',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(115,'Electrician - Lead',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(116,'Maintenance Planner',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(117,'Maintenance Electrician IV',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(118,'Sr Industrial Buyer',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(119,'Maintenance Electrician II',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(120,'Maintenance  Mechanic II',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(121,'Warehouse Inventory Manager','null',10,3,3,'2017-11-10 15:33:00',121,'2018-08-22 11:37:20',121,1),(122,'Maintenance Reliability Specialist',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(123,'Maintenance Manager',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(124,'Plant Operator I',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(125,'Offsite Supervisor',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(126,'4R Guest Relations',NULL,10,3,1,'2017-11-10 15:33:00',121,NULL,NULL,1),(127,'Light Equipment Operator','',60,3,1,'2018-08-15 15:45:45',143,NULL,NULL,1),(128,'Test edit','',10,2,5,'2018-08-24 15:02:48',121,'2018-08-24 15:07:17',121,0);
+/*!40000 ALTER TABLE `main_hr_job_titles` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2022-01-17 13:52:25
